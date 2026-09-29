@@ -1,0 +1,165 @@
+.trigger {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 40px;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .42);
+    color: var(--ink);
+    cursor: pointer;
+    transition:
+        color .3s var(--ease),
+        border-color .3s var(--ease),
+        background-color .3s var(--ease),
+        transform .35s var(--ease),
+        box-shadow .35s var(--ease);
+}
+
+.icon {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 16px;
+    color: currentColor;
+    transform-origin: center;
+    transition:
+        transform .4s var(--ease),
+        opacity .3s var(--ease);
+}
+
+.icon svg {
+    display: block;
+    width: 15px;
+    height: 15px;
+    stroke-width: 1.7;
+    pointer-events: none;
+}
+
+@media (hover: hover) {
+    .trigger:hover {
+        color: var(--brown);
+        border-color: rgba(77, 45, 26, .35);
+        background: rgba(77, 45, 26, .04);
+        transform: rotate(-5deg);
+        box-shadow: 0 6px 18px rgba(42, 31, 24, .045);
+    }
+
+    .trigger:hover .icon {
+        transform: scale(1.08);
+    }
+}
+
+.trigger:active {
+    transform: scale(.94);
+}
+
+.trigger:focus-visible {
+    outline: 2px solid var(--brown);
+    outline-offset: 3px;
+}
+
+:global(html[data-theme="dark"]) .trigger {
+    background: rgba(255, 255, 255, .035);
+    border-color: var(--line);
+    color: var(--ink);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .035);
+}
+
+@media (hover: hover) {
+    :global(html[data-theme="dark"]) .trigger:hover {
+        color: var(--brown);
+        border-color: rgba(164, 118, 94, .38);
+        background: rgba(164, 118, 94, .08);
+        box-shadow:
+            0 6px 20px rgba(0, 0, 0, .18);
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    :global(.nav-intro .nav-actions .theme-toggle) {
+        opacity: 0;
+        translate: 0 -10px;
+        will-change:
+            opacity,
+            translate;
+    }
+
+    :global(.nav-intro.nav-ready .nav-actions .theme-toggle) {
+        animation:
+            theme-toggle-enter
+            .42s
+            cubic-bezier(.22, 1, .36, 1)
+            .52s
+            both;
+    }
+}
+
+:global(.mobile-nav-header-actions) {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+:global(.mobile-nav-header) .trigger {
+    width: 32px;
+    height: 32px;
+    flex-basis: 32px;
+}
+
+:global(.mobile-nav-header) .icon {
+    width: 14px;
+    height: 14px;
+    flex-basis: 14px;
+}
+
+:global(.mobile-nav-header) .icon svg {
+    width: 13px;
+    height: 13px;
+}
+
+@media (max-width: 800px) {
+    .trigger {
+        width: 38px;
+        height: 38px;
+        flex-basis: 38px;
+    }
+
+    .icon,
+    .icon svg {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .trigger,
+    .icon {
+        transition: none;
+    }
+
+    :global(.nav-intro .nav-actions .theme-toggle) {
+        opacity: 1;
+        translate: none;
+        animation: none;
+    }
+}
+
+@keyframes theme-toggle-enter {
+    from {
+        opacity: 0;
+        translate: 0 -10px;
+    }
+
+    to {
+        opacity: 1;
+        translate: 0 0;
+    }
+}
