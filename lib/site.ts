@@ -27,7 +27,7 @@ export const SOCIAL_LINKS = {
   linkedin: "https://www.linkedin.com/in/jaspher-tania/",
 } as const;
 
-export const RESUME_URL = "/resume/Jaspher-Tania-Resume.pdf";
+export const RESUME_URL = "/resume/Jaspher%20Tania%20-%20Resume.pdf";
 
 export function absoluteUrl(path = "/") {
   return new URL(path, `${SITE_URL}/`).toString();
