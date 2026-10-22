@@ -1,0 +1,129 @@
+.not-found {
+  min-height: 100svh;
+  padding: clamp(24px, 4vw, 52px);
+  background: var(--paper);
+}
+
+.not-found-inner {
+  width: min(100%, 1320px);
+  min-height: calc(100svh - clamp(48px, 8vw, 104px));
+  display: flex;
+  flex-direction: column;
+  margin-inline: auto;
+}
+
+.not-found-top,
+.not-found-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-block: 14px;
+  border-block: 1px solid var(--line);
+  font: 600 8px/1.4 var(--font-display);
+  letter-spacing: .13em;
+  color: var(--muted);
+}
+
+.not-found-content {
+  width: min(100%, 850px);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-inline: auto;
+  padding-block: clamp(60px, 10vh, 120px);
+  text-align: center;
+}
+
+.not-found-number {
+  font: 300 clamp(82px, 15vw, 210px)/.75 var(--font-number);
+  letter-spacing: -.09em;
+  color: rgba(77, 45, 26, .12);
+}
+
+.not-found-kicker {
+  margin: clamp(30px, 5vh, 54px) 0 14px;
+  font: 600 8px/1 var(--font-display);
+  letter-spacing: .15em;
+  color: var(--brown);
+}
+
+.not-found-content h1 {
+  margin: 0;
+  font: 700 clamp(42px, 7vw, 92px)/.95 var(--font-display);
+  letter-spacing: -.065em;
+}
+
+.not-found-content h1 em {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  color: var(--brown);
+}
+
+.not-found-description {
+  margin: 24px 0 0;
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--muted);
+}
+
+.not-found-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 34px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font: 600 9px/1 var(--font-display);
+  letter-spacing: .1em;
+}
+
+.not-found-arrow {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--brown);
+  transition:
+    transform .35s var(--ease),
+    background .35s var(--ease),
+    color .35s var(--ease);
+}
+
+.not-found-arrow svg {
+  width: 13px;
+  height: 13px;
+}
+
+@media (hover: hover) {
+  .not-found-link:hover .not-found-arrow {
+    background: var(--brown);
+    color: var(--paper);
+    transform: rotate(45deg);
+  }
+}
+
+@media (max-width: 600px) {
+  .not-found {
+    padding: 17px;
+  }
+
+  .not-found-inner {
+    min-height: calc(100svh - 34px);
+  }
+
+  .not-found-top,
+  .not-found-bottom {
+    gap: 14px;
+    font-size: 7px;
+    letter-spacing: .09em;
+  }
+
+  .not-found-description br {
+    display: none;
+  }
+}

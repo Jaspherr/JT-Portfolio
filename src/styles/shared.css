@@ -1,0 +1,68 @@
+.services-accent,
+.experience-accent,
+.tools-accent {
+  overflow: hidden;
+}
+
+.services-accent span,
+.experience-accent span,
+.tools-accent span {
+  transform-origin: left;
+}
+
+.section-heading>p,
+.services-heading>p,
+.exp-heading>p,
+.projects-heading-description,
+.tools-intro>p {
+  font-size: 15px;
+}
+
+.hero-copy h2 em,
+.contact h2 em {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  color: var(--brown);
+}
+
+.nav a:focus-visible,
+.collab:focus-visible,
+.project-media-controls button:focus-visible,
+.contact-email:focus-visible,
+.contact-link:focus-visible,
+.back-top:focus-visible {
+  outline: 2px solid var(--brown);
+  outline-offset: 4px;
+}
+
+@media (max-width: 800px) {
+  .services::before,
+  .services::after,
+  .experience::before,
+  .tools::before {
+    display: none;
+  }
+}
+
+@media (hover: hover) {
+  :root[data-theme="dark"] .chip:hover,
+  :root[data-theme="dark"] .toolkit-tag:hover {
+    background: var(--brown);
+    border-color: var(--brown);
+    color: #fff;
+  }
+}
+
+:root[data-theme="dark"] .project-media-controls button:not(:disabled):hover,
+:root[data-theme="dark"] .case-action:hover,
+:root[data-theme="dark"] .not-found-link:hover .not-found-arrow {
+  color: #fff;
+}
+
+.socials>a:focus-visible,
+.copy-email-btn:focus-visible,
+.project-case-study-link:focus-visible,
+.project-github-link:focus-visible {
+  outline: 2px solid var(--brown);
+  outline-offset: 4px;
+}

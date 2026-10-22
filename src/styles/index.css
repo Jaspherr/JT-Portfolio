@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@import "./fonts.css";
+@import "./tokens.css";
+
+@import "./base.css" layer(base);
+@import "./layout.css" layer(components);
+@import "./shared.css" layer(components);
+
+@import "../components/sections/services.css" layer(components);
+@import "../components/layout/scroll-progress.css" layer(components);
+@import "../components/layout/navbar.css" layer(components);
+@import "../components/sections/hero.css" layer(components);
+@import "../components/sections/experience.css" layer(components);
+@import "../components/sections/projects.css" layer(components);
+@import "../components/sections/toolkit.css" layer(components);
+@import "../components/sections/contact.css" layer(components);
+@import "../components/layout/footer.css" layer(components);
+@import "../components/projects/case-study.css" layer(components);
+@import "../pages/not-found.css" layer(components);
+@import "../components/layout/theme-toggle.css" layer(components);
+
+@utility font-monoton {
+  font-family: Monoton, "Monoton Fallback";
+  font-style: normal;
+  font-weight: 400;
+}
