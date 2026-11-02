@@ -109,7 +109,7 @@ export default function Hero() {
         <div className="hero-meta">
           <div className="experience-count">
             <div className="experience-number">
-              <strong>2</strong>
+              <strong>3</strong>
 
               <span
                 className="experience-orbit"
