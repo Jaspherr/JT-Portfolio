@@ -5,14 +5,14 @@ export const experience: Experience[] = [
     index: "01",
     company: "Boom Technologies Inc.",
     role: "Web Developer & UI Designer Intern",
-    date: "DEC 2025 — MAR 2026",
-    text: "Designed clearer product interfaces and contributed to a multi-page admin dashboard, balancing visual consistency with practical development constraints.",
+    date: "Dec 2025 – Mar 2026",
+    text: "Designed and helped build Clarify, a multi-page admin platform — where I learned how much a design changes once real development constraints show up.",
   },
   {
     index: "02",
     company: "Simple.biz",
     role: "Freelance Video Editor",
-    date: "DEC 2025 — APR 2026",
-    text: "Crafted narrative-led video work through pacing, color, sound, and motion—strengthening the storytelling instincts I bring into digital product design.",
+    date: "Dec 2025 – Apr 2026",
+    text: "Edited video for pacing, colour, sound and motion — work that sharpened the storytelling instincts I bring into interfaces.",
   },
 ];

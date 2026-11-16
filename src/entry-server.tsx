@@ -43,7 +43,7 @@ export function render(url: string) {
   const fontPreloads =
     url === "/"
       ? [
-          `<link rel="preload" href="/fonts/monoton-latin.woff2" as="font" type="font/woff2" crossorigin />`,
+          `<link rel="preload" href="/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin />`,
         ]
       : [];
 

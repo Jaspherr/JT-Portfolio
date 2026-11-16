@@ -24,6 +24,10 @@ export type Director = {
   next: (root: HTMLElement) => SceneSpec;
 };
 
+// Stillness between acts, in seconds. The rotation keeps the rhythm from
+// feeling metronomic; a workspace that never pauses reads as a screensaver.
+const RESTS = [2.2, 3.6, 1.6, 4.4, 2.8];
+
 export type CursorPoint = [at: number, x: number, y: number, scale?: number];
 
 const EASE = "cubic-bezier(.16, 1, .3, 1)";
@@ -199,6 +203,7 @@ export function createPlayer(root: HTMLElement, director: Director) {
   let effects: Animation[] = [];
   let timers: Animation[] = [];
   let running = false;
+  let acts = 0;
 
   const all = () => [...effects, ...timers];
 
@@ -244,8 +249,10 @@ export function createPlayer(root: HTMLElement, director: Director) {
       timers.push(cue);
     }
 
-    const clock = root.animate(null, { duration });
+    const rest = RESTS[acts % RESTS.length] * 1000;
+    const clock = root.animate(null, { duration: duration + rest });
 
+    acts += 1;
     clock.onfinish = () => {
       settle();
       stage(director.next(root));

@@ -79,7 +79,6 @@
 .service-grid {
   position: relative;
   z-index: 2;
-  border-bottom: 1px solid var(--line);
 }
 
 .service-card {
@@ -92,7 +91,6 @@
     "content stage";
   column-gap: var(--svc-gap);
   padding-block: clamp(30px, 4.6vh, 48px);
-  border-top: 1px solid var(--line);
   scroll-margin-top: 24px;
 }
 
@@ -100,25 +98,6 @@
   grid-area: stage;
   align-self: center;
   margin: 0;
-}
-
-/* A brown rule draws along the row's top edge once its scene starts. */
-.service-edge {
-  position: absolute;
-  top: -1px;
-  left: 0;
-  width: var(--svc-copy);
-  height: 1px;
-  background: var(--brown);
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform .9s var(--ease);
-  pointer-events: none;
-}
-
-.service-card-01 .service-edge,
-.service-card:has(.sv-stage[data-scene]:not([data-scene="ready"])) .service-edge {
-  transform: scaleX(1);
 }
 
 .service-top {
@@ -140,15 +119,6 @@
   font: 400 21px/1 var(--font-number);
   letter-spacing: -.04em;
   color: var(--brown);
-}
-
-.service-number>small {
-  padding: 7px 11px;
-  border-radius: 999px;
-  background: var(--brown);
-  font: 600 7px/1 var(--font-display);
-  letter-spacing: .08em;
-  color: #fff;
 }
 
 .service-icon {
@@ -217,7 +187,7 @@
   border: 1px solid #ddd8d0;
   border-radius: 999px;
   background: rgba(255, 255, 255, .65);
-  font: 500 8.5px var(--font-body);
+  font: 500 11px var(--font-body);
   color: #625f59;
   white-space: nowrap;
   transition:
@@ -243,15 +213,7 @@
     box-shadow .6s var(--ease);
 }
 
-.service-card-01 .sv-stage {
-  border-color: rgba(77, 45, 26, .26);
-}
-
 @media (hover: hover) {
-  .service-card:hover .service-edge {
-    transform: scaleX(1);
-  }
-
   .service-card:hover .sv-stage {
     border-color: rgba(77, 45, 26, .32);
     box-shadow:
@@ -295,7 +257,7 @@
   .services-heading h2 {
     grid-row: auto;
     max-width: 600px;
-    font-size: clamp(42px, 8vw, 58px);
+    font-size: var(--section-title-tablet);
   }
 
   .services-heading>p,
@@ -318,10 +280,6 @@
       "content";
     row-gap: 24px;
     padding-block: 32px 38px;
-  }
-
-  .service-edge {
-    width: 120px;
   }
 
   .service-content {
@@ -356,7 +314,7 @@
   }
 
   .services-heading h2 {
-    font-size: clamp(38px, 11vw, 50px);
+    font-size: var(--section-title-mobile);
   }
 
   .services-accent {
@@ -377,10 +335,6 @@
   }
 }
 
-:root[data-theme="dark"] .service-card-01 .sv-stage {
-  border-color: rgba(164, 118, 94, .30);
-}
-
 :root[data-theme="dark"] .service-icon,
 :root[data-theme="dark"] .chip {
   border-color: #3a342f;
@@ -399,5 +353,16 @@
   :root[data-theme="dark"] .service-card:hover .sv-stage {
     border-color: rgba(164, 118, 94, .38);
     box-shadow: 0 30px 70px rgba(0, 0, 0, .22), 0 5px 16px rgba(0, 0, 0, .14);
+  }
+}
+
+/* Rows alternate on wide screens: copy left for 01 and 03, right for 02 and
+   04, so the four sketches read as a sequence rather than a list. */
+@media (min-width: 961px) {
+  .service-card:nth-child(even) {
+    grid-template-columns: minmax(0, 1fr) var(--svc-copy);
+    grid-template-areas:
+      "stage top"
+      "stage content";
   }
 }

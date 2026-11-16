@@ -21,26 +21,26 @@ export default function Contact() {
 
       <div className="shell contact-inner">
         <div className="contact-top reveal">
-          <SectionKicker n="05" label="CONTACT" />
+          <SectionKicker n="04" label="Say hello" />
 
           <div className="contact-status">
             <span />
-            Available for selected opportunities
+            Open to UI/UX and front-end roles
           </div>
         </div>
 
         <div className="contact-main reveal">
-          <p className="contact-pretitle">Have an idea in mind?</p>
+          <p className="contact-pretitle">That&apos;s most of it.</p>
 
           <h2>
-            Let&apos;s make something
+            <span className="contact-line">If something here clicked,</span>
             <br />
-            <em>worth remembering.</em>
+            <em>say hello.</em>
           </h2>
 
           <p className="contact-description">
-            Whether it&apos;s a product, interface, or an idea that still needs
-            shape — tell me what you&apos;re working on.
+            A question about one of the projects, a role you think I&apos;d fit,
+            or something you&apos;re building — my inbox is open.
           </p>
         </div>
 
@@ -48,7 +48,7 @@ export default function Contact() {
           <a className="contact-email" href={`mailto:${CONTACT_EMAIL}`}>
             <div className="contact-email-label">
               <Mail aria-hidden="true" />
-              <span>START A CONVERSATION</span>
+              <span>Write to me</span>
             </div>
 
             <strong>{CONTACT_EMAIL}</strong>
@@ -71,7 +71,7 @@ export default function Contact() {
 
         <div className="contact-bottom">
           <div className="contact-bottom-heading">
-            <span>OR ELSEWHERE</span>
+            <span>Or find me elsewhere</span>
           </div>
 
           <div className="contact-links">

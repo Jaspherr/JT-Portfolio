@@ -20,7 +20,7 @@ export const SITE_TITLE =
   "Jaspher Tania — UI/UX Designer & Front-End Developer";
 
 export const SITE_DESCRIPTION =
-  "Portfolio of Jaspher Tania, a UI/UX designer and front-end developer creating clear, thoughtful digital products across web and mobile.";
+  "Jaspher Tania designs interfaces and then builds them. Projects, animated experiments and notes from a UI/UX designer who also builds the front-end.";
 
 export const SOCIAL_LINKS = {
   github: "https://github.com/jaspherr",

@@ -1,12 +1,11 @@
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import ScrollProgress from "@/components/layout/ScrollProgress";
+import About from "@/components/sections/About";
 import Contact from "@/components/sections/Contact";
-import Experience from "@/components/sections/Experience";
 import Hero from "@/components/sections/Hero";
 import Projects from "@/components/sections/Projects";
 import Services from "@/components/sections/Services";
-import Toolkit from "@/components/sections/Toolkit";
 import JsonLd from "@/components/shared/JsonLd";
 import { homeTimelines } from "@/data/scrollTimelines";
 import { useRevealOnScroll } from "@/hooks/useRevealOnScroll";
@@ -33,10 +32,9 @@ export default function HomePage() {
 
       <main id="main-content" tabIndex={-1}>
         <Hero />
-        <Services />
-        <Experience />
         <Projects />
-        <Toolkit />
+        <Services />
+        <About />
         <Contact />
       </main>
 
