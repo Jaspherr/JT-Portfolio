@@ -1,0 +1,614 @@
+import type { MouseEvent } from "react";
+
+import SceneCursor from "@/components/services/SceneCursor";
+import ServiceStage from "@/components/services/ServiceStage";
+import {
+  GLIDE,
+  createCrew,
+  cursor,
+  fade,
+  flash,
+  reveal,
+  typeOn,
+  type Director,
+  type SceneKey,
+  type SceneSpec,
+} from "@/lib/scene";
+
+const BRIEF = "Clean dashboard, responsive nav, actionable analytics";
+const CONCEPTS = ["a", "b", "c"] as const;
+const OVERVIEW_BARS = [14, 22, 18, 30, 26, 36, 24, 32, 40];
+const INSIGHT_BARS = [22, 30, 26, 40, 34, 56, 44];
+
+// The chosen concept sits where the prototype will grow from.
+const FROM_CONCEPT = "translate(61px, 44px) scale(.4135)";
+const TO_PROTOTYPE = "translate(-61px, -44px) scale(2.4186)";
+const BLOCK = { opacity: 0, transform: "scale(.6)" };
+const BAR = "scaleY(0)";
+
+const TREND = OVERVIEW_BARS.map(
+  (height, index) => `${index ? "L" : "M"}${12 + index * 20} ${44 - height}`,
+).join(" ");
+
+const intro: SceneSpec = (() => {
+  const tracks: SceneSpec["tracks"] = {
+    // The brief is written and sent by a person.
+    ".sv-a-prompt": [
+      { at: 0, opacity: 1 },
+      { at: 4.55, opacity: 1 },
+      { at: 4.9, opacity: 0 },
+    ],
+    ".sv-a-prompt > span": typeOn(0.5, 1.4, BRIEF.length),
+    ".sv-cur-you": cursor([
+      [0.2, 300, 70],
+      [0.7, 262, 20],
+      [1.95, 262, 20],
+      [2.0, 262, 20, 0.82],
+      [2.15, 262, 20],
+      [3.5, 250, 44],
+      [3.9, 62, 88],
+      [4.2, 162, 88],
+      [4.35, 162, 88, 0.82],
+      [4.5, 162, 88],
+      [5.6, 232, 70],
+      [5.9, 196, 31],
+      [5.95, 196, 31, 0.82],
+      [6.1, 196, 31],
+      [6.45, 226, 70],
+      [7.0, 226, 70],
+      [7.25, 130, 23],
+      [7.3, 130, 23, 0.82],
+      [7.45, 130, 23],
+      [7.9, 150, 60],
+      [8.3, 200, 150],
+    ]),
+
+    // Three concepts are explored in parallel.
+    ".sv-a-lines": flash(2.05, 4.5),
+    ".sv-a-lines path": [
+      { at: 0, strokeDashoffset: 1 },
+      { at: 2.1, strokeDashoffset: 1, ease: GLIDE },
+      { at: 2.6, strokeDashoffset: 0 },
+    ],
+    ".sv-a-cap": flash(2.9, 4.5),
+    ".sv-a-t-a, .sv-a-t-c": [
+      { at: 2.5, opacity: 0 },
+      { at: 2.7, opacity: 1 },
+      { at: 4.55, opacity: 1 },
+      { at: 4.9, opacity: 0 },
+    ],
+
+    // One direction is chosen and grows into the prototype.
+    ".sv-a-t-b": [
+      { at: 2.5, opacity: 0 },
+      { at: 2.7, opacity: 1 },
+      { at: 4.9, transform: "translate(0px, 0px) scale(1)", ease: GLIDE },
+      { at: 5.1, opacity: 1 },
+      { at: 5.5, opacity: 0 },
+      { at: 5.7, transform: TO_PROTOTYPE },
+    ],
+    ".sv-a-ring": flash(4.38, 5.1, 0.15),
+    ".sv-a-proto": [
+      { at: 0, opacity: 0, transform: FROM_CONCEPT },
+      { at: 4.9, transform: FROM_CONCEPT, ease: GLIDE },
+      { at: 5.0, opacity: 0 },
+      { at: 5.4, opacity: 1 },
+      { at: 5.7, transform: "translate(0px, 0px) scale(1)" },
+    ],
+    ".sv-a-trail": reveal(5.5, 0.4, { opacity: 0, transform: "translateX(8px)" }),
+    ".sv-a-m1": reveal(5.6),
+    ".sv-a-m2": reveal(5.85),
+
+    // A review note tightens the spacing.
+    ".sv-a-pin": flash(5.95, 6.8, 0.2),
+    ".sv-a-body": [
+      { at: 0, transform: "translateY(7px)" },
+      { at: 6.3, transform: "translateY(7px)", ease: GLIDE },
+      { at: 6.65, transform: "translateY(0px)" },
+    ],
+    ".sv-a-m3": reveal(6.8),
+  };
+
+  CONCEPTS.forEach((concept, column) => {
+    for (let block = 1; block <= 5; block += 1) {
+      tracks[`.sv-a-t-${concept} > i:nth-child(${block})`] = reveal(
+        2.75 + block * 0.15 + column * 0.06,
+        0.3,
+        BLOCK,
+      );
+    }
+
+    const x = 17 + column * 100;
+
+    tracks[`.sv-a-ag-${concept}`] = cursor([
+      [2.5, x + 43, 40],
+      [2.85, x + 10, 62],
+      [3.1, x + 56, 66],
+      [3.3, x + 22, 80],
+      [3.5, x + 62, 90],
+      [3.7, x + 30, 98],
+      [4.0, x + 70, 110],
+    ]);
+  });
+
+  [3, -2, 4].forEach((offset, index) => {
+    tracks[`.sv-a-kpi:nth-child(${index + 1})`] = [
+      { at: 0, transform: `translateY(${offset}px)` },
+      { at: 6.35 + index * 0.05, transform: `translateY(${offset}px)` },
+      { at: 6.7 + index * 0.05, transform: "translateY(0px)" },
+    ];
+  });
+
+  OVERVIEW_BARS.forEach((_, index) => {
+    tracks[`.sv-a-chart > s:nth-child(${index + 1})`] = [
+      { at: 0, transform: BAR },
+      { at: 5.7 + index * 0.05, transform: BAR },
+      { at: 6.2 + index * 0.05, transform: "scaleY(1)" },
+    ];
+  });
+
+  INSIGHT_BARS.forEach((_, index) => {
+    tracks[`.sv-a-big > s:nth-child(${index + 1})`] = [
+      { at: 0, transform: BAR },
+      { at: 7.5 + index * 0.05, transform: BAR },
+      { at: 7.95 + index * 0.05, transform: "scaleY(1)" },
+    ];
+  });
+
+  return {
+    duration: 8.5,
+    tracks,
+    prepare: (root) => {
+      const prototype = root.querySelector<HTMLElement>(".sv-a-proto")!;
+
+      prototype.dataset.tab = "overview";
+      prototype.dataset.chart = "bars";
+      prototype.dataset.kpi = "even";
+      CONCEPTS.forEach((concept) => {
+        delete root.querySelector<HTMLElement>(`.sv-a-t-${concept}`)!.dataset.v;
+      });
+      text(root, ".sv-a-prompt > span", BRIEF);
+      text(root, ".sv-a-cap-a", "A · Sidebar");
+      text(root, ".sv-a-cap-b", "B · Top nav");
+      text(root, ".sv-a-cap-c", "C · Cards");
+      text(root, ".sv-a-m1 b", "3");
+      text(root, ".sv-a-m2 b", "1");
+      text(root, ".sv-a-m3 b", "2");
+      text(root, ".sv-a-pin", "Tighten the spacing");
+      choose(root, "b");
+    },
+    cues: [[7.35, (root) => showTab(root, "insights")]],
+  };
+})();
+
+/* After the first prototype, the lab keeps iterating on it. Each round the
+   current design becomes the baseline, a person writes a follow-up brief,
+   two alternatives are explored next to it, one is chosen and the
+   prototype updates. Between rounds the prototype is tested. */
+
+type Topic = "chart" | "kpi";
+
+const OPTIONS: Record<Topic, string[]> = {
+  chart: ["bars", "line", "area"],
+  kpi: ["even", "hero", "trend"],
+};
+
+const LABELS: Record<string, string> = {
+  bars: "Bars",
+  line: "Line",
+  area: "Area",
+  even: "Even",
+  hero: "Hero metric",
+  trend: "Trends",
+};
+
+const BRIEFS: Record<string, string> = {
+  line: "Show the weekly trend, not just totals",
+  area: "Emphasise the volume behind the trend",
+  bars: "Compare each day side by side again",
+  hero: "Make the key number stand out",
+  trend: "Show whether each metric is improving",
+  even: "Balance the summary cards again",
+};
+
+const NOTES = ["Spacing feels right", "Ready for a usability test", "Share with the team"];
+const ROUNDS: (Topic | "test")[] = ["chart", "kpi", "test"];
+const TILE_X: Record<string, number> = { a: 17, b: 117, c: 217 };
+const SETTLED = "translate(0px, 0px) scale(1)";
+
+const grownFrom = (x: number) => `translate(${x - 56}px, 44px) scale(.4135)`;
+const grownInto = (x: number) => `translate(${56 - x}px, -44px) scale(2.4186)`;
+
+function text(root: HTMLElement, selector: string, value: string) {
+  root.querySelector(selector)!.textContent = value;
+}
+
+function choose(root: HTMLElement, letter: string) {
+  root.querySelectorAll<HTMLElement>(".sv-a-trail span").forEach((span) => {
+    span.classList.toggle("is-chosen", span.dataset.letter === letter);
+  });
+}
+
+function showTab(root: HTMLElement, tab: string) {
+  root.querySelector<HTMLElement>(".sv-a-proto")!.dataset.tab = tab;
+}
+
+function bump(at: number): SceneKey[] {
+  return [
+    { at, transform: "scale(1)" },
+    { at: at + 0.15, transform: "scale(1.3)" },
+    { at: at + 0.45, transform: "scale(1)" },
+  ];
+}
+
+function direct(): Director {
+  const crew = createCrew({ you: [200, 150] });
+  const state = {
+    step: 0,
+    chart: 0,
+    kpi: 0,
+    pick: 0,
+    note: 0,
+    explored: 3,
+    chosen: 1,
+    revisions: 2,
+    tab: "insights",
+  };
+
+  const test = (): SceneSpec => {
+    const first = state.tab === "insights" ? "overview" : "insights";
+    const note = NOTES[state.note % NOTES.length];
+
+    state.note += 1;
+    state.tab = first === "overview" ? "insights" : "overview";
+
+    const tab = (name: string): [number, number] => [name === "overview" ? 96 : 130, 23];
+
+    return {
+      duration: 5.2,
+      tracks: {
+        ".sv-cur-you": crew.walk("you", [
+          [0.7, ...tab(first)],
+          [0.78, ...tab(first), 0.82],
+          [0.86, ...tab(first)],
+          [1.9, ...tab(state.tab)],
+          [1.98, ...tab(state.tab), 0.82],
+          [2.06, ...tab(state.tab)],
+          [2.7, 196, 31],
+          [2.78, 196, 31, 0.82],
+          [2.86, 196, 31],
+          [3.6, 226, 70],
+        ]),
+        ".sv-a-pin": flash(2.85, 4.3, 0.2),
+      },
+      prepare: (root) => text(root, ".sv-a-pin", note),
+      cues: [
+        [0.8, (root) => showTab(root, first)],
+        [2, (root) => showTab(root, state.tab)],
+      ],
+    };
+  };
+
+  const round = (topic: Topic): SceneSpec => {
+    const options = OPTIONS[topic];
+    const from = state[topic];
+    const to = (from + 1) % options.length;
+    const other = (from + 2) % options.length;
+    const picked = state.pick % 2 ? "a" : "c";
+    const spare = picked === "a" ? "c" : "a";
+    const variants: Record<string, string> = {
+      b: options[from],
+      [picked]: options[to],
+      [spare]: options[other],
+    };
+    const brief = BRIEFS[options[to]];
+    const x = TILE_X[picked];
+
+    state[topic] = to;
+    state.pick += 1;
+    state.explored += 2;
+    state.chosen += 1;
+    state.revisions += 1;
+    state.tab = "overview";
+
+    const typed = 0.95 + brief.length * 0.035;
+    const sent = typed + 0.25;
+    const pick = sent + 2.3;
+    const tracks: SceneSpec["tracks"] = {
+      // The current prototype folds back into the baseline concept.
+      ".sv-a-proto": [
+        { at: 0, opacity: 1, transform: SETTLED, ease: GLIDE },
+        { at: 0.6, opacity: 1 },
+        { at: 0.8, transform: grownFrom(TILE_X.b) },
+        { at: 0.9, opacity: 0 },
+        { at: pick + 0.5, opacity: 0, transform: grownFrom(x), ease: GLIDE },
+        { at: pick + 0.95, opacity: 1 },
+        { at: pick + 1.3, transform: SETTLED },
+      ],
+      ".sv-a-t-b": [
+        { at: 0, opacity: 0, transform: "none" },
+        { at: 0.55, opacity: 0 },
+        { at: 0.85, opacity: 1 },
+      ],
+
+      // A follow-up brief is written and sent.
+      ".sv-a-prompt": [
+        ...fade(0.5, 0, 1, 0.3),
+        ...fade(pick + 0.2, 1, 0, 0.3),
+      ],
+      ".sv-a-prompt > span": typeOn(0.95, typed - 0.95, brief.length),
+      ".sv-a-lines": flash(sent + 0.1, pick + 0.3),
+      ".sv-a-lines path": [
+        { at: 0, strokeDashoffset: 1 },
+        { at: sent + 0.15, strokeDashoffset: 1, ease: GLIDE },
+        { at: sent + 0.65, strokeDashoffset: 0 },
+      ],
+      ".sv-a-cap": flash(sent + 0.7, pick + 0.4),
+      ".sv-cur-you": crew.walk("you", [
+        [0.9, 262, 20],
+        [typed, 262, 20],
+        [sent, 262, 20, 0.82],
+        [sent + 0.15, 262, 20],
+        [sent + 1.2, 160, 44],
+        [pick - 0.1, x + 43, 80],
+        [pick, x + 43, 80, 0.82],
+        [pick + 0.15, x + 43, 80],
+        [pick + 1.6, 232, 120],
+      ], 0.2),
+      ".sv-a-ring": [
+        { at: 0, opacity: 0, transform: `translateX(${x - TILE_X.b}px)` },
+        ...flash(pick - 0.05, pick + 0.6, 0.15),
+      ],
+
+      // The rest fade while the choice grows into the prototype.
+      [`.sv-a-t-${picked}`]: [
+        { at: pick + 0.5, transform: "none", ease: GLIDE },
+        { at: pick + 0.7, opacity: 1 },
+        { at: pick + 1.1, opacity: 0 },
+        { at: pick + 1.3, transform: grownInto(x) },
+      ],
+      // The version trail and counters share the tiles' row, so they step
+      // aside while concepts are explored and return with the update.
+      ".sv-a-trail, .sv-a-meta": [
+        ...fade(0.1, 1, 0, 0.35),
+        ...fade(pick + 1.2, 0, 1, 0.35),
+      ],
+      ".sv-a-m1 b": bump(pick + 1.6),
+      ".sv-a-m2 b": bump(pick + 1.75),
+      ".sv-a-m3 b": bump(pick + 1.9),
+    };
+
+    tracks[".sv-a-t-b"].push(...fade(pick + 0.5, 1, 0, 0.35));
+
+    // Two alternatives are generated next to the baseline.
+    [spare, picked].forEach((letter, order) => {
+      const left = TILE_X[letter];
+      const start = sent + 0.4 + order * 0.15;
+
+      tracks[`.sv-a-t-${letter}`] = [
+        { at: 0, opacity: 0, transform: "none" },
+        { at: start, opacity: 0 },
+        { at: start + 0.2, opacity: 1 },
+        ...(tracks[`.sv-a-t-${letter}`] ?? []),
+      ];
+
+      if (letter === spare) {
+        tracks[`.sv-a-t-${letter}`].push(...fade(pick + 0.5, 1, 0, 0.35));
+      }
+
+      for (let block = 1; block <= 5; block += 1) {
+        tracks[`.sv-a-t-${letter} > i:nth-child(${block})`] = [
+          { at: 0, ...BLOCK },
+          ...reveal(start + 0.1 + block * 0.15, 0.3, BLOCK).slice(1),
+        ];
+      }
+
+      tracks[`.sv-a-ag-${letter}`] = cursor([
+        [start, left + 43, 40],
+        [start + 0.35, left + 10, 62],
+        [start + 0.6, left + 56, 66],
+        [start + 0.8, left + 22, 80],
+        [start + 1, left + 62, 90],
+        [start + 1.2, left + 30, 98],
+        [start + 1.5, left + 70, 110],
+      ]);
+    });
+
+    return {
+      duration: pick + 3,
+      tracks,
+      prepare: (root) => {
+        Object.entries(variants).forEach(([letter, variant]) => {
+          root.querySelector<HTMLElement>(`.sv-a-t-${letter}`)!.dataset.v = variant;
+          text(
+            root,
+            `.sv-a-cap-${letter}`,
+            `${letter.toUpperCase()} · ${letter === "b" ? "Current" : LABELS[variant]}`,
+          );
+        });
+        text(root, ".sv-a-prompt > span", brief);
+      },
+      cues: [
+        [pick + 1.45, (root) => choose(root, picked)],
+        [
+          pick + 0.55,
+          (root) => {
+            const prototype = root.querySelector<HTMLElement>(".sv-a-proto")!;
+
+            prototype.dataset[topic] = options[to];
+            prototype.dataset.tab = "overview";
+          },
+        ],
+        [
+          pick + 1.6,
+          (root) => {
+            text(root, ".sv-a-m1 b", String(state.explored));
+            text(root, ".sv-a-m2 b", String(state.chosen));
+            text(root, ".sv-a-m3 b", String(state.revisions));
+          },
+        ],
+      ],
+    };
+  };
+
+  return {
+    intro,
+    next: () => {
+      const topic = ROUNDS[state.step % ROUNDS.length];
+
+      state.step += 1;
+
+      return topic === "test" ? test() : round(topic);
+    },
+  };
+}
+
+function selectTab(event: MouseEvent<HTMLButtonElement>) {
+  const prototype = event.currentTarget.closest<HTMLElement>(".sv-a-proto")!;
+
+  prototype.dataset.tab = event.currentTarget.value;
+}
+
+export default function AiScene({ title }: { title: string }) {
+  return (
+    <ServiceStage
+      n="03"
+      title={title}
+      direct={direct}
+      summary="Illustration: a person keeps iterating on a dashboard prototype — writing follow-up briefs, comparing generated alternatives against the current design, choosing one and testing the result."
+    >
+      <div className="sv-a-prompt">
+        <i>✦</i>
+        <span>{BRIEF}</span>
+        <b>↑</b>
+      </div>
+
+      <svg className="sv-a-lines" viewBox="0 0 320 140">
+        <path pathLength={1} d="M160 28v9q0 5-5 5H65q-5 0-5 5v8" />
+        <path pathLength={1} d="M160 28v27" />
+        <path pathLength={1} d="M160 28v9q0 5 5 5h90q5 0 5 5v8" />
+      </svg>
+
+      {CONCEPTS.map((concept) => (
+        <div key={concept} className={`sv-a-t sv-a-t-${concept}`}>
+          <i />
+          <i />
+          <i />
+          <i />
+          <i />
+        </div>
+      ))}
+
+      <span className="sv-a-ring">
+        <b>✓</b>
+      </span>
+
+      <span className="sv-a-cap sv-a-cap-a">A · Sidebar</span>
+      <span className="sv-a-cap sv-a-cap-b">B · Top nav</span>
+      <span className="sv-a-cap sv-a-cap-c">C · Cards</span>
+
+      {CONCEPTS.map((concept) => (
+        <span key={concept} className={`sv-a-ag sv-a-ag-${concept}`} />
+      ))}
+
+      <div className="sv-a-trail">
+        {CONCEPTS.map((concept) => (
+          <span
+            key={concept}
+            data-letter={concept}
+            className={concept === "b" ? "is-chosen" : undefined}
+          >
+            {concept.toUpperCase()}
+          </span>
+        ))}
+      </div>
+
+      <div
+        className="sv-a-proto"
+        data-tab="insights"
+        data-chart="bars"
+        data-kpi="even"
+      >
+        <div className="sv-a-nav">
+          <i />
+          <button
+            type="button"
+            className="sv-a-tab sv-a-t1"
+            value="overview"
+            tabIndex={-1}
+            onClick={selectTab}
+          >
+            Overview
+          </button>
+          <button
+            type="button"
+            className="sv-a-tab sv-a-t2"
+            value="insights"
+            tabIndex={-1}
+            onClick={selectTab}
+          >
+            Insights
+          </button>
+          <span className="sv-a-ind" />
+          <em />
+        </div>
+
+        <div className="sv-a-body">
+          <div className="sv-a-ov">
+            <div className="sv-a-kpis">
+              {[
+                ["2.4k", "↑ 8%"],
+                ["68%", "↑ 3%"],
+                ["+12", "↓ 2"],
+              ].map(([value, change]) => (
+                <span key={value} className="sv-a-kpi">
+                  <i />
+                  <b>{value}</b>
+                  <em>{change}</em>
+                </span>
+              ))}
+            </div>
+
+            <div className="sv-a-chart">
+              {OVERVIEW_BARS.map((height, index) => (
+                <s key={index} style={{ left: 6 + index * 20, height }} />
+              ))}
+
+              <svg className="sv-a-trend" viewBox="0 0 188 44" preserveAspectRatio="none">
+                <path className="sv-a-trend-area" d={`${TREND} L172 44 L12 44 Z`} />
+                <path className="sv-a-trend-line" d={TREND} />
+              </svg>
+            </div>
+          </div>
+
+          <div className="sv-a-ins">
+            <span className="sv-a-call">↑ 12% this week</span>
+            <span className="sv-a-act">3 leads to follow up</span>
+
+            <div className="sv-a-big">
+              {INSIGHT_BARS.map((height, index) => (
+                <s key={index} style={{ left: 4 + index * 27, height }} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <span className="sv-a-pin">Tighten the spacing</span>
+
+      <div className="sv-a-meta">
+        <span className="sv-a-m1">
+          <b>3</b>explored
+        </span>
+        <span className="sv-a-m2">
+          <b>1</b>chosen
+        </span>
+        <span className="sv-a-m3">
+          <b>2</b>revisions
+        </span>
+      </div>
+
+      <SceneCursor id="you" tag="You" />
+    </ServiceStage>
+  );
+}

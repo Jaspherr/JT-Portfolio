@@ -5,52 +5,39 @@
   color: var(--muted);
 }
 
+/* An editorial header, then one full-width row per service: copy on the left,
+   the animated stage as the centerpiece on the right. */
+
 .services {
+  --svc-copy: clamp(270px, 25vw, 350px);
+  --svc-gap: clamp(40px, 5vw, 76px);
   position: relative;
-  min-height: 100svh;
-  display: grid;
-  grid-template-columns: .82fr 1.55fr;
-  align-items: center;
-  gap: clamp(65px, 7vw, 120px);
-  padding-block: clamp(70px, 8vh, 105px);
+  padding-block: clamp(84px, 11vh, 130px) clamp(70px, 9vh, 110px);
   background: var(--paper);
-  overflow: hidden;
-}
-
-.services::before,
-.services::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: var(--line);
-  pointer-events: none;
-}
-
-.services::before {
-  top: clamp(70px, 8vh, 105px);
-}
-
-.services::after {
-  bottom: clamp(70px, 8vh, 105px);
+  overflow-x: clip;
 }
 
 .services-heading {
   position: relative;
   z-index: 2;
-  align-self: center;
-  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 380px);
+  align-items: end;
+  column-gap: var(--svc-gap);
+  margin-bottom: clamp(44px, 6.5vh, 72px);
 }
 
 .services-heading .kicker {
+  grid-column: 1 / -1;
   margin-bottom: 30px;
 }
 
 .services-heading h2 {
-  max-width: 520px;
+  grid-row: 2 / span 2;
+  max-width: 900px;
   font: 700 clamp(46px, 4.1vw, 66px)/.98 var(--font-display);
   letter-spacing: -.065em;
+  text-wrap: balance;
 }
 
 .services-heading h2 em {
@@ -61,17 +48,21 @@
 }
 
 .services-heading>p {
-  max-width: 400px;
-  margin: 34px 0 0;
+  grid-column: 2;
+  grid-row: 2;
+  max-width: 380px;
+  margin: 0;
   font-size: 15px;
   line-height: 1.8;
   color: var(--muted);
 }
 
 .services-accent {
-  width: min(210px, 52%);
+  grid-column: 2;
+  grid-row: 3;
+  width: min(210px, 60%);
   height: 1px;
-  margin-top: 45px;
+  margin-top: 30px;
   background: var(--line);
   overflow: hidden;
 }
@@ -88,59 +79,50 @@
 .service-grid {
   position: relative;
   z-index: 2;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  border-bottom: 1px solid var(--line);
 }
 
 .service-card {
   position: relative;
-  min-height: 310px;
-  padding: 30px 31px 27px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  background: rgba(255, 255, 255, .58);
-  translate: 0 0;
-  transition:
-    translate .5s var(--ease),
-    box-shadow .5s var(--ease),
-    border-color .4s var(--ease),
-    background .4s var(--ease);
+  display: grid;
+  grid-template-columns: var(--svc-copy) minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "top stage"
+    "content stage";
+  column-gap: var(--svc-gap);
+  padding-block: clamp(30px, 4.6vh, 48px);
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 24px;
 }
 
-.service-card-01 {
-  border-color: rgba(77, 45, 26, .34);
-  background:
-    radial-gradient(circle at 82% 12%, rgba(77, 45, 26, .09), transparent 35%),
-    linear-gradient(135deg, #fbf8f3, #f4eee7);
+.service-card > .sv-stage {
+  grid-area: stage;
+  align-self: center;
+  margin: 0;
 }
 
-.service-card-03 {
-  background:
-    radial-gradient(circle at 0 100%, rgba(77, 45, 26, .055), transparent 43%),
-    rgba(255, 255, 255, .6);
-}
-
+/* A brown rule draws along the row's top edge once its scene starts. */
 .service-edge {
   position: absolute;
-  top: 85px;
-  left: -1px;
-  width: 3px;
-  height: 0;
-  border-radius: 0 4px 4px 0;
+  top: -1px;
+  left: 0;
+  width: var(--svc-copy);
+  height: 1px;
   background: var(--brown);
-  transition: height .55s var(--ease);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .9s var(--ease);
+  pointer-events: none;
 }
 
-.service-card-01 .service-edge {
-  height: 105px;
+.service-card-01 .service-edge,
+.service-card:has(.sv-stage[data-scene]:not([data-scene="ready"])) .service-edge {
+  transform: scaleX(1);
 }
 
 .service-top {
+  grid-area: top;
   position: relative;
   z-index: 3;
   display: flex;
@@ -155,7 +137,7 @@
 }
 
 .service-number>span {
-  font: 400 19px/1 var(--font-number);
+  font: 400 21px/1 var(--font-number);
   letter-spacing: -.04em;
   color: var(--brown);
 }
@@ -192,30 +174,32 @@
 }
 
 .service-content {
+  grid-area: content;
+  align-self: end;
   position: relative;
   z-index: 3;
-  margin-top: 50px;
+  padding-top: 36px;
 }
 
 .service-card h3 {
   max-width: 320px;
-  margin: 0 0 13px;
-  font: 700 17px/1.25 var(--font-display);
-  letter-spacing: -.04em;
+  margin: 0 0 14px;
+  font: 700 clamp(19px, 1.65vw, 24px)/1.15 var(--font-display);
+  letter-spacing: -.045em;
 }
 
 .service-card p {
   max-width: 330px;
   margin: 0;
-  font-size: 13px;
+  font-size: 13.5px;
   line-height: 1.75;
   color: var(--muted);
 }
 
 .service-divider {
-  width: 82%;
+  width: 100%;
   height: 1px;
-  margin-top: 25px;
+  margin-top: 24px;
   background: #ddd9d2;
 }
 
@@ -243,31 +227,36 @@
     color .3s var(--ease);
 }
 
+.service-tags .chip {
+  padding: 7px 12px;
+  font-size: 10px;
+}
+
+/* The row number already leads each service. */
 .service-watermark {
-  position: absolute;
-  z-index: 1;
-  right: -6px;
-  bottom: -26px;
-  font: 300 125px/.8 var(--font-number);
-  letter-spacing: -.09em;
-  color: var(--brown);
-  opacity: .035;
-  pointer-events: none;
-  transition: opacity .5s var(--ease), transform .65s var(--ease);
+  display: none;
+}
+
+.service-card .sv-stage {
+  transition:
+    border-color .45s var(--ease),
+    box-shadow .6s var(--ease);
+}
+
+.service-card-01 .sv-stage {
+  border-color: rgba(77, 45, 26, .26);
 }
 
 @media (hover: hover) {
-  .service-card:hover {
-    translate: 0 -7px;
-    border-color: rgba(77, 45, 26, .28);
-    background: #fff;
+  .service-card:hover .service-edge {
+    transform: scaleX(1);
+  }
+
+  .service-card:hover .sv-stage {
+    border-color: rgba(77, 45, 26, .32);
     box-shadow:
       0 30px 70px rgba(42, 31, 24, .07),
       0 5px 16px rgba(42, 31, 24, .025);
-  }
-
-  .service-card:hover .service-edge {
-    height: 105px;
   }
 
   .service-card:hover .service-icon {
@@ -275,11 +264,6 @@
     background: var(--brown);
     border-color: var(--brown);
     color: #fff;
-  }
-
-  .service-card:hover .service-watermark {
-    opacity: .075;
-    transform: translate(-8px, -5px);
   }
 
   .chip:hover {
@@ -292,25 +276,32 @@
 
 @media (max-width: 1100px) {
   .services {
-    gap: 55px;
+    --svc-copy: clamp(250px, 30vw, 300px);
+    --svc-gap: 40px;
+  }
+
+  .service-card p {
+    font-size: 13px;
   }
 }
 
-@media (max-width: 800px) {
-  .services {
-    min-height: auto;
-    grid-template-columns: 1fr;
-    align-items: start;
-    padding-block: 80px;
-  }
-
+/* Below this the stage needs the full width to stay legible. */
+@media (max-width: 960px) {
   .services-heading {
-    max-width: 560px;
+    grid-template-columns: 1fr;
+    margin-bottom: 40px;
   }
 
   .services-heading h2 {
-    max-width: 540px;
+    grid-row: auto;
+    max-width: 600px;
     font-size: clamp(42px, 8vw, 58px);
+  }
+
+  .services-heading>p,
+  .services-accent {
+    grid-column: 1;
+    grid-row: auto;
   }
 
   .services-heading>p {
@@ -318,17 +309,38 @@
     margin-top: 25px;
   }
 
-  .service-grid {
-    gap: 14px;
+  .service-card {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    grid-template-areas:
+      "top"
+      "stage"
+      "content";
+    row-gap: 24px;
+    padding-block: 32px 38px;
   }
 
-  .service-card {
-    min-height: 285px;
-    padding: 25px;
+  .service-edge {
+    width: 120px;
   }
 
   .service-content {
-    margin-top: 45px;
+    padding-top: 2px;
+  }
+
+  .service-card h3,
+  .service-card p {
+    max-width: 560px;
+  }
+
+  .service-divider {
+    width: min(82%, 560px);
+  }
+}
+
+@media (max-width: 800px) {
+  .services {
+    padding-block: 80px;
   }
 
   .service-icon {
@@ -338,15 +350,8 @@
   }
 }
 
-@media (max-width: 600px) {
-  .service-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 @media (max-width: 480px) {
   .services {
-    gap: clamp(34px, 9vw, 42px);
     padding-block: clamp(60px, 15vw, 70px);
   }
 
@@ -355,50 +360,25 @@
   }
 
   .services-accent {
-    margin-top: 32px;
-  }
-
-  .service-grid {
-    gap: 13px;
+    margin-top: 28px;
   }
 
   .service-card {
-    min-height: 270px;
-    padding: clamp(20px, 5.5vw, 23px);
-  }
-
-  .service-content {
-    margin-top: 42px;
+    row-gap: 20px;
+    padding-block: 26px 30px;
   }
 
   .service-card h3 {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .service-divider {
     margin-top: 20px;
   }
-
-  .service-watermark {
-    font-size: clamp(88px, 26vw, 105px);
-  }
 }
 
-:root[data-theme="dark"] .service-card {
-  background: rgba(255, 255, 255, .025);
-}
-
-:root[data-theme="dark"] .service-card-01 {
+:root[data-theme="dark"] .service-card-01 .sv-stage {
   border-color: rgba(164, 118, 94, .30);
-  background:
-    radial-gradient( circle at 82% 12%, rgba(164, 118, 94, .10), transparent 35% ),
-    linear-gradient( 135deg, #1c1815, #151310 );
-}
-
-:root[data-theme="dark"] .service-card-03 {
-  background:
-    radial-gradient( circle at 0 100%, rgba(164, 118, 94, .075), transparent 43% ),
-    rgba(255, 255, 255, .025);
 }
 
 :root[data-theme="dark"] .service-icon,
@@ -416,8 +396,8 @@
 }
 
 @media (hover: hover) {
-  :root[data-theme="dark"] .service-card:hover {
-    background: #1a1714;
+  :root[data-theme="dark"] .service-card:hover .sv-stage {
+    border-color: rgba(164, 118, 94, .38);
     box-shadow: 0 30px 70px rgba(0, 0, 0, .22), 0 5px 16px rgba(0, 0, 0, .14);
   }
 }

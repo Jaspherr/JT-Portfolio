@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 
 type ServiceCardProps = Omit<Service, "icon"> & {
   icon: ReactNode;
+  scene?: ReactNode;
 };
 
 export default function ServiceCard({
@@ -11,9 +12,10 @@ export default function ServiceCard({
   text,
   chips,
   icon,
+  scene,
 }: ServiceCardProps) {
   return (
-    <article className={`service-card service-card-${n}`}>
+    <article id={`service-${n}`} className={`service-card service-card-${n}`}>
       <div className="service-top">
         <div className="service-number">
           <span>{n}</span>
@@ -22,6 +24,8 @@ export default function ServiceCard({
 
         <div className="service-icon">{icon}</div>
       </div>
+
+      {scene}
 
       <div className="service-content">
         <h3>{title}</h3>

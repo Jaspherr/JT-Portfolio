@@ -8,6 +8,7 @@
 @import "./shared.css" layer(components);
 
 @import "../components/sections/services.css" layer(components);
+@import "../components/services/service-scenes.css" layer(components);
 @import "../components/layout/scroll-progress.css" layer(components);
 @import "../components/layout/navbar.css" layer(components);
 @import "../components/sections/hero.css" layer(components);

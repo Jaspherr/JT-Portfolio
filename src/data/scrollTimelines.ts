@@ -14,7 +14,15 @@ const services: TimelineSpec = {
   tweens: [
     { targets: ".services-heading", from: { autoAlpha: 0, y: 45 }, duration: 0.85, ease: "power4.out", at: 0 },
     { targets: ".services-accent span", from: { scaleX: 0 }, originLeft: true, duration: 0.7, ease: "power3.out", at: 0.12 },
-    { targets: ".service-card", from: { autoAlpha: 0, y: 45, scale: 0.98 }, duration: 0.85, stagger: 0.1, ease: "power4.out", flat: true, at: 0.15 },
+  ],
+};
+
+const serviceRow: TimelineSpec = {
+  scope: ".service-card",
+  start: 0.88,
+  tweens: [
+    { targets: ".service-top, .service-content", from: { autoAlpha: 0, y: 30 }, duration: 0.85, stagger: 0.08, ease: "power4.out", flat: true, at: 0 },
+    { targets: ".sv-stage", from: { autoAlpha: 0, y: 40 }, duration: 1, ease: "power4.out", flat: true, at: 0.06 },
   ],
 };
 
@@ -85,6 +93,7 @@ const contactElsewhere: TimelineSpec = {
 export const homeTimelines: TimelineSpec[] = [
   headingRise,
   services,
+  serviceRow,
   experienceAccent,
   experienceJob,
   projectCase,
