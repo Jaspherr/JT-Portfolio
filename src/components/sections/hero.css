@@ -7,17 +7,6 @@
   overflow: hidden;
 }
 
-.hero-eyebrow {
-  display: flex;
-  justify-content: space-between;
-  border-top: 1px solid var(--line);
-  padding-top: 12px;
-  font: 500 11px/1 var(--font-display);
-  letter-spacing: .13em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
 .hero-name {
   position: relative;
   z-index: 2;
@@ -45,15 +34,17 @@
   z-index: 2;
   margin: 0;
   text-align: center;
-  font-size: clamp(96px, 10.5vw, 176px);
-  line-height: .78;
-  letter-spacing: 0;
+  font-family: "Anton", Impact, "Arial Narrow", sans-serif;
+  font-size: clamp(120px, 13.2vw, 220px);
+  font-weight: 400;
+  line-height: .82;
+  letter-spacing: -.005em;
 }
 
+/* One typeface for the whole name; the two halves differ only in colour. */
 .hero-name-letters {
   display: inline-flex;
   align-items: baseline;
-  gap: .025em;
 }
 
 .hero-name-letter {
@@ -63,23 +54,11 @@
 }
 
 .hero-name-letter-solid {
-  font-family: var(--font-display);
-  font-weight: 800;
   color: var(--ink);
 }
 
 .hero-name-letter-line {
-  font-size: .95em;
   color: var(--brown);
-  margin-inline: -.018em;
-}
-
-.hero-name-letter:nth-child(3) {
-  margin-right: -.015em;
-}
-
-.hero-name-letter:nth-child(4) {
-  margin-left: -.01em;
 }
 
 .hero-designer {
@@ -108,24 +87,26 @@
   padding-bottom: 0;
 }
 
+/* The introduction reads as one passage: a two-line lead, then the
+   paragraph that continues it. */
 .hero-copy {
   position: relative;
   z-index: 10;
-  max-width: 300px;
+  max-width: 320px;
   justify-self: end;
   transform: translateY(-20px);
 }
 
 .hero-copy h2 {
-  margin: 15px 0;
+  margin: 0 0 18px;
   font: 600 clamp(21px, 1.75vw, 27px)/1.2 var(--font-display);
   letter-spacing: -.05em;
 }
 
 .hero-description {
-  max-width: 270px;
+  margin: 0;
   font-size: 15px;
-  line-height: 1.7;
+  line-height: 1.75;
   color: var(--muted);
 }
 
@@ -515,12 +496,6 @@
       scale;
   }
 
-  .hero-intro .hero-eyebrow {
-    opacity: 0;
-    translate: 0 -6px;
-    will-change: opacity, translate;
-  }
-
   .hero-intro .avatar-wrap {
     opacity: 0;
     translate: 0 28px;
@@ -537,7 +512,7 @@
     will-change: opacity, scale;
   }
 
-  .hero-intro .hero-copy>* {
+  .hero-intro .hero-copy {
     opacity: 0;
     translate: -12px 0;
     will-change: opacity, translate;
@@ -589,10 +564,6 @@
     animation: hero-designer-enter .42s cubic-bezier(.22, 1, .36, 1) .78s both;
   }
 
-  .hero-intro.hero-ready .hero-eyebrow {
-    animation: hero-eyebrow-enter .4s cubic-bezier(.22, 1, .36, 1) .86s both;
-  }
-
   .hero-intro.hero-ready .avatar-wrap {
     animation: hero-avatar-enter .62s cubic-bezier(.22, 1, .36, 1) .78s both;
   }
@@ -601,16 +572,8 @@
     animation: hero-halo-enter .6s cubic-bezier(.22, 1, .36, 1) .82s both;
   }
 
-  .hero-intro.hero-ready .hero-copy>*:nth-child(1) {
-    animation: hero-copy-enter .46s cubic-bezier(.22, 1, .36, 1) 1.15s both;
-  }
-
-  .hero-intro.hero-ready .hero-copy>*:nth-child(2) {
-    animation: hero-copy-enter .46s cubic-bezier(.22, 1, .36, 1) 1.22s both;
-  }
-
-  .hero-intro.hero-ready .hero-copy>*:nth-child(3) {
-    animation: hero-copy-enter .46s cubic-bezier(.22, 1, .36, 1) 1.29s both;
+  .hero-intro.hero-ready .hero-copy {
+    animation: hero-copy-enter .55s cubic-bezier(.22, 1, .36, 1) 1.15s both;
   }
 
   .hero-intro.hero-ready .hero-meta {
@@ -622,10 +585,9 @@
   .hero-intro .hero-im,
   .hero-intro .hero-name-letter,
   .hero-intro .hero-designer,
-  .hero-intro .hero-eyebrow,
   .hero-intro .avatar-wrap,
   .hero-intro .avatar-halo,
-  .hero-intro .hero-copy>*,
+  .hero-intro .hero-copy,
   .hero-intro .hero-meta {
     opacity: 1;
     translate: none;
@@ -671,6 +633,10 @@
     margin-inline: auto;
   }
 
+  .hero-description {
+    max-width: 360px;
+  }
+
   .collab {
     margin: 28px auto 0;
     text-align: left;
@@ -692,11 +658,6 @@
     overflow: clip;
   }
 
-  .hero-eyebrow {
-    margin-top: 8px;
-    padding-top: 10px;
-  }
-
   .hero-name {
     position: relative;
     z-index: 5;
@@ -708,9 +669,9 @@
 
   .hero h1 {
     margin: 0;
-    font-size: clamp(52px, 12vw, 82px);
-    line-height: .88;
-    letter-spacing: .045em;
+    font-size: clamp(96px, 19vw, 150px);
+    line-height: .84;
+    letter-spacing: 0;
   }
 
   .hero-im {
@@ -866,19 +827,15 @@
     padding-bottom: 60px;
   }
 
-  .hero-eyebrow span:last-child {
-    display: none;
-  }
-
   .hero-name {
     margin-top: 54px;
     margin-bottom: 44px;
   }
 
   .hero h1 {
-    font-size: clamp(48px, 14vw, 62px);
-    line-height: .9;
-    letter-spacing: .035em;
+    font-size: clamp(76px, 25vw, 112px);
+    line-height: .86;
+    letter-spacing: 0;
   }
 
   .hero-im {
@@ -908,7 +865,7 @@
 
   .hero-meta {
     max-width: 340px;
-    margin: 8px auto 0;
+    margin: 44px auto 0;
   }
 
   .experience-count {
@@ -1028,17 +985,7 @@
   }
 }
 
-@keyframes hero-eyebrow-enter {
-  from {
-    opacity: 0;
-    translate: 0 -6px;
-  }
 
-  to {
-    opacity: 1;
-    translate: 0 0;
-  }
-}
 
 @keyframes hero-avatar-enter {
   from {

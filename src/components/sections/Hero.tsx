@@ -22,11 +22,6 @@ export default function Hero() {
 
   return (
     <section ref={heroRef} id="intro" className="hero hero-intro shell">
-      <div className="hero-eyebrow">
-        <span>Designer + Developer</span>
-        <span>Philippines · 2026</span>
-      </div>
-
       <div className="hero-name">
         <span className="hero-im" aria-hidden="true">
           I&apos;M
@@ -42,7 +37,7 @@ export default function Hero() {
                 className={cn(
                   "hero-name-letter",
                   index >= FIRST_LINE_LETTER
-                    ? "hero-name-letter-line font-monoton"
+                    ? "hero-name-letter-line"
                     : "hero-name-letter-solid",
                 )}
                 key={`${letter}-${index}`}
@@ -61,29 +56,24 @@ export default function Hero() {
       <div className="hero-grid">
         <div className="hero-copy">
           <h2>
-            I design interfaces,{" "}
+            I design interfaces,
+            <br />
             <em>then I build them.</em>
           </h2>
 
           <p className="hero-description">
-            Most of what I make lives somewhere between Figma and a
-            code editor — school projects, an internship, and a few
-            small experiments further down this page.
+            Most of what I make lives somewhere between Figma and a code
+            editor — school projects, an internship, and a few small
+            experiments further down this page.
           </p>
 
-          <a
-            className="collab magnetic"
-            href="#projects"
-          >
+          <a className="collab" href="#projects">
             <span className="collab-label">
               <small>Have a look around</small>
               <strong>See what I&apos;ve made</strong>
             </span>
 
-            <span
-              className="collab-arrow"
-              aria-hidden="true"
-            >
+            <span className="collab-arrow" aria-hidden="true">
               <ArrowDownRight />
             </span>
           </a>

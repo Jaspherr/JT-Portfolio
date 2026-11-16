@@ -79,7 +79,6 @@
 .service-grid {
   position: relative;
   z-index: 2;
-  border-bottom: 1px solid var(--line);
 }
 
 .service-card {
@@ -92,7 +91,6 @@
     "content stage";
   column-gap: var(--svc-gap);
   padding-block: clamp(30px, 4.6vh, 48px);
-  border-top: 1px solid var(--line);
   scroll-margin-top: 24px;
 }
 
@@ -100,24 +98,6 @@
   grid-area: stage;
   align-self: center;
   margin: 0;
-}
-
-/* A brown rule draws along the row's top edge once its scene starts. */
-.service-edge {
-  position: absolute;
-  top: -1px;
-  left: 0;
-  width: var(--svc-copy);
-  height: 1px;
-  background: var(--brown);
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform .9s var(--ease);
-  pointer-events: none;
-}
-
-.service-card:has(.sv-stage[data-scene]:not([data-scene="ready"])) .service-edge {
-  transform: scaleX(1);
 }
 
 .service-top {
@@ -234,10 +214,6 @@
 }
 
 @media (hover: hover) {
-  .service-card:hover .service-edge {
-    transform: scaleX(1);
-  }
-
   .service-card:hover .sv-stage {
     border-color: rgba(77, 45, 26, .32);
     box-shadow:
@@ -304,10 +280,6 @@
       "content";
     row-gap: 24px;
     padding-block: 32px 38px;
-  }
-
-  .service-edge {
-    width: 120px;
   }
 
   .service-content {
@@ -392,11 +364,5 @@
     grid-template-areas:
       "stage top"
       "stage content";
-  }
-
-  .service-card:nth-child(even) .service-edge {
-    right: 0;
-    left: auto;
-    transform-origin: right center;
   }
 }

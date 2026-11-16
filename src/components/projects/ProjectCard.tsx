@@ -27,7 +27,6 @@ export default function ProjectCard({
   tags,
   index,
   position,
-  total,
 }: ProjectCardProps) {
   const [activeImage, setActiveImage] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
@@ -234,14 +233,6 @@ export default function ProjectCard({
             <span>
               {activeProjectImage?.type === "mobile" ? "Mobile" : "Web"}{" "}
               screens
-            </span>
-
-            <span>
-              {padIndex(activeImage + 1)}
-
-              <i>/</i>
-
-              {padIndex(projectImages.length)}
             </span>
           </div>
 
@@ -531,14 +522,6 @@ export default function ProjectCard({
             {tags.map((tag) => (
               <span key={tag}>{tag}</span>
             ))}
-          </div>
-
-          <div className="project-position">
-            <span>{index}</span>
-
-            <div />
-
-            <span>{padIndex(total)}</span>
           </div>
         </div>
       </div>

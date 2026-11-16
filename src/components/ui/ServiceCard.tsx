@@ -44,8 +44,6 @@ export default function ServiceCard({
       <span className="service-watermark" aria-hidden="true">
         {n}
       </span>
-
-      <span className="service-edge" aria-hidden="true" />
     </article>
   );
 }

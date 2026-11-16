@@ -87,7 +87,6 @@
 .project-case:not(:last-child) {
   margin-bottom: clamp(70px, 8vh, 110px);
   padding-bottom: clamp(35px, 4vh, 55px);
-  border-bottom: 1px solid var(--line);
 }
 
 .project-case:last-child {
@@ -239,6 +238,7 @@
   border-bottom: 1px solid var(--line);
 }
 
+.project-summary-block>span,
 .project-impact-heading>span,
 .project-result>span {
   display: block;
@@ -316,17 +316,6 @@
   border-radius: 999px;
   font-size: 10px;
   color: var(--muted);
-}
-
-.project-position {
-  min-width: 130px;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 9px;
-  margin: 0;
-  font: 500 10px var(--font-number);
-  color: var(--subtle);
 }
 
 .project-overline {
@@ -557,12 +546,6 @@
 
 .project-visual-meta>span:first-child {
   color: var(--brown);
-}
-
-.project-visual-meta>span:last-child {
-  display: flex;
-  align-items: center;
-  gap: 5px;
 }
 
 .project-visual-meta i {
