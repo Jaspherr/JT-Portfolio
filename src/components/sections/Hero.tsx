@@ -1,11 +1,5 @@
 import { useRef } from "react";
-import {
-  ArrowDownRight,
-  FileText,
-  Github,
-  Linkedin,
-  Mail,
-} from "lucide-react";
+import { ArrowDownRight, FileText, Github, Linkedin, Mail } from "lucide-react";
 
 import Image from "@/components/ui/Image";
 import { useIntroReady } from "@/hooks/useIntroReady";
@@ -23,15 +17,12 @@ export default function Hero() {
   return (
     <section ref={heroRef} id="intro" className="hero hero-intro shell">
       <div className="hero-name">
-        <span className="hero-im" aria-hidden="true">
-          I&apos;M
-        </span>
-
         <h1 aria-label="JASPHER">
-          <span
-            className="hero-name-letters"
-            aria-hidden="true"
-          >
+          <span className="hero-im" aria-hidden="true">
+            I&apos;M
+          </span>
+
+          <span className="hero-name-letters" aria-hidden="true">
             {NAME.split("").map((letter, index) => (
               <span
                 className={cn(
@@ -48,9 +39,7 @@ export default function Hero() {
           </span>
         </h1>
 
-        <span className="hero-designer">
-          a designer who builds
-        </span>
+        <span className="hero-designer">a designer who builds</span>
       </div>
 
       <div className="hero-grid">
@@ -62,9 +51,9 @@ export default function Hero() {
           </h2>
 
           <p className="hero-description">
-            Most of what I make lives somewhere between Figma and a code
-            editor — school projects, an internship, and a few small
-            experiments further down this page.
+            Most of what I make lives somewhere between Figma and a code editor
+            — school projects, an internship, and a few small experiments
+            further down this page.
           </p>
 
           <a className="collab" href="#projects">
@@ -80,10 +69,7 @@ export default function Hero() {
         </div>
 
         <div className="avatar-stage">
-          <div
-            className="avatar-halo"
-            aria-hidden="true"
-          />
+          <div className="avatar-halo" aria-hidden="true" />
 
           <div className="avatar-wrap">
             <Image
@@ -101,10 +87,7 @@ export default function Hero() {
             <div className="experience-number">
               <strong>3</strong>
 
-              <span
-                className="experience-orbit"
-                aria-hidden="true"
-              >
+              <span className="experience-orbit" aria-hidden="true">
                 <span className="experience-dot" />
               </span>
             </div>
@@ -123,16 +106,12 @@ export default function Hero() {
             </span>
 
             <p>
-              Wrapped up an internship at Boom Technologies,
-              edited video for Simple.biz, and rebuilt this site.
+              Wrapped up an internship at Boom Technologies, edited video for
+              Simple.biz, and rebuilt this site.
             </p>
           </div>
 
-          <div
-            className="socials"
-            role="group"
-            aria-label="Find me elsewhere"
-          >
+          <div className="socials" role="group" aria-label="Find me elsewhere">
             <a
               href={SOCIAL_LINKS.linkedin}
               target="_blank"
@@ -172,10 +151,7 @@ export default function Hero() {
             </a>
           </div>
 
-          <div
-            className="hero-meta-accent"
-            aria-hidden="true"
-          >
+          <div className="hero-meta-accent" aria-hidden="true">
             <span />
           </div>
         </div>
