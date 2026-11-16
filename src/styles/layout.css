@@ -22,8 +22,7 @@
 
 .kicker p {
   margin: 0;
-  font: 600 9px var(--font-display);
-  letter-spacing: .14em;
+  font: 500 13px/1 var(--font-body);
   color: var(--muted);
 }
 

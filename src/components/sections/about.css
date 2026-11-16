@@ -1,0 +1,210 @@
+/* A personal chapter: the story on the left, small notes on the right.
+   It replaces the separate experience timeline and toolkit index. */
+
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+  align-items: start;
+  gap: clamp(48px, 7vw, 120px);
+  padding-block: clamp(90px, 12vh, 140px);
+  border-top: 1px solid var(--line);
+}
+
+.about-story {
+  position: sticky;
+  top: clamp(40px, 8vh, 90px);
+}
+
+.about-story .kicker {
+  margin-bottom: 28px;
+}
+
+.about-story h2 {
+  max-width: 560px;
+  font: 700 var(--section-title)/1 var(--font-display);
+  letter-spacing: var(--section-title-tracking);
+  text-wrap: balance;
+}
+
+.about-story h2 em {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--brown);
+}
+
+.about-story > p {
+  max-width: 520px;
+  margin: 20px 0 0;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+.about-story .about-lead {
+  margin-top: 34px;
+  font: 500 clamp(19px, 1.55vw, 23px)/1.5 var(--font-display);
+  letter-spacing: -.02em;
+  color: var(--text);
+}
+
+.about-notes {
+  display: grid;
+  gap: clamp(44px, 6vh, 64px);
+  padding-top: 6px;
+}
+
+.about-block h3 {
+  margin: 0 0 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+  font: 500 13px var(--font-body);
+  color: var(--brown);
+}
+
+.about-roles {
+  display: grid;
+  gap: 26px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about-role {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: 18px;
+}
+
+.about-role-date {
+  padding-top: 3px;
+  font: 400 12px/1.4 var(--font-number);
+  color: var(--subtle);
+}
+
+.about-role strong {
+  display: block;
+  font: 600 16px/1.3 var(--font-display);
+  letter-spacing: -.03em;
+  color: var(--ink);
+}
+
+.about-role-company {
+  display: block;
+  margin-top: 3px;
+  font-size: 13px;
+  color: var(--brown);
+}
+
+.about-role p {
+  margin: 10px 0 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.about-moment {
+  margin: 0;
+  font: 500 17px/1.6 var(--font-display);
+  letter-spacing: -.02em;
+  color: var(--text);
+}
+
+.about-moment em {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  color: var(--brown);
+}
+
+.about-moment a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color .3s var(--ease);
+}
+
+.about-moment a:focus-visible {
+  outline: 2px solid var(--brown);
+  outline-offset: 3px;
+}
+
+.about-tools {
+  display: grid;
+  margin: 0;
+}
+
+.about-tool {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 18px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.about-tool:first-child {
+  padding-top: 0;
+}
+
+.about-tool dt {
+  font: 600 14px/1.35 var(--font-display);
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+
+.about-tool dt span {
+  display: block;
+  margin-top: 3px;
+  font: 400 12px/1.4 var(--font-body);
+  letter-spacing: 0;
+  color: var(--subtle);
+}
+
+.about-tool dd {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--muted);
+}
+
+@media (hover: hover) {
+  .about-moment a:hover {
+    text-decoration-color: var(--brown);
+  }
+}
+
+@media (max-width: 960px) {
+  .about {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+
+  .about-story {
+    position: static;
+  }
+
+  .about-story h2 {
+    font-size: var(--section-title-tablet);
+  }
+}
+
+@media (max-width: 480px) {
+  .about {
+    padding-block: 72px;
+  }
+
+  .about-role,
+  .about-tool {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .about-story .about-lead {
+    margin-top: 26px;
+  }
+
+  .about-story h2 {
+    font-size: var(--section-title-mobile);
+  }
+}

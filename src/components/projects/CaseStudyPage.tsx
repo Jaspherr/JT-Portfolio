@@ -75,7 +75,7 @@ export default function CaseStudyPage({ project }: Props) {
           className="case-study-nav-links"
           aria-label="Case study quick navigation"
         >
-          <Link to="/#projects">Selected Work</Link>
+          <Link to="/#projects">Work</Link>
           <Link to="/#contact">Contact</Link>
           <a
             href={RESUME_URL}
@@ -99,7 +99,7 @@ export default function CaseStudyPage({ project }: Props) {
         <div className="case-topbar">
           <Link to="/#projects" className="case-back">
             <ArrowLeft aria-hidden="true" />
-            <span>Selected Work</span>
+            <span>All work</span>
           </Link>
           <span className="case-label">CASE STUDY</span>
         </div>
@@ -343,7 +343,7 @@ export default function CaseStudyPage({ project }: Props) {
       <CaseStudyNavigation currentSlug={project.slug} />
       <div className="case-home shell">
         <Link to="/#projects">
-          <span>BACK TO SELECTED WORK</span>
+          <span>BACK TO ALL WORK</span>
           <ArrowUpRight aria-hidden="true" />
         </Link>
       </div>

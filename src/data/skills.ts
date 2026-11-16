@@ -3,26 +3,26 @@ import type { Skill } from "@/types";
 export const skills: Skill[] = [
   {
     n: "01",
-    title: "Development",
-    desc: "Building clean, scalable digital experiences.",
-    chips: ["HTML", "CSS", "JavaScript", "React", "Python", "Dart", "Git", "TypeScript", "Java"],
+    title: "Code",
+    desc: "What I build with.",
+    chips: ["React", "TypeScript", "JavaScript", "HTML & CSS", "Dart", "Python", "Java", "Git"],
   },
   {
     n: "02",
-    title: "Design & UX",
-    desc: "Turning complex flows into intuitive interfaces.",
-    chips: ["UI / UX", "Figma", "Wireframing", "Prototyping", "Research", "Design Systems"],
+    title: "Design",
+    desc: "Where things get figured out.",
+    chips: ["Figma", "Wireframing", "Prototyping", "Research", "Design systems"],
   },
   {
     n: "03",
-    title: "Strategy & Content",
-    desc: "Giving products structure, voice, and direction.",
-    chips: ["Storytelling", "Content Strategy", "Brand Guidelines", "Information Architecture"],
+    title: "Words & structure",
+    desc: "Giving products structure and a voice.",
+    chips: ["Storytelling", "Content strategy", "Information architecture", "Brand guidelines"],
   },
   {
     n: "04",
-    title: "Creative Workflow",
-    desc: "A flexible toolkit for faster, sharper execution.",
-    chips: ["VS Code", "Figma", "Notion", "CapCut", "ChatGPT", "Slack", "Trello"],
+    title: "Everyday",
+    desc: "Day-to-day tools.",
+    chips: ["VS Code", "Claude Code", "v0", "Figma Make", "ChatGPT", "Notion", "CapCut", "Slack", "Trello"],
   },
 ];

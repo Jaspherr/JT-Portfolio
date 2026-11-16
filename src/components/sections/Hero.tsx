@@ -1,16 +1,15 @@
 import { useRef } from "react";
 import {
-  ArrowUpRight,
-  Code2,
-  Figma,
+  ArrowDownRight,
+  FileText,
   Github,
   Linkedin,
-  PenTool,
+  Mail,
 } from "lucide-react";
 
 import Image from "@/components/ui/Image";
 import { useIntroReady } from "@/hooks/useIntroReady";
-import { SOCIAL_LINKS } from "@/lib/site";
+import { CONTACT_EMAIL, RESUME_URL, SOCIAL_LINKS } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 const NAME = "JASPHER";
@@ -22,7 +21,7 @@ export default function Hero() {
   useIntroReady(heroRef, "hero-ready");
 
   return (
-    <section ref={heroRef} id="about" className="hero hero-intro shell">
+    <section ref={heroRef} id="intro" className="hero hero-intro shell">
       <div className="hero-eyebrow">
         <span>Designer + Developer</span>
         <span>Philippines · 2026</span>
@@ -55,36 +54,37 @@ export default function Hero() {
         </h1>
 
         <span className="hero-designer">
-          a UI / UX Designer
+          a designer who builds
         </span>
       </div>
 
       <div className="hero-grid">
         <div className="hero-copy">
           <h2>
-            I shape useful ideas into{" "}
-            <em>clear digital experiences.</em>
+            I design interfaces,{" "}
+            <em>then I build them.</em>
           </h2>
 
           <p className="hero-description">
-            I design and build thoughtful interfaces where visual
-            craft, product thinking, and front-end execution meet.
+            Most of what I make lives somewhere between Figma and a
+            code editor — school projects, an internship, and a few
+            small experiments further down this page.
           </p>
 
           <a
             className="collab magnetic"
-            href="#contact"
+            href="#projects"
           >
             <span className="collab-label">
-              <small>AVAILABLE FOR WORK</small>
-              <strong>Start a project</strong>
+              <small>Have a look around</small>
+              <strong>See what I&apos;ve made</strong>
             </span>
 
             <span
               className="collab-arrow"
               aria-hidden="true"
             >
-              <ArrowUpRight />
+              <ArrowDownRight />
             </span>
           </a>
         </div>
@@ -129,55 +129,54 @@ export default function Hero() {
           <div className="hero-currently">
             <span className="hero-currently-label">
               <i aria-hidden="true" />
-              CURRENTLY
+              LATELY
             </span>
 
             <p>
-              Open to UI/UX design, front-end development,
-              and selected freelance opportunities.
+              Wrapped up an internship at Boom Technologies,
+              edited video for Simple.biz, and rebuilt this site.
             </p>
           </div>
 
           <div
             className="socials"
             role="group"
-            aria-label="Professional links and tools"
+            aria-label="Find me elsewhere"
           >
             <a
               href={SOCIAL_LINKS.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn profile, opens in a new tab"
+              title="LinkedIn"
             >
               <Linkedin aria-hidden="true" />
             </a>
 
-            <span
-              role="img"
-              aria-label="Design"
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              aria-label={`Email ${CONTACT_EMAIL}`}
+              title="Email"
             >
-              <PenTool aria-hidden="true" />
-            </span>
+              <Mail aria-hidden="true" />
+            </a>
 
-            <span
-              role="img"
-              aria-label="Figma"
+            <a
+              href={RESUME_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Résumé, opens in a new tab"
+              title="Résumé"
             >
-              <Figma aria-hidden="true" />
-            </span>
-
-            <span
-              role="img"
-              aria-label="Development"
-            >
-              <Code2 aria-hidden="true" />
-            </span>
+              <FileText aria-hidden="true" />
+            </a>
 
             <a
               href={SOCIAL_LINKS.github}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub profile, opens in a new tab"
+              title="GitHub"
             >
               <Github aria-hidden="true" />
             </a>

@@ -19,7 +19,6 @@ export default function ServiceCard({
       <div className="service-top">
         <div className="service-number">
           <span>{n}</span>
-          {n === "01" && <small>PRIMARY</small>}
         </div>
 
         <div className="service-icon">{icon}</div>

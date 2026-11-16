@@ -12,7 +12,7 @@
   justify-content: space-between;
   border-top: 1px solid var(--line);
   padding-top: 12px;
-  font: 500 8px/1 var(--font-display);
+  font: 500 11px/1 var(--font-display);
   letter-spacing: .13em;
   text-transform: uppercase;
   color: var(--muted);
@@ -166,8 +166,8 @@
 }
 
 .collab-label small {
-  font: 600 6px/1 var(--font-display);
-  letter-spacing: .15em;
+  font: 500 10px/1 var(--font-body);
+  letter-spacing: 0;
   color: var(--subtle);
   transition: color .35s var(--ease);
 }
@@ -337,6 +337,12 @@
   border-radius: 50%;
   pointer-events: none;
   animation: experience-orbit-spin 9s linear infinite;
+  animation-play-state: paused;
+}
+
+/* The orbit only turns while someone is looking at it. */
+.experience-count:hover .experience-orbit {
+  animation-play-state: running;
 }
 
 .experience-dot {
@@ -352,7 +358,7 @@
 }
 
 .experience-label {
-  font: 700 9px/1.55 var(--font-display);
+  font: 700 10px/1.55 var(--font-display);
   letter-spacing: .13em;
   color: var(--ink);
 }
@@ -374,7 +380,7 @@
   align-items: center;
   gap: 8px;
   margin-bottom: 9px;
-  font: 600 7px/1 var(--font-display);
+  font: 600 10.5px/1 var(--font-display);
   letter-spacing: .14em;
   color: var(--brown);
 }
@@ -408,7 +414,7 @@
   z-index: 20;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   margin-top: 27px;
   overflow: hidden;
   border: 1px solid var(--line);
@@ -729,12 +735,13 @@
     gap: 0;
   }
 
+  /* On small screens, say what I do right after the portrait. */
   .hero-copy {
-    order: 3;
+    order: 2;
     display: block;
     width: 100%;
     max-width: 440px;
-    margin: 48px auto 0;
+    margin: 36px auto 0;
     justify-self: auto;
     text-align: center;
     transform: none;
@@ -788,11 +795,11 @@
   }
 
   .hero-meta {
-    order: 2;
+    order: 3;
     position: relative;
     width: 100%;
     max-width: 360px;
-    margin: 12px auto 0;
+    margin: 48px auto 0;
     padding: 0;
     transform: none;
     text-align: left;
@@ -832,7 +839,7 @@
     border-radius: 16px;
   }
 
-  .socials>span {
+  .socials>a {
     height: 62px;
   }
 
@@ -928,7 +935,7 @@
     margin: 24px 0 0;
   }
 
-  .socials>span {
+  .socials>a {
     height: 58px;
   }
 

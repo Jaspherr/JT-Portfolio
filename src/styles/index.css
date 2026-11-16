@@ -12,9 +12,8 @@
 @import "../components/layout/scroll-progress.css" layer(components);
 @import "../components/layout/navbar.css" layer(components);
 @import "../components/sections/hero.css" layer(components);
-@import "../components/sections/experience.css" layer(components);
 @import "../components/sections/projects.css" layer(components);
-@import "../components/sections/toolkit.css" layer(components);
+@import "../components/sections/about.css" layer(components);
 @import "../components/sections/contact.css" layer(components);
 @import "../components/layout/footer.css" layer(components);
 @import "../components/projects/case-study.css" layer(components);

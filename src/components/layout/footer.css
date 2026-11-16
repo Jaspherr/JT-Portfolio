@@ -34,7 +34,7 @@
 }
 
 .footer small {
-  font-size: 8px;
+  font-size: 11px;
   line-height: 1.65;
   color: var(--muted);
 }
@@ -44,7 +44,7 @@
 }
 
 .back-top {
-  font: 600 8px var(--font-display);
+  font: 600 11px var(--font-display);
   text-transform: uppercase;
   letter-spacing: .1em;
 }
@@ -72,7 +72,7 @@
   }
 
   .footer-inner>small {
-    font-size: 7px;
+    font-size: 10.5px;
   }
 
   .footer-inner>small:last-child {

@@ -25,7 +25,7 @@ export default function Footer() {
         </a>
 
         <small>
-          Designed &amp; built with intent.
+          Designed and built by me.
           <br />
           © 2026 Jaspher Tania.
         </small>

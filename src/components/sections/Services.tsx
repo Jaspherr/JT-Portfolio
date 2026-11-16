@@ -25,15 +25,16 @@ export default function Services() {
   return (
     <section id="services" className="section shell services">
       <div className="section-heading services-heading">
-        <SectionKicker n="01" label="CAPABILITIES" />
+        <SectionKicker n="02" label="Making" />
 
         <h2>
-          From first idea to <em>final interface.</em>
+          Design, code &amp; <em>everything between.</em>
         </h2>
 
         <p>
-          I bridge design and development so the work stays coherent from
-          concept through implementation.
+          The four things I keep coming back to. Each has a small animated
+          sketch I built for this page — they keep working on their own, so
+          pause them whenever you like.
         </p>
 
         <div className="services-accent" aria-hidden="true">

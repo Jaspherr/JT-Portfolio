@@ -11,23 +11,16 @@ export default function Projects() {
       <div className="shell projects-stage">
         <aside className="projects-heading reveal">
           <div className="projects-heading-content">
-            <SectionKicker n="03" label="SELECTED WORK" />
+            <SectionKicker n="01" label="Work" />
             <h2>
               Selected things
               <br />
               <em>I&apos;ve shaped.</em>
             </h2>
             <p className="projects-heading-description">
-              A selection of product work across web, mobile, AI, and
-              operational interfaces.
+              Four projects from school and an internship — what each one
+              was, what I did on it, and how it turned out.
             </p>
-          </div>
-          <div className="projects-heading-footer">
-            <span>2024 — 2026</span>
-            <div className="projects-heading-line">
-              <span />
-            </div>
-            <span>{padIndex(total)} PROJECTS</span>
           </div>
         </aside>
         <div className="project-gallery">

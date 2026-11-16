@@ -1,7 +1,7 @@
 import type { TimelineSpec } from "@/lib/scroll-timeline";
 
 const headingRise: TimelineSpec = {
-  scope: ".exp-heading, .projects-heading-content",
+  scope: ".projects-heading-content",
   start: 0.82,
   tweens: [
     { targets: ":scope", from: { opacity: 0, y: 55 }, duration: 1.05, ease: "power4.out" },
@@ -26,24 +26,6 @@ const serviceRow: TimelineSpec = {
   ],
 };
 
-const experienceAccent: TimelineSpec = {
-  scope: ".experience-accent",
-  start: 0.85,
-  tweens: [
-    { targets: "span", from: { scaleX: 0 }, originLeft: true, duration: 0.7, ease: "power3.out" },
-  ],
-};
-
-const experienceJob: TimelineSpec = {
-  scope: ".timeline-job",
-  start: 0.8,
-  tweens: [
-    { targets: ".timeline-date", from: { opacity: 0, x: -20 }, duration: 0.5, ease: "power3.out" },
-    { targets: ".timeline-marker", from: { autoAlpha: 0 }, duration: 0.4, ease: "power3.out", at: "-=0.4" },
-    { targets: ".timeline-content", from: { opacity: 0, x: 28 }, duration: 0.6, ease: "power4.out", at: "-=0.45", clearTransform: true },
-  ],
-};
-
 const projectCase: TimelineSpec = {
   scope: ".project-case",
   start: 0.76,
@@ -59,13 +41,12 @@ const projectCase: TimelineSpec = {
   ],
 };
 
-const toolkit: TimelineSpec = {
-  scope: ".tools",
-  start: 0.9,
+const about: TimelineSpec = {
+  scope: ".about",
+  start: 0.85,
   tweens: [
-    { targets: ".tools-intro", from: { autoAlpha: 0, y: 45 }, duration: 0.85, ease: "power4.out", at: 0 },
-    { targets: ".tools-accent span", from: { scaleX: 0 }, originLeft: true, duration: 0.7, ease: "power3.out", at: 0.12 },
-    { targets: ".toolkit-row", from: { autoAlpha: 0, x: 40 }, duration: 0.85, stagger: 0.09, ease: "power4.out", flat: true, at: 0.15 },
+    { targets: ".about-story", from: { opacity: 0, y: 40 }, duration: 0.9, ease: "power4.out", at: 0, clearTransform: true },
+    { targets: ".about-block", from: { opacity: 0, y: 24 }, duration: 0.7, stagger: 0.12, ease: "power3.out", at: 0.15 },
   ],
 };
 
@@ -94,10 +75,8 @@ export const homeTimelines: TimelineSpec[] = [
   headingRise,
   services,
   serviceRow,
-  experienceAccent,
-  experienceJob,
   projectCase,
-  toolkit,
+  about,
   contact,
   contactElsewhere,
 ];

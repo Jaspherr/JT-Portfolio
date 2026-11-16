@@ -91,7 +91,8 @@ export default function ServiceStage({
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        inView = entry.isIntersecting;
+        // Only animate while most of the stage can actually be seen.
+        inView = entry.intersectionRatio >= 0.35;
 
         if (!started && entry.intersectionRatio >= 0.5) {
           timer ||= window.setTimeout(() => {
@@ -102,7 +103,7 @@ export default function ServiceStage({
 
         sync();
       },
-      { threshold: [0, 0.5] },
+      { threshold: [0, 0.35, 0.5] },
     );
 
     observer.observe(stage);

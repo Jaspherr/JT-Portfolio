@@ -211,7 +211,7 @@ export default function ProjectCard({
     >
       <div className="project-case-inner">
         <div className="project-overline">
-          <span>CASE STUDY / {index}</span>
+          <span>Project {index}</span>
         </div>
 
         <div className="project-case-heading">
@@ -232,10 +232,8 @@ export default function ProjectCard({
         >
           <div className="project-visual-meta">
             <span>
-              PROJECT PREVIEW
-              {activeProjectImage && (
-                <> · {activeProjectImage.type.toUpperCase()}</>
-              )}
+              {activeProjectImage?.type === "mobile" ? "Mobile" : "Web"}{" "}
+              screens
             </span>
 
             <span>
@@ -459,37 +457,21 @@ export default function ProjectCard({
 
         <div className="project-summary">
           <div className="project-summary-block project-summary-brief">
-            <span>PROJECT BRIEF</span>
+            <span>What it is</span>
 
             <p>{description}</p>
           </div>
 
           <div className="project-summary-block project-summary-role">
-            <span>MY ROLE</span>
+            <span>My role</span>
 
             <strong>{role}</strong>
           </div>
         </div>
 
         <div className="project-impact">
-          <div className="project-impact-heading">
-            <span>MY CONTRIBUTION</span>
-
-            <small>WHAT I BROUGHT TO THE PROJECT</small>
-          </div>
-
-          <div className="project-contribution-list">
-            {contributions.map((contribution, i) => (
-              <div className="project-contribution-item" key={contribution}>
-                <span>{padIndex(i + 1)}</span>
-
-                <strong>{contribution}</strong>
-              </div>
-            ))}
-          </div>
-
           <div className="project-result">
-            <span>OUTCOME</span>
+            <span>How it turned out</span>
 
             <p>{outcome}</p>
 
@@ -500,7 +482,7 @@ export default function ProjectCard({
                 aria-label={`View full ${title} case study`}
               >
                 <span className="project-action-label">
-                  VIEW FULL CASE STUDY
+                  Read the case study
                 </span>
 
                 <ArrowUpRight
@@ -517,7 +499,7 @@ export default function ProjectCard({
                   rel="noopener noreferrer"
                   aria-label={`View ${title} repository on GitHub, opens in a new tab`}
                 >
-                  <span className="project-action-label">GITHUB</span>
+                  <span className="project-action-label">Code on GitHub</span>
 
                   <ArrowUpRight
                     className="project-action-arrow"
@@ -527,6 +509,21 @@ export default function ProjectCard({
               )}
             </div>
           </div>
+
+          <div className="project-impact-heading">
+            <span>What I did</span>
+          </div>
+
+          <div className="project-contribution-list">
+            {contributions.map((contribution, i) => (
+              <div className="project-contribution-item" key={contribution}>
+                <span>{padIndex(i + 1)}</span>
+
+                <strong>{contribution}</strong>
+              </div>
+            ))}
+          </div>
+
         </div>
 
         <div className="project-footer">

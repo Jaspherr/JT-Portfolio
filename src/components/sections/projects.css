@@ -36,11 +36,18 @@
   margin-bottom: 27px;
 }
 
+/* The shared chapter scale, capped to this narrow sticky column so
+   "Selected things" never breaks onto a third line. */
+.projects-heading-content {
+  container-type: inline-size;
+}
+
 .projects-heading h2 {
   max-width: 540px;
   margin: 0;
-  font: 600 clamp(42px, 3.8vw, 58px) / 1 var(--font-display);
-  letter-spacing: -.06em;
+  font: 700 clamp(38px, 14.6cqi, var(--section-title)) / 1 var(--font-display);
+  letter-spacing: var(--section-title-tracking);
+  text-wrap: balance;
 }
 
 .projects-heading h2 em {
@@ -57,33 +64,6 @@
   font-size: 15px;
   line-height: 1.75;
   color: var(--muted);
-}
-
-.projects-heading-footer {
-  position: absolute;
-  right: clamp(30px, 3vw, 55px);
-  bottom: clamp(40px, 5vh, 60px);
-  left: 0;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 14px;
-  font: 500 6.5px var(--font-number);
-  letter-spacing: .12em;
-  color: var(--subtle);
-}
-
-.projects-heading-line {
-  height: 1px;
-  overflow: hidden;
-  background: var(--line);
-}
-
-.projects-heading-line span {
-  display: block;
-  width: 30%;
-  height: 100%;
-  background: var(--brown);
 }
 
 .project-gallery {
@@ -148,7 +128,7 @@
   justify-content: center;
   gap: 5px;
   margin: 0;
-  font: 500 6.5px var(--font-number);
+  font: 500 10.5px var(--font-number);
   letter-spacing: .08em;
   color: var(--subtle);
 }
@@ -218,8 +198,7 @@
 .project-summary-block>span {
   display: block;
   margin-bottom: 6px;
-  font: 600 5.5px var(--font-display);
-  letter-spacing: .15em;
+  font: 500 11px/1.3 var(--font-body);
   color: var(--subtle);
 }
 
@@ -253,7 +232,7 @@
 .project-impact {
   min-height: 133px;
   display: grid;
-  grid-template-columns: minmax(100px, .3fr) minmax(220px, .85fr) minmax(240px, 1fr);
+  grid-template-columns: minmax(280px, 1.4fr) minmax(80px, .22fr) minmax(220px, .8fr);
   gap: clamp(24px, 3vw, 45px);
   align-items: start;
   padding: 16px 0;
@@ -263,8 +242,7 @@
 .project-impact-heading>span,
 .project-result>span {
   display: block;
-  font: 600 5.5px var(--font-display);
-  letter-spacing: .15em;
+  font: 500 11px/1.3 var(--font-body);
   color: var(--brown);
 }
 
@@ -273,7 +251,7 @@
   max-width: 115px;
   margin-top: 5px;
   line-height: 1.4;
-  font: 500 5px/1.5 var(--font-number);
+  font: 500 10px/1.5 var(--font-number);
   letter-spacing: .1em;
   color: var(--subtle);
 }
@@ -293,24 +271,24 @@
 }
 
 .project-contribution-item>span {
-  font: 400 5.5px var(--font-number);
+  font: 400 10px var(--font-number);
   color: var(--subtle);
 }
 
 .project-contribution-item strong {
-  font: 500 8px var(--font-body);
+  font: 500 11px var(--font-body);
   color: var(--text);
 }
 
 .project-result {
   position: relative;
   min-height: 100%;
-  padding-left: 20px;
-  border-left: 1px solid var(--line);
+  padding-right: 20px;
+  border-right: 1px solid var(--line);
 }
 
 .project-result p {
-  max-width: 390px;
+  max-width: 480px;
   margin: 7px 30px 0 0;
   font: 500 clamp(11px, .9vw, 13px)/1.5 var(--font-display);
   letter-spacing: -.02em;
@@ -336,7 +314,7 @@
   padding: 4px 8px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  font-size: 6px;
+  font-size: 10px;
   color: var(--muted);
 }
 
@@ -347,7 +325,7 @@
   align-items: center;
   gap: 9px;
   margin: 0;
-  font: 500 5.5px var(--font-number);
+  font: 500 10px var(--font-number);
   color: var(--subtle);
 }
 
@@ -358,8 +336,7 @@
   margin-bottom: 14px;
   padding-bottom: 7px;
   border-bottom: 1px solid var(--line);
-  font: 600 6.5px var(--font-number);
-  letter-spacing: .14em;
+  font: 500 12px var(--font-body);
   color: var(--subtle);
 }
 
@@ -494,15 +471,6 @@
   pointer-events: none;
 }
 
-.project-visual-frame::after {
-  content: "";
-  position: absolute;
-  inset: 11px;
-  z-index: 3;
-  border: 1px solid rgba(17, 17, 15, .065);
-  pointer-events: none;
-}
-
 .project-showcase-image {
   object-fit: contain;
   padding: 15px;
@@ -582,8 +550,8 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 7px;
-  font: 600 5.5px var(--font-number);
-  letter-spacing: .14em;
+  font: 500 11px var(--font-number);
+  letter-spacing: .04em;
   color: var(--subtle);
 }
 
@@ -707,6 +675,10 @@
   border-top: 1px solid var(--line);
 }
 
+.project-result-actions > :last-child {
+  border-bottom: 0;
+}
+
 .project-case-study-link,
 .project-github-link {
   width: 100%;
@@ -730,11 +702,10 @@
   margin: 0;
   padding: 0;
   font-family: var(--font-display);
-  font-size: 6.5px;
+  font-size: 12px;
   font-weight: 600;
   line-height: 1;
-  letter-spacing: .13em;
-  text-transform: uppercase;
+  letter-spacing: -.01em;
   color: inherit;
 }
 
@@ -748,7 +719,7 @@
 }
 
 .project-case-study-link span {
-  letter-spacing: .13em;
+  letter-spacing: -.01em;
 }
 
 .project-case-study-link svg {
@@ -760,19 +731,14 @@
 }
 
 .project-github-link {
-  display: flex;
-  align-items: start;
-  justify-content: space-between;
   gap: 20px;
-  padding-top: 16px;
-  border-top: 1px solid var(--line);
   color: var(--muted);
   transition: color .35s var(--ease);
 }
 
 .project-github-link span {
   margin-right: auto;
-  letter-spacing: .13em;
+  letter-spacing: -.01em;
 }
 
 .project-github-link svg:first-child {
@@ -828,7 +794,7 @@
   }
 
   .projects-heading h2 {
-    font-size: clamp(38px, 4.2vw, 52px);
+    font-size: clamp(38px, 14.6cqi, var(--section-title));
   }
 
   .project-case-heading {
@@ -870,7 +836,7 @@
 
   .projects-heading h2 {
     max-width: 520px;
-    font-size: clamp(45px, 11vw, 70px);
+    font-size: var(--section-title-tablet);
   }
 
   .projects-heading-description {
@@ -953,10 +919,11 @@
     max-width: none;
   }
 
+  /* Stacked, this rule closes the last link row. */
   .project-result {
-    padding: 25px 0 0;
-    border-top: 1px solid var(--line);
-    border-left: 0;
+    padding: 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
   }
 
   .project-result p {
@@ -1001,7 +968,7 @@
   }
 
   .projects-heading h2 {
-    font-size: clamp(40px, 12vw, 58px);
+    font-size: var(--section-title-mobile);
   }
 
   .projects-heading-footer {
@@ -1028,7 +995,7 @@
 
   .project-case-type {
     max-width: 50%;
-    font-size: 7px;
+    font-size: 10.5px;
     white-space: normal;
     text-align: right;
   }
@@ -1085,12 +1052,124 @@
   background: radial-gradient(circle at 50% 38%, rgba(255, 255, 255, .055), rgba(28, 25, 22, .94) 64%, #171411);
 }
 
-:root[data-theme="dark"] .project-visual-frame::after {
-  border-color: rgba(255, 255, 255, .065);
-}
-
 @media (hover: hover) {
   :root[data-theme="dark"] .project-case:hover .project-visual-frame:not(.is-dragging) {
     box-shadow: 0 30px 70px rgba(0, 0, 0, .25);
+  }
+}
+/* On desktop each project fills the screen. The navigation scrolls away with
+   the page, so the full 100svh is available. The media frame absorbs the
+   spare height; when content needs more, the project simply grows. */
+@media (min-width: 1101px) and (min-height: 640px) {
+  .project-case,
+  .project-case:not(:last-child) {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+    padding-block: clamp(24px, 4svh, 52px);
+  }
+
+  .project-case-inner {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-overline {
+    margin-bottom: 10px;
+  }
+
+  .project-case-heading {
+    margin-bottom: 8px;
+  }
+
+  .project-visual {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .project-visual-frame {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 240px;
+    max-height: 620px;
+  }
+
+  .project-media-nav {
+    height: 40px;
+    margin-top: 6px;
+  }
+
+  .project-summary {
+    min-height: 0;
+    margin-top: 8px;
+    padding: 10px 0 12px;
+  }
+
+  .project-summary-brief p,
+  .project-summary-role strong {
+    min-height: 0;
+  }
+
+  .project-impact {
+    min-height: 0;
+    padding: 12px 0;
+  }
+
+  .project-contribution-list {
+    min-height: 0;
+  }
+
+  .project-result-actions {
+    margin-top: 12px;
+  }
+}
+
+/* Short laptop screens (around 768px tall): trim the fixed chrome so the
+   media keeps its size instead of the project spilling past the screen. */
+@media (min-width: 1101px) and (min-height: 640px) and (max-height: 820px) {
+  .project-case,
+  .project-case:not(:last-child) {
+    padding-block: 18px;
+  }
+
+  .project-case-heading h3 {
+    font-size: clamp(25px, 2.6vw, 34px);
+  }
+
+  .project-media-nav {
+    height: 34px;
+    margin-top: 4px;
+  }
+
+  .project-summary {
+    padding: 8px 0 10px;
+  }
+
+  .project-impact {
+    padding: 10px 0;
+  }
+
+  .project-case-study-link,
+  .project-github-link {
+    height: 32px;
+  }
+
+  .project-result-actions {
+    margin-top: 10px;
+  }
+
+  .project-footer {
+    padding-top: 6px;
+  }
+}
+
+/* Side by side, the summary rule above already opens the list. */
+@media (min-width: 801px) {
+  .project-contribution-list {
+    border-top: 0;
   }
 }
