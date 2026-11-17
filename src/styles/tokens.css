@@ -6,6 +6,12 @@
   --subtle: #76756e;
   --line: #e6e4dd;
   --paper: #fdfdfb;
+  /* Page backdrop: lavender wash, hairline grid, two corner glows. */
+  --backdrop: #f5f4fb;
+  --backdrop-grid: rgb(96 92 170 / .055);
+  --backdrop-glow: rgb(160 150 255 / .42);
+  --backdrop-cell: 76px;
+  --backdrop-line: 1px;
   --soft: #f5f4ef;
   --green: #e5f4e6;
   --brown: #4D2D1A;
@@ -34,9 +40,19 @@
   --subtle: #837c74;
   --line: #35302b;
   --paper: #11100e;
+  --backdrop: #11100f;
+  --backdrop-grid: rgb(200 196 255 / .038);
+  --backdrop-glow: rgb(110 98 220 / .2);
   --soft: #181512;
   --green: #17341f;
   --brown: #a4765e;
+}
+
+/* Dense screens can draw a true half-pixel hairline. */
+@media (min-resolution: 2dppx) {
+  :root {
+    --backdrop-line: .5px;
+  }
 }
 
 @theme {

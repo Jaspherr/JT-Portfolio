@@ -4,9 +4,7 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 82% 22%, rgba(77, 45, 26, .055), transparent 28%),
-    var(--paper);
+  background: transparent;
 }
 
 .contact-inner {

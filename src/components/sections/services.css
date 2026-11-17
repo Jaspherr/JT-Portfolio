@@ -13,7 +13,7 @@
   --svc-gap: clamp(40px, 5vw, 76px);
   position: relative;
   padding-block: clamp(84px, 11vh, 130px) clamp(70px, 9vh, 110px);
-  background: var(--paper);
+  background: transparent;
   overflow-x: clip;
 }
 
@@ -221,8 +221,10 @@
       0 5px 16px rgba(42, 31, 24, .025);
   }
 
+  /* Rotate only: a turning circle keeps its footprint, whereas scaling
+     pushed the flush-right icons past the section's clipped edge. */
   .service-card:hover .service-icon {
-    transform: rotate(-7deg) scale(1.04);
+    transform: rotate(-7deg);
     background: var(--brown);
     border-color: var(--brown);
     color: #fff;

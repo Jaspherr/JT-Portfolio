@@ -257,22 +257,15 @@
   transform: scale(1.5);
   transform-origin: center bottom;
   filter: drop-shadow(0 20px 24px rgba(77, 45, 26, .08));
+  -webkit-mask-image: linear-gradient(to bottom, #000 84%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 84%, transparent 100%);
   pointer-events: none;
 }
 
+/* The legs fade out into the page backdrop rather than under a painted
+   strip, so the grid stays visible behind them. */
 .avatar-stage::before {
-  content: "";
-  position: absolute;
-  z-index: 3;
-  left: 50%;
-  bottom: -55px;
-  width: 130%;
-  height: 34%;
-  transform: translateX(-50%);
-  pointer-events: none;
-  background: linear-gradient(to bottom, transparent 0%, rgba(253, 253, 251, .18) 28%, rgba(253, 253, 251, .62) 67%, var(--paper) 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 45%, #000);
-  mask-image: linear-gradient(to bottom, transparent, #000 45%, #000);
+  display: none;
 }
 
 .avatar-stage::after {
@@ -322,12 +315,6 @@
   border-radius: 50%;
   pointer-events: none;
   animation: experience-orbit-spin 9s linear infinite;
-  animation-play-state: paused;
-}
-
-/* The orbit only turns while someone is looking at it. */
-.experience-count:hover .experience-orbit {
-  animation-play-state: running;
 }
 
 .experience-dot {

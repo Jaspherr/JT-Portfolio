@@ -4,7 +4,7 @@
   padding: 0;
   overflow: visible;
   border-top: 1px solid var(--line);
-  background: var(--paper);
+  background: transparent;
 }
 
 .projects-stage {
@@ -80,7 +80,7 @@
   display: block;
   padding: clamp(48px, 5vh, 65px) 0;
   border-bottom: 0;
-  background: var(--paper);
+  background: transparent;
   overflow: visible;
 }
 
@@ -408,7 +408,7 @@
   position: relative;
   height: clamp(390px, 40vh, 430px);
   overflow: hidden;
-  background: radial-gradient(circle at 50% 38%, rgba(255, 255, 255, .98), rgba(239, 236, 229, .91) 64%, #e9e6df);
+  background: radial-gradient(circle at 50% 38%, rgba(255, 255, 255, .98), rgba(238, 237, 245, .92) 64%, #e8e7f0);
   transition: transform .7s var(--ease), box-shadow .7s var(--ease);
 }
 
@@ -569,7 +569,7 @@
 
   .project-case:hover .project-visual-frame:not(.is-dragging) {
     transform: translateY(-4px);
-    box-shadow: 0 30px 70px rgba(42, 31, 24, .065);
+    box-shadow: 0 30px 70px rgba(40, 38, 70, .065);
   }
 }
 
@@ -1032,7 +1032,7 @@
 }
 
 :root[data-theme="dark"] .project-visual-frame {
-  background: radial-gradient(circle at 50% 38%, rgba(255, 255, 255, .055), rgba(28, 25, 22, .94) 64%, #171411);
+  background: radial-gradient(circle at 50% 38%, rgba(255, 255, 255, .055), rgba(25, 24, 28, .94) 64%, #151418);
 }
 
 @media (hover: hover) {
