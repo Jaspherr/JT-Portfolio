@@ -480,7 +480,12 @@ export default function AiScene({ title }: { title: string }) {
       <div className="sv-a-prompt">
         <i>✦</i>
         <span>{BRIEF}</span>
-        <b>↑</b>
+        <b>
+          <svg viewBox="0 0 14 14" aria-hidden="true">
+            <circle cx="7" cy="7" r="7" />
+            <path d="M7 10.4V3.9M4.4 6.5 7 3.9l2.6 2.6" />
+          </svg>
+        </b>
       </div>
 
       <svg className="sv-a-lines" viewBox="0 0 320 140">
@@ -608,7 +613,7 @@ export default function AiScene({ title }: { title: string }) {
         </span>
       </div>
 
-      <SceneCursor id="you" tag="You" />
+      <SceneCursor id="you" tag="JT" />
     </ServiceStage>
   );
 }

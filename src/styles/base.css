@@ -11,7 +11,7 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
+  background: transparent;
   color: var(--ink);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
@@ -33,6 +33,21 @@ body::before {
   z-index: 99;
   opacity: .18;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.10'/%3E%3C/svg%3E");
+}
+
+/* The page backdrop stays put while content scrolls over it. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 60% at 100% 0%, var(--backdrop-glow), transparent 70%),
+    radial-gradient(ellipse 45% 55% at 0% 100%, var(--backdrop-glow), transparent 70%),
+    linear-gradient(var(--backdrop-grid) var(--backdrop-line), transparent var(--backdrop-line)) 0 0 / var(--backdrop-cell) var(--backdrop-cell),
+    linear-gradient(90deg, var(--backdrop-grid) var(--backdrop-line), transparent var(--backdrop-line)) 0 0 / var(--backdrop-cell) var(--backdrop-cell),
+    var(--backdrop);
 }
 
 a {
@@ -75,7 +90,7 @@ h3 {
 }
 
 html {
-  background: var(--paper);
+  background: var(--backdrop);
 }
 
 html,

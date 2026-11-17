@@ -4,8 +4,9 @@
 
 .sv-stage {
   --sv-surface: #fff;
-  --sv-bar: #ddd8cf;
-  --sv-bar-soft: #efece6;
+  --sv-bar: #dcdbe3;
+  --sv-bar-soft: #eeedf3;
+  --sv-chrome: #f2f1f6;
   --sv-guide: #d9552f;
   --sv-c1: var(--brown);
   --sv-c2: #c0623a;
@@ -21,7 +22,7 @@
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: clamp(14px, 1.4vw, 20px);
-  background: var(--soft);
+  background: rgb(255 255 255 / .62);
   contain: layout paint;
 }
 
@@ -744,7 +745,7 @@
   inset: 0 0 auto;
   height: 14px;
   border-bottom: var(--sv-hair) solid var(--line);
-  background: var(--soft);
+  background: var(--sv-chrome);
 }
 
 .sv-c-bar > i {
@@ -912,12 +913,27 @@
   right: 2px;
   width: 14px;
   height: 14px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--ink);
-  font: 600 7px/1 var(--font-body);
-  color: var(--paper);
+}
+
+/* Circle and arrow are one drawing, so display scaling can never round
+   them apart. The arrow sits a touch below centre to look centred. */
+.sv-a-prompt > b > svg {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.sv-a-prompt > b circle {
+  fill: var(--ink);
+}
+
+.sv-a-prompt > b path {
+  fill: none;
+  stroke: var(--paper);
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .sv-a-lines,
@@ -1540,7 +1556,7 @@
   inset: 0 0 auto;
   height: 12px;
   border-bottom: var(--sv-hair) solid var(--line);
-  background: var(--soft);
+  background: var(--sv-chrome);
 }
 
 .sv-h-bar > i {
@@ -1998,6 +2014,8 @@
 }
 
 :root[data-theme="dark"] .sv-stage {
+  --sv-chrome: #1a191d;
+  background: rgb(255 255 255 / .03);
   --sv-surface: #1c1916;
   --sv-bar: #3a342f;
   --sv-bar-soft: #25211d;

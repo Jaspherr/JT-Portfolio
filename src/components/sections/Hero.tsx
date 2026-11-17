@@ -39,7 +39,7 @@ export default function Hero() {
           </span>
         </h1>
 
-        <span className="hero-designer">a designer who builds</span>
+        <span className="hero-designer">, a designer who builds</span>
       </div>
 
       <div className="hero-grid">
