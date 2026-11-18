@@ -43,8 +43,6 @@ body::after {
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 55% 60% at 100% 0%, var(--backdrop-glow), transparent 70%),
-    radial-gradient(ellipse 45% 55% at 0% 100%, var(--backdrop-glow), transparent 70%),
     linear-gradient(var(--backdrop-grid) var(--backdrop-line), transparent var(--backdrop-line)) 0 0 / var(--backdrop-cell) var(--backdrop-cell),
     linear-gradient(90deg, var(--backdrop-grid) var(--backdrop-line), transparent var(--backdrop-line)) 0 0 / var(--backdrop-cell) var(--backdrop-cell),
     var(--backdrop);
