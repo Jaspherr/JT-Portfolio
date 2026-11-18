@@ -8,12 +8,12 @@ import Projects from "@/components/sections/Projects";
 import Services from "@/components/sections/Services";
 import JsonLd from "@/components/shared/JsonLd";
 import { homeTimelines } from "@/data/scrollTimelines";
-import { useRevealOnScroll } from "@/hooks/useRevealOnScroll";
+import { useDraftOnView } from "@/hooks/useDraftOnView";
 import { useScrollTimelines } from "@/hooks/useScrollTimelines";
 import { profileJsonLd } from "@/lib/structured-data";
 
 export default function HomePage() {
-  useRevealOnScroll();
+  useDraftOnView();
   useScrollTimelines(homeTimelines);
 
   return (

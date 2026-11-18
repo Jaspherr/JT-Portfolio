@@ -126,7 +126,15 @@ export default function ServiceStage({
   };
 
   return (
-    <div className={`sv-stage sv-stage-${n}`} ref={stageRef}>
+    <div className={`sv-stage sv-stage-${n}`} ref={stageRef} data-draft="frame">
+      <span className="draft-spec" aria-hidden="true">
+        <i />
+        <i />
+        <i />
+        <i />
+        <b />
+      </span>
+
       <div className="sv-canvas" ref={canvasRef} aria-hidden="true">
         {children}
       </div>

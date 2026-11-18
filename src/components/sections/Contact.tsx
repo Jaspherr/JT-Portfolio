@@ -20,7 +20,7 @@ export default function Contact() {
       </span>
 
       <div className="shell contact-inner">
-        <div className="contact-top reveal">
+        <div className="contact-top">
           <SectionKicker n="04" label="Say hello" />
 
           <div className="contact-status">
@@ -29,13 +29,13 @@ export default function Contact() {
           </div>
         </div>
 
-        <div className="contact-main reveal">
+        <div className="contact-main">
           <p className="contact-pretitle">That&apos;s most of it.</p>
 
-          <h2>
+          <h2 data-draft="set">
             <span className="contact-line">If something here clicked,</span>
             <br />
-            <em>say hello.</em>
+            <em data-draft="ink">say hello.</em>
           </h2>
 
           <p className="contact-description">
@@ -44,7 +44,7 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="contact-email-wrap reveal">
+        <div className="contact-email-wrap">
           <a className="contact-email" href={`mailto:${CONTACT_EMAIL}`}>
             <div className="contact-email-label">
               <Mail aria-hidden="true" />

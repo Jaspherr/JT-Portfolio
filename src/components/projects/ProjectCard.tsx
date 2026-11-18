@@ -250,7 +250,15 @@ export default function ProjectCard({
             onPointerUp={handlePointerEnd}
             onPointerCancel={handlePointerCancel}
             onLostPointerCapture={handleLostPointerCapture}
+            data-draft="frame"
           >
+            <span className="draft-spec" aria-hidden="true">
+              <i />
+              <i />
+              <i />
+              <i />
+              <b />
+            </span>
 
             {isSakay && projectImages.length > 1 ? (
               <div className="project-sakay-carousel">

@@ -6,6 +6,7 @@
 @import "./base.css" layer(base);
 @import "./layout.css" layer(components);
 @import "./shared.css" layer(components);
+@import "./draft.css" layer(components);
 
 @import "../components/sections/services.css" layer(components);
 @import "../components/services/service-scenes.css" layer(components);

@@ -9,10 +9,10 @@ export default function Projects() {
   return (
     <section id="projects" className="section projects">
       <div className="shell projects-stage">
-        <aside className="projects-heading reveal">
+        <aside className="projects-heading">
           <div className="projects-heading-content">
             <SectionKicker n="01" label="Work" />
-            <h2>
+            <h2 data-draft="set">
               Selected things
               <br />
               <em>I&apos;ve shaped.</em>
