@@ -1,0 +1,186 @@
+/* The site's motion language — "drawn, then built".
+
+   The hero drafts the name and inks it; every other section speaks the same
+   vocabulary, picking the move that suits what it shows:
+
+     rule   a hairline is drawn across (section kickers)
+     set    type rises out of its baseline (section headings)
+     frame  a frame is spec'd with its real size, then its content is
+            inked in from the left (project previews, Making stages)
+     ink    an outline is drawn, then filled from the left (the closing
+            "say hello.", echoing the hero)
+
+   useDraftOnView adds `data-drafted` when an element comes into view. The
+   hidden "before" states only exist under `.motion-draft` (set by that
+   hook) and when motion is allowed, so the finished page is always the
+   static fallback. Tokens live in tokens.css. */
+
+/* Frame spec overlay: corner crop marks and the measured size. It is a
+   construction aid — it shows while the frame is drafted, then fades. */
+.draft-spec {
+  position: absolute;
+  z-index: 6;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.draft-spec i {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--brown);
+  border-style: solid;
+  border-width: 0;
+}
+
+.draft-spec i:nth-child(1) { top: 10px; left: 10px; border-top-width: 1px; border-left-width: 1px; }
+.draft-spec i:nth-child(2) { top: 10px; right: 10px; border-top-width: 1px; border-right-width: 1px; }
+.draft-spec i:nth-child(3) { bottom: 10px; left: 10px; border-bottom-width: 1px; border-left-width: 1px; }
+.draft-spec i:nth-child(4) { bottom: 10px; right: 10px; border-bottom-width: 1px; border-right-width: 1px; }
+
+.draft-spec b {
+  position: absolute;
+  top: 14px;
+  left: 32px;
+  font: 500 10px/1 var(--font-number);
+  letter-spacing: .08em;
+  color: var(--brown);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* rule — kickers: the line draws, then the number and label settle. */
+  .motion-draft [data-draft="rule"]:not([data-drafted]) > span {
+    scale: 0 1;
+  }
+
+  .motion-draft [data-draft="rule"]:not([data-drafted]) > :not(span) {
+    opacity: 0;
+  }
+
+  .motion-draft [data-draft="rule"] > span {
+    transform-origin: left;
+  }
+
+  .motion-draft [data-draft="rule"][data-drafted] > span {
+    animation: draft-rule var(--t-rule) var(--ease-draw) both;
+  }
+
+  .motion-draft [data-draft="rule"][data-drafted] > b {
+    animation: draft-settle .7s var(--ease-set) .1s both;
+  }
+
+  .motion-draft [data-draft="rule"][data-drafted] > p {
+    animation: draft-settle .7s var(--ease-set) .45s both;
+  }
+
+  /* set — headings rise out of their baseline, the way the hero's letters
+     are drawn up. */
+  .motion-draft [data-draft="set"]:not([data-drafted]) {
+    clip-path: inset(100% -6% -20% -6%);
+  }
+
+  .motion-draft [data-draft="set"][data-drafted] {
+    animation: draft-set var(--t-set) var(--ease-set) .15s both;
+  }
+
+  /* frame — spec'd, then inked from the left. */
+  .motion-draft [data-draft="frame"]:not([data-drafted]) > :not(.draft-spec) {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  .motion-draft [data-draft="frame"][data-drafted] > :not(.draft-spec) {
+    animation: draft-ink-in var(--t-ink) var(--ease-draw) .35s both;
+  }
+
+  .motion-draft [data-draft="frame"][data-drafted] > .draft-spec {
+    animation: draft-spec 2s linear both;
+  }
+
+  /* ink — outline first, then filled from the left. Italic glyphs lean past
+     their box, so a little padding keeps the last letter whole. */
+  .motion-draft [data-draft="ink"] {
+    margin-right: -.12em;
+    padding-right: .12em;
+    background: linear-gradient(90deg, currentColor 50%, transparent 50%) 100% 0 / 200% 100% no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px currentColor;
+  }
+
+  .motion-draft [data-draft="ink"][data-drafted] {
+    animation: draft-ink-text 1.2s var(--ease-draw) .7s both;
+  }
+}
+
+@keyframes draft-rule {
+  from {
+    scale: 0 1;
+  }
+
+  to {
+    scale: 1 1;
+  }
+}
+
+@keyframes draft-settle {
+  from {
+    opacity: 0;
+    translate: 0 .5em;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes draft-set {
+  from {
+    clip-path: inset(100% -6% -20% -6%);
+    translate: 0 .12em;
+  }
+
+  to {
+    clip-path: inset(-20% -6% -20% -6%);
+    translate: 0 0;
+  }
+}
+
+@keyframes draft-ink-in {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes draft-spec {
+  0% {
+    opacity: 0;
+  }
+
+  12%,
+  70% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes draft-ink-text {
+  from {
+    background-position: 100% 0;
+    -webkit-text-stroke-color: currentColor;
+  }
+
+  to {
+    background-position: 0 0;
+    -webkit-text-stroke-color: transparent;
+  }
+}

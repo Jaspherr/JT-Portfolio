@@ -27,7 +27,7 @@ export default function Services() {
       <div className="section-heading services-heading">
         <SectionKicker n="02" label="Making" />
 
-        <h2>
+        <h2 data-draft="set">
           Design, code &amp; <em>everything between.</em>
         </h2>
 

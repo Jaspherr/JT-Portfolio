@@ -8,7 +8,7 @@ export default function SectionKicker({
   label,
 }: SectionKickerProps) {
   return (
-    <div className="kicker">
+    <div className="kicker" data-draft="rule">
       <b>{n}</b>
       <span />
       <p>{label}</p>

@@ -10,7 +10,7 @@ export default function About() {
       <div className="about-story">
         <SectionKicker n="03" label="About" />
 
-        <h2>
+        <h2 data-draft="set">
           A bit about the <em>person behind it.</em>
         </h2>
 

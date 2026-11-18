@@ -1,10 +1,15 @@
 import type { TimelineSpec } from "@/lib/scroll-timeline";
 
+// Supporting copy settles in here. The defining moves — kicker rules,
+// headings set on their baseline, frames spec'd then inked, the closing
+// "say hello." — belong to the draft system (src/styles/draft.css), so they
+// are not repeated in these timelines.
+
 const headingRise: TimelineSpec = {
   scope: ".projects-heading-content",
   start: 0.82,
   tweens: [
-    { targets: ":scope", from: { opacity: 0, y: 55 }, duration: 1.05, ease: "power4.out" },
+    { targets: ".projects-heading-description", from: { opacity: 0, y: 18 }, duration: 0.8, ease: "power4.out", at: 0.35 },
   ],
 };
 
@@ -12,7 +17,7 @@ const services: TimelineSpec = {
   scope: ".services",
   start: 0.9,
   tweens: [
-    { targets: ".services-heading", from: { autoAlpha: 0, y: 45 }, duration: 0.85, ease: "power4.out", at: 0 },
+    { targets: ".services-heading > p", from: { autoAlpha: 0, y: 18 }, duration: 0.8, ease: "power4.out", at: 0.35 },
     { targets: ".services-accent span", from: { scaleX: 0 }, originLeft: true, duration: 0.7, ease: "power3.out", at: 0.12 },
   ],
 };
@@ -22,7 +27,6 @@ const serviceRow: TimelineSpec = {
   start: 0.88,
   tweens: [
     { targets: ".service-top, .service-content", from: { autoAlpha: 0, y: 30 }, duration: 0.85, stagger: 0.08, ease: "power4.out", flat: true, at: 0 },
-    { targets: ".sv-stage", from: { autoAlpha: 0, y: 40 }, duration: 1, ease: "power4.out", flat: true, at: 0.06 },
   ],
 };
 
@@ -34,7 +38,6 @@ const projectCase: TimelineSpec = {
     { targets: ".project-case-number", from: { opacity: 0, y: 12 }, duration: 0.4, ease: "power3.out", at: "-=0.3" },
     { targets: ".project-case-heading h3", from: { opacity: 0, y: 38 }, duration: 0.65, ease: "power4.out", at: "-=0.3" },
     { targets: ".project-case-type", from: { opacity: 0, y: 10 }, duration: 0.4, ease: "power3.out", at: "-=0.48" },
-    { targets: ".project-visual-frame", from: { opacity: 0, clipInset: [8, 92] }, duration: 0.45, ease: "power3.out", at: "-=0.42" },
     { targets: ".project-summary", from: { opacity: 0, y: 14 }, duration: 0.5, ease: "power3.out", at: "-=0.3" },
     { targets: ".project-impact", from: { opacity: 0, y: 14 }, duration: 0.5, ease: "power3.out", at: "-=0.35" },
     { targets: ".project-footer", from: { opacity: 0, y: 10 }, duration: 0.4, ease: "power3.out", at: "-=0.35" },
@@ -45,7 +48,7 @@ const about: TimelineSpec = {
   scope: ".about",
   start: 0.85,
   tweens: [
-    { targets: ".about-story", from: { opacity: 0, y: 40 }, duration: 0.9, ease: "power4.out", at: 0, clearTransform: true },
+    { targets: ".about-story > p", from: { opacity: 0, y: 18 }, duration: 0.8, stagger: 0.09, ease: "power4.out", at: 0.35, clearTransform: true },
     { targets: ".about-block", from: { opacity: 0, y: 24 }, duration: 0.7, stagger: 0.12, ease: "power3.out", at: 0.15 },
   ],
 };
@@ -54,9 +57,8 @@ const contact: TimelineSpec = {
   scope: ".contact",
   start: 0.65,
   tweens: [
-    { targets: ".contact-top", from: { opacity: 0, y: 15 }, duration: 0.5, ease: "power3.out" },
+    { targets: ".contact-status", from: { opacity: 0, y: 15 }, duration: 0.5, ease: "power3.out" },
     { targets: ".contact-pretitle", from: { opacity: 0, y: 18 }, duration: 0.5, ease: "power3.out", at: "-=0.35" },
-    { targets: ".contact-main h2", from: { opacity: 0, y: 45 }, duration: 0.6, ease: "power4.out", at: "-=0.35" },
     { targets: ".contact-description", from: { opacity: 0, y: 18 }, duration: 0.5, ease: "power3.out", at: "-=0.45" },
     { targets: ".contact-email", from: { opacity: 0, scaleX: 0.95 }, originLeft: true, duration: 0.55, ease: "power3.out", at: "-=0.35" },
   ],

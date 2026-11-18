@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "src/styles/draft.css"
+        ],
+        "createdAt": "2026-11-18T16:17:23.485Z",
+        "reason": "Claude: hard-stop 50% gradient used only as an animated ink-fill mask for the closing 'say hello.'; text rests as one solid colour, never a visible gradient"
+      }
+    ]
+  }
+}

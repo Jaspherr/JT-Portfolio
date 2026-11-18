@@ -4,6 +4,7 @@ import { Link } from "react-router";
 import CaseStudyNavigation from "@/components/projects/CaseStudyNavigation";
 import Image from "@/components/ui/Image";
 import { caseStudyTimelines } from "@/data/scrollTimelines";
+import { useDraftOnView } from "@/hooks/useDraftOnView";
 import { useScrollTimelines } from "@/hooks/useScrollTimelines";
 import { RESUME_URL } from "@/lib/site";
 import { cn, padIndex } from "@/lib/utils";
@@ -27,6 +28,7 @@ function joinMeta(...values: Array<string | null | undefined>) {
 
 export default function CaseStudyPage({ project }: Props) {
   useScrollTimelines(caseStudyTimelines);
+  useDraftOnView();
 
   const technicalConsiderations =
     project.strategy.technicalConsiderations ?? [];
@@ -171,7 +173,7 @@ export default function CaseStudyPage({ project }: Props) {
         <div className="case-overview-grid">
           <article>
             <span className="case-small-label">THE CHALLENGE</span>
-            <h2>{project.challenge.heading}</h2>
+            <h2 data-draft="set">{project.challenge.heading}</h2>
             {challengeParagraphs.length > 0 && (
               <div className="case-paragraphs">
                 {challengeParagraphs.map((paragraph, index) => (
@@ -182,7 +184,7 @@ export default function CaseStudyPage({ project }: Props) {
           </article>
           <article>
             <span className="case-small-label">THE APPROACH</span>
-            <h2>Designing for clarity and context.</h2>
+            <h2 data-draft="set">Designing for clarity and context.</h2>
             {project.strategy.introduction && (
               <p className="case-approach">{project.strategy.introduction}</p>
             )}
@@ -202,7 +204,7 @@ export default function CaseStudyPage({ project }: Props) {
           <div className="case-technical-grid">
             <div className="case-technical-intro">
               <span className="case-small-label">TECHNICAL CONSIDERATIONS</span>
-              <h2>How the product thinking translated into the build.</h2>
+              <h2 data-draft="set">How the product thinking translated into the build.</h2>
             </div>
             <ul className="case-technical-list">
               {technicalConsiderations.map((consideration, index) => (
@@ -223,7 +225,7 @@ export default function CaseStudyPage({ project }: Props) {
               <p id="case-features-label">KEY FEATURES</p>
             </div>
             <div className="case-features-header">
-              <h2>
+              <h2 data-draft="set">
                 Key moments in
                 <br />
                 <em>the experience.</em>
@@ -251,7 +253,15 @@ export default function CaseStudyPage({ project }: Props) {
                         ? "case-feature-image--mobile"
                         : "case-feature-image--web",
                     )}
+                    data-draft="frame"
                   >
+                    <span className="draft-spec" aria-hidden="true">
+                      <i />
+                      <i />
+                      <i />
+                      <i />
+                      <b />
+                    </span>
                     <Image
                       src={feature.image}
                       alt={`${project.projectName} — ${feature.title}`}
@@ -307,7 +317,7 @@ export default function CaseStudyPage({ project }: Props) {
         >
           <div className="case-outcome-lead">
             <span className="case-small-label">PROJECT RESULT</span>
-            <h2>
+            <h2 data-draft="set">
               The result &
               <br />
               <em>what I learned.</em>

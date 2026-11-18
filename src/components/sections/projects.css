@@ -808,7 +808,8 @@
     top: auto;
     height: auto;
     display: block;
-    padding: 90px 0 70px;
+    /* The section already brings its top spacing; don't add more. */
+    padding: 0 0 70px;
     border-right: 0;
     border-bottom: 1px solid var(--line);
   }
@@ -947,7 +948,7 @@
 
 @media (max-width: 480px) {
   .projects-heading {
-    padding: clamp(65px, 18vw, 75px) 0 clamp(48px, 13vw, 55px);
+    padding: 0 0 clamp(48px, 13vw, 55px);
   }
 
   .projects-heading h2 {
