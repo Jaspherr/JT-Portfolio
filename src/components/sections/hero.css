@@ -1,60 +1,82 @@
+/* Hero — "drawn, then built".
+   The name sits at the centre of the screen and exists in two states in the
+   same place: a blueprint (outlined letters on type-specimen guides) and
+   built (solid ink). It is drafted, then inked; a loupe under the pointer
+   peels the ink back to the drawing; scrolling away drains it back. Under
+   the J: the way into the work and the links. Under the tagline: the
+   introduction. Behaviour lives in useHeroBlueprint. */
+
+/* The hero starts below the 78px navigation, so a bottom padding of the same
+   78px puts the centre of its content box at the centre of the screen. */
 .hero {
   height: calc(100svh - 78px);
-  min-height: calc(100svh - 78px);
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow: hidden;
+  min-height: 600px;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto minmax(0, 1fr);
+  padding-bottom: 78px;
 }
+
+/* The name. Its size fills the measure on tall screens and is capped by the
+   screen height elsewhere, leaving room above and below for what it carries. */
 
 .hero-name {
+  grid-row: 2;
   position: relative;
-  z-index: 2;
-  width: 100%;
+  container-type: inline-size;
   display: flex;
   justify-content: center;
-  margin-top: clamp(38px, 5.5vh, 70px);
 }
 
-.hero-im {
-  position: absolute;
-  z-index: 3;
-  top: -28px;
-  left: -30px;
-  font-family: Georgia, serif;
-  font-size: clamp(25px, 2.6vw, 43px);
-  font-style: italic;
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: -.05em;
-  color: var(--brown);
-  transform: rotate(-4deg);
+.hero-lockup {
+  position: relative;
 }
 
 .hero h1 {
+  /* Loupe position/size and scroll drain, written by useHeroBlueprint. */
+  --lx: 0px;
+  --ly: 0px;
+  --lr: 0px;
+  --lo: 0;
+  --drain: 0;
+  --bp-stop: 99999px;
+  /* Guides, measured from the font; these defaults are Anton's own. */
+  --bp-cap: -9px;
+  --bp-base: .79em;
+  --bp-bleed: clamp(20px, 3.2vw, 52px);
+  --bp-bleed-y: .17em;
+  --bp-line: color-mix(in srgb, var(--brown) 42%, transparent);
   position: relative;
   z-index: 2;
-  flex: 0 0 auto;
-  width: max-content;
+  /* Keeps the letters' negative margins from collapsing through. */
+  display: flow-root;
   margin: 0;
-  text-align: center;
   font-family: "Anton", Impact, "Arial Narrow", sans-serif;
-  font-size: clamp(120px, 13.2vw, 220px);
+  font-size: min(calc(100cqi / 3.32), 38svh);
   font-weight: 400;
   line-height: .82;
-  letter-spacing: -.005em;
+  letter-spacing: 0;
+  white-space: nowrap;
 }
 
-/* One typeface for the whole name; the two halves differ only in colour. */
+/* Built: the solid name. The loupe punches a hole in it and the scroll
+   drain trims it from the right; the blueprint shows through both. */
 .hero-name-letters {
-  display: inline-flex;
+  position: relative;
+  z-index: 1;
+  display: flex;
   align-items: baseline;
+  /* A mask also trims anything outside the box, and Anton's capitals rise
+     past the tight line box; this padding (cancelled by the margin) keeps
+     the whole glyph inside it. */
+  margin-block: -.12em;
+  padding-block: .12em;
+  clip-path: inset(-20% calc(var(--drain) * 100%) -20% -20%);
+  -webkit-mask-image: radial-gradient(circle max(var(--lr), .5px) at var(--lx) calc(var(--ly) + .12em), transparent 97%, #000 100%);
+  mask-image: radial-gradient(circle max(var(--lr), .5px) at var(--lx) calc(var(--ly) + .12em), transparent 97%, #000 100%);
 }
 
 .hero-name-letter {
   display: inline-block;
-  transform-origin: center bottom;
-  will-change: transform, opacity;
 }
 
 .hero-name-letter-solid {
@@ -65,63 +87,235 @@
   color: var(--brown);
 }
 
+/* Blueprint: the same letters, outlined, on cap-height and baseline guides
+   with each letter's measured width. It bleeds past the letters so the
+   guides run on, and is only visible inside the loupe and the drained part. */
+.hero-blueprint {
+  position: absolute;
+  z-index: 2;
+  inset: calc(-1 * var(--bp-bleed-y)) calc(-1 * var(--bp-bleed));
+  pointer-events: none;
+  -webkit-mask-image:
+    radial-gradient(circle max(var(--lr), .5px) at calc(var(--lx) + var(--bp-bleed)) calc(var(--ly) + var(--bp-bleed-y)), #000 97%, transparent 100%),
+    linear-gradient(to right, transparent var(--bp-stop), #000 var(--bp-stop));
+  mask-image:
+    radial-gradient(circle max(var(--lr), .5px) at calc(var(--lx) + var(--bp-bleed)) calc(var(--ly) + var(--bp-bleed-y)), #000 97%, transparent 100%),
+    linear-gradient(to right, transparent var(--bp-stop), #000 var(--bp-stop));
+}
+
+.hero-bp-guide {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  border-top: 1px solid var(--bp-line);
+  transform-origin: left;
+}
+
+.hero-bp-cap {
+  top: calc(var(--bp-bleed-y) + var(--bp-cap));
+}
+
+.hero-bp-base {
+  top: calc(var(--bp-bleed-y) + var(--bp-base));
+}
+
+/* Guide notes: cap height at the right end above its line, baseline at the
+   left end below its line, so neither meets the tagline or the link. */
+.hero-bp-guide em {
+  position: absolute;
+  bottom: 5px;
+  font: 500 10px/1 var(--font-number);
+  font-style: normal;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--brown);
+  white-space: nowrap;
+}
+
+.hero-bp-cap em {
+  right: 0;
+}
+
+.hero-bp-base em {
+  top: 6px;
+  bottom: auto;
+  left: 0;
+}
+
+.hero-bp-letters {
+  position: absolute;
+  inset: var(--bp-bleed-y) var(--bp-bleed);
+  display: flex;
+  align-items: baseline;
+}
+
+.hero-bp-letters::after {
+  content: "";
+  position: absolute;
+  top: calc(-1 * var(--bp-bleed-y));
+  bottom: -14px;
+  right: 0;
+  border-right: 1px dashed var(--bp-line);
+}
+
+.hero-bp-letter {
+  position: relative;
+  display: inline-block;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1.5px currentColor;
+}
+
+/* Sidebearing lines between the letters... */
+.hero-bp-letter::before {
+  content: "";
+  position: absolute;
+  /* Runs up past the cap line, but stops just under the baseline so it
+     never crosses the tagline. */
+  top: calc(-1 * var(--bp-bleed-y));
+  bottom: -14px;
+  left: 0;
+  border-left: 1px dashed var(--bp-line);
+}
+
+/* ...and each letter's measured width, just above the cap height. */
+.hero-bp-letter::after {
+  content: attr(data-w);
+  position: absolute;
+  left: 50%;
+  /* px, not em: an em here would resolve at the label's own 10px size. */
+  top: calc(var(--bp-cap) - 30px);
+  font: 500 10px/1 var(--font-number);
+  letter-spacing: .06em;
+  -webkit-text-fill-color: var(--brown);
+  -webkit-text-stroke: 0;
+  translate: -50% 0;
+}
+
+/* The loupe's rim, with a small crosshair at its centre. */
+.hero-lens {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  width: calc(var(--lr) * 2);
+  height: calc(var(--lr) * 2);
+  border: 1px solid var(--brown);
+  border-radius: 50%;
+  opacity: var(--lo);
+  translate: calc(var(--lx) - var(--lr)) calc(var(--ly) - var(--lr));
+  pointer-events: none;
+}
+
+.hero-lens::before,
+.hero-lens::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: var(--brown);
+  translate: -50% -50%;
+}
+
+.hero-lens::before {
+  width: 11px;
+  height: 1px;
+}
+
+.hero-lens::after {
+  width: 1px;
+  height: 11px;
+}
+
+/* "I'M" sits on the J's left edge, just above the cap height; the tagline
+   hangs off the R's right edge, just below the baseline. */
+
+.hero-im {
+  position: absolute;
+  z-index: 3;
+  left: .01em;
+  bottom: calc(100% + .02em);
+  font-family: Georgia, serif;
+  font-size: clamp(24px, 2.4vw, 40px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -.05em;
+  color: var(--brown);
+}
+
 .hero-designer {
   position: absolute;
   z-index: 3;
-  right: 12%;
-  bottom: -46px;
+  right: 0;
+  top: calc(100% + .1em);
   font-family: Georgia, serif;
-  font-size: clamp(22px, 2.25vw, 37px);
+  font-size: clamp(22px, 2.25vw, 38px);
   font-style: italic;
   font-weight: 400;
   line-height: 1;
   letter-spacing: -.05em;
   color: var(--ink);
-  transform: rotate(-2deg);
   white-space: nowrap;
 }
 
-.hero-grid {
-  flex: 1;
-  display: grid;
-  grid-template-columns: minmax(230px, 1fr) minmax(440px, 620px) minmax(210px, 1fr);
-  align-items: center;
-  gap: 20px;
-  min-height: 0;
-  padding-bottom: 0;
+/* Under the name, hung from it so it never moves the name off centre:
+   the link and socials under the J, the introduction under the tagline. */
+
+.hero-under {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
 }
 
-/* The introduction reads as one passage: a two-line lead, then the
-   paragraph that continues it. */
-.hero-copy {
-  position: relative;
-  z-index: 10;
-  max-width: 320px;
-  justify-self: end;
-  transform: translateY(-20px);
+.hero-actions {
+  order: -1;
+  width: 270px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-top: clamp(28px, 4vh, 40px);
 }
 
-.hero-copy h2 {
-  margin: 0 0 18px;
-  font: 600 clamp(21px, 1.75vw, 27px)/1.2 var(--font-display);
-  letter-spacing: -.05em;
-}
-
-.hero-description {
+/* End-aligned, so its lines finish flush with the R and the tagline. */
+.hero-lede {
+  max-width: 400px;
   margin: 0;
-  font-size: 15px;
-  line-height: 1.75;
+  padding-top: clamp(64px, 8.5vh, 84px);
+  text-align: end;
+  font-size: 14.5px;
+  line-height: 1.7;
   color: var(--muted);
 }
 
+.hero-lede strong {
+  display: block;
+  margin-bottom: 10px;
+  font: 600 clamp(22px, 1.8vw, 28px)/1.12 var(--font-display);
+  letter-spacing: -.045em;
+  color: var(--ink);
+}
+
+.hero-lede em {
+  display: block;
+  font-style: italic;
+  letter-spacing: -.035em;
+}
+
+/* "See what I've made" — the boxed link, unchanged. */
+
 .collab {
   position: relative;
-  width: min(100%, 270px);
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 22px;
-  margin-top: 28px;
   padding: 13px 0 14px;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -170,7 +364,7 @@
   flex: 0 0 37px;
   display: grid;
   place-items: center;
-  border: 1px solid #d5d2ca;
+  border: 1px solid #d5d4dc;
   border-radius: 50%;
   background: var(--paper);
   color: var(--ink);
@@ -186,6 +380,62 @@
   width: 14px;
   height: 14px;
   pointer-events: none;
+}
+
+.socials {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  background: rgba(255, 255, 255, .58);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .8),
+    0 8px 30px rgba(40, 38, 70, .04);
+  isolation: isolate;
+}
+
+.socials>a {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  background: transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color .35s var(--ease), background-color .4s var(--ease);
+}
+
+.socials>a:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 1px;
+  height: 18px;
+  background: var(--line);
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: opacity .3s var(--ease);
+}
+
+.socials svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 1.7;
+  pointer-events: none;
+  transition: transform .45s var(--ease), color .35s var(--ease);
+}
+
+.socials>a:focus-visible {
+  z-index: 3;
+  border-radius: 999px;
 }
 
 @media (hover: hover) {
@@ -212,684 +462,188 @@
     border-color: var(--brown);
     color: #fff;
   }
-}
 
-.avatar-stage {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 0;
-  align-self: stretch;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  overflow: visible;
-  pointer-events: none;
-}
-
-.avatar-halo {
-  position: absolute;
-  left: 50%;
-  bottom: -4%;
-  width: 115%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(238, 232, 223, .9) 0%, rgba(244, 240, 233, .6) 46%, transparent 72%);
-  filter: blur(10px);
-  transform: translateX(-50%);
-  pointer-events: none;
-}
-
-.avatar-wrap {
-  position: absolute;
-  z-index: 1;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  transform-origin: center bottom;
-  pointer-events: none;
-}
-
-.avatar-wrap img {
-  object-fit: contain;
-  object-position: center bottom;
-  transform: scale(1.5);
-  transform-origin: center bottom;
-  filter: drop-shadow(0 20px 24px rgba(77, 45, 26, .08));
-  -webkit-mask-image: linear-gradient(to bottom, #000 84%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 84%, transparent 100%);
-  pointer-events: none;
-}
-
-/* The legs fade out into the page backdrop rather than under a painted
-   strip, so the grid stays visible behind them. */
-.avatar-stage::before {
-  display: none;
-}
-
-.avatar-stage::after {
-  display: none;
-}
-
-.hero-meta {
-  position: relative;
-  z-index: 10;
-  justify-self: end;
-  align-self: center;
-  width: min(100%, 340px);
-  padding-bottom: 0;
-  transform: none;
-}
-
-.experience-count {
-  display: flex;
-  align-items: center;
-  gap: 22px;
-  transform: translateY(-26px);
-}
-
-.experience-number {
-  position: relative;
-  width: 82px;
-  height: 82px;
-  flex: 0 0 82px;
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(77, 45, 26, .22);
-  border-radius: 50%;
-}
-
-.experience-number strong {
-  position: relative;
-  z-index: 3;
-  font: 300 50px/.8 var(--font-number);
-  letter-spacing: -.08em;
-  color: var(--brown);
-}
-
-.experience-orbit {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  border-radius: 50%;
-  pointer-events: none;
-  animation: experience-orbit-spin 9s linear infinite;
-}
-
-.experience-dot {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--brown);
-  box-shadow: none;
-  transform: translate(-50%, -50%);
-}
-
-.experience-label {
-  font: 700 10px/1.55 var(--font-display);
-  letter-spacing: .13em;
-  color: var(--ink);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .experience-orbit {
-    animation: none;
-  }
-}
-
-.hero-currently {
-  max-width: 310px;
-  margin-top: 28px;
-  transform: translateY(-10px);
-}
-
-.hero-currently-label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 9px;
-  font: 600 10.5px/1 var(--font-display);
-  letter-spacing: .14em;
-  color: var(--brown);
-}
-
-.hero-currently-label i {
-  position: relative;
-  width: 6px;
-  height: 6px;
-  flex: 0 0 6px;
-  border-radius: 50%;
-  background: #57945b;
-}
-
-.hero-currently-label i::after {
-  content: "";
-  position: absolute;
-  inset: -3px;
-  border: 1px solid rgba(87, 148, 91, .25);
-  border-radius: 50%;
-}
-
-.hero-currently p {
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.75;
-  color: var(--muted);
-}
-
-.socials {
-  position: relative;
-  z-index: 20;
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin-top: 27px;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 100px;
-  background: rgba(255, 255, 255, .58);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, .8),
-    0 8px 30px rgba(42, 31, 24, .035);
-  isolation: isolate;
-}
-
-.socials>a,
-.socials>span {
-  position: relative;
-  z-index: 1;
-  min-width: 0;
-  height: 62px;
-  display: grid;
-  place-items: center;
-  color: var(--ink);
-  background: transparent;
-  text-decoration: none;
-  cursor: pointer;
-  transition: color .35s var(--ease), background-color .4s var(--ease);
-}
-
-.socials>a:not(:last-child)::after,
-.socials>span:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: 0;
-  width: 1px;
-  height: 24px;
-  background: var(--line);
-  transform: translateY(-50%);
-  pointer-events: none;
-  transition: height .4s var(--ease), opacity .3s var(--ease);
-}
-
-.socials svg {
-  width: 20px;
-  height: 20px;
-  stroke-width: 1.7;
-  pointer-events: none;
-  transition: transform .45s var(--ease), color .35s var(--ease);
-}
-
-@media (hover: hover) {
-  .socials>a:hover,
-  .socials>span:hover {
+  .socials>a:hover {
     z-index: 2;
     background-color: var(--brown);
     color: #fff;
   }
 
-  .socials>a:hover svg,
-  .socials>span:hover svg {
+  .socials>a:hover svg {
     color: #fff;
     transform: scale(1.12);
   }
 
-  .socials>a:hover::after,
-  .socials>span:hover::after {
+  .socials>a:hover::after {
     opacity: 0;
   }
 }
 
+/* Entrance — drafted, then inked. The guides rule across, the outlined
+   letters are drawn up out of the baseline, ink fills each letter left to
+   right, and the drawing fades back under the finished name. The name reads
+   from the first moment; nothing waits on the user. */
+
 @media (prefers-reduced-motion: no-preference) {
-  .hero-intro .hero-im {
+  .hero-intro .hero-im,
+  .hero-intro .hero-designer,
+  .hero-intro .hero-actions,
+  .hero-intro .hero-lede {
     opacity: 0;
-    translate: 0 12px;
-    scale: .96;
-    will-change:
-      opacity,
-      translate,
-      scale;
   }
 
   .hero-intro .hero-name-letter {
-    opacity: 0;
-    translate: 0 60%;
-    scale: 1 1.04;
-    transform-origin: center bottom;
-    will-change:
-      opacity,
-      translate,
-      scale;
+    clip-path: inset(-12% 100% -12% -12%);
   }
 
-  .hero-intro .hero-designer {
+  /* Hidden only until the draft starts; afterwards the loupe and the scroll
+     drain decide what of the drawing shows. */
+  .hero-intro:not(.hero-ready) .hero-blueprint {
     opacity: 0;
-    translate: 16px 8px;
-    scale: .98;
-    will-change:
-      opacity,
-      translate,
-      scale;
   }
 
-  .hero-intro .avatar-wrap {
-    opacity: 0;
-    translate: 0 28px;
-    scale: .985;
-    will-change:
-      opacity,
-      translate,
-      scale;
+  /* While drafting, the whole drawing is shown, not just the loupe. */
+  .hero-intro.hero-ready .hero-blueprint {
+    animation: hero-draft 2.3s linear; /* no fill: hands back to the masks */
   }
 
-  .hero-intro .avatar-halo {
-    opacity: 0;
-    scale: .92;
-    will-change: opacity, scale;
+  .hero-intro.hero-ready .hero-bp-cap {
+    animation: hero-rule-draw .9s cubic-bezier(.65, 0, .35, 1) .05s both;
   }
 
-  .hero-intro .hero-copy {
-    opacity: 0;
-    translate: -12px 0;
-    will-change: opacity, translate;
+  .hero-intro.hero-ready .hero-bp-base {
+    animation: hero-rule-draw .9s cubic-bezier(.65, 0, .35, 1) .15s both;
   }
 
-  .hero-intro .hero-meta {
-    opacity: 0;
-    translate: 12px 0;
-    will-change: opacity, translate;
+  .hero-intro.hero-ready .hero-bp-letter {
+    animation: hero-letter-draw .8s cubic-bezier(.19, 1, .22, 1) both;
   }
 
-  .hero-intro.hero-ready .hero-im {
-    animation: hero-im-enter .32s cubic-bezier(.22, 1, .36, 1) both;
-  }
+  .hero-intro.hero-ready .hero-bp-letter:nth-child(1) { animation-delay: .2s; }
+  .hero-intro.hero-ready .hero-bp-letter:nth-child(2) { animation-delay: .25s; }
+  .hero-intro.hero-ready .hero-bp-letter:nth-child(3) { animation-delay: .3s; }
+  .hero-intro.hero-ready .hero-bp-letter:nth-child(4) { animation-delay: .35s; }
+  .hero-intro.hero-ready .hero-bp-letter:nth-child(5) { animation-delay: .4s; }
+  .hero-intro.hero-ready .hero-bp-letter:nth-child(6) { animation-delay: .45s; }
+  .hero-intro.hero-ready .hero-bp-letter:nth-child(7) { animation-delay: .5s; }
 
   .hero-intro.hero-ready .hero-name-letter {
-    animation: hero-letter-enter .36s cubic-bezier(.22, 1, .36, 1) both;
+    animation: hero-ink .6s cubic-bezier(.65, 0, .35, 1) both;
   }
 
-  .hero-intro.hero-ready .hero-name-letter:nth-child(1) {
-    animation-delay: .24s;
-  }
+  .hero-intro.hero-ready .hero-name-letter:nth-child(1) { animation-delay: .8s; }
+  .hero-intro.hero-ready .hero-name-letter:nth-child(2) { animation-delay: .87s; }
+  .hero-intro.hero-ready .hero-name-letter:nth-child(3) { animation-delay: .94s; }
+  .hero-intro.hero-ready .hero-name-letter:nth-child(4) { animation-delay: 1.01s; }
+  .hero-intro.hero-ready .hero-name-letter:nth-child(5) { animation-delay: 1.08s; }
+  .hero-intro.hero-ready .hero-name-letter:nth-child(6) { animation-delay: 1.15s; }
+  .hero-intro.hero-ready .hero-name-letter:nth-child(7) { animation-delay: 1.22s; }
 
-  .hero-intro.hero-ready .hero-name-letter:nth-child(2) {
-    animation-delay: .285s;
-  }
-
-  .hero-intro.hero-ready .hero-name-letter:nth-child(3) {
-    animation-delay: .33s;
-  }
-
-  .hero-intro.hero-ready .hero-name-letter:nth-child(4) {
-    animation-delay: .375s;
-  }
-
-  .hero-intro.hero-ready .hero-name-letter:nth-child(5) {
-    animation-delay: .42s;
-  }
-
-  .hero-intro.hero-ready .hero-name-letter:nth-child(6) {
-    animation-delay: .465s;
-  }
-
-  .hero-intro.hero-ready .hero-name-letter:nth-child(7) {
-    animation-delay: .51s;
+  .hero-intro.hero-ready .hero-im {
+    animation: hero-rise .8s var(--ease) 1.3s both;
   }
 
   .hero-intro.hero-ready .hero-designer {
-    animation: hero-designer-enter .42s cubic-bezier(.22, 1, .36, 1) .78s both;
+    animation: hero-rise .8s var(--ease) 1.45s both;
   }
 
-  .hero-intro.hero-ready .avatar-wrap {
-    animation: hero-avatar-enter .62s cubic-bezier(.22, 1, .36, 1) .78s both;
+  .hero-intro.hero-ready .hero-actions {
+    animation: hero-rise .9s var(--ease) 1.55s both;
   }
 
-  .hero-intro.hero-ready .avatar-halo {
-    animation: hero-halo-enter .6s cubic-bezier(.22, 1, .36, 1) .82s both;
-  }
-
-  .hero-intro.hero-ready .hero-copy {
-    animation: hero-copy-enter .55s cubic-bezier(.22, 1, .36, 1) 1.15s both;
-  }
-
-  .hero-intro.hero-ready .hero-meta {
-    animation: hero-meta-enter .5s cubic-bezier(.22, 1, .36, 1) 1.18s both;
+  .hero-intro.hero-ready .hero-lede {
+    animation: hero-rise .9s var(--ease) 1.65s both;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .hero-intro .hero-im,
-  .hero-intro .hero-name-letter,
-  .hero-intro .hero-designer,
-  .hero-intro .avatar-wrap,
-  .hero-intro .avatar-halo,
-  .hero-intro .hero-copy,
-  .hero-intro .hero-meta {
-    opacity: 1;
-    translate: none;
-    scale: none;
-    animation: none;
+/* Short desktop screens (e.g. 1366 × 768): a touch tighter under the name. */
+
+@media (min-width: 801px) and (max-height: 820px) {
+  .hero-lede {
+    padding-top: 58px;
+  }
+
+  .hero-lede strong {
+    margin-bottom: 8px;
   }
 }
 
-.hero {
-  overflow-x: hidden;
-}
-
-@media (max-width: 1100px) {
-  .hero-grid {
-    grid-template-columns: 160px minmax(300px, 1fr) 150px;
-  }
-}
+/* Phones and small tablets: everything stacks under the name in reading
+   order, and the height follows the content. */
 
 @media (max-width: 800px) {
-  .avatar-stage::before {
-    bottom: -15px;
-    width: 105%;
-    height: 20%;
-  }
-
-  .experience-orbit {
-    transform-origin: 50% 50%;
-  }
-
-  .hero-currently {
-    margin-top: 22px;
-  }
-
-  .socials {
-    top: auto;
-  }
-
-  .hero-copy h2 {
-    margin-top: 0;
-  }
-
-  .hero-description {
-    margin-inline: auto;
-  }
-
-  .hero-description {
-    max-width: 360px;
-  }
-
-  .collab {
-    margin: 28px auto 0;
-    text-align: left;
-  }
-
-  .hero-meta-accent {
-    margin: 28px auto 0;
-  }
-
-  .hero-designer {
-    text-align: right;
-  }
-
   .hero {
     height: auto;
     min-height: 0;
-    max-height: none;
-    padding-bottom: 70px;
-    overflow: clip;
+    display: block;
+    padding: clamp(64px, 14vw, 96px) 0 72px;
   }
 
   .hero-name {
-    position: relative;
-    z-index: 5;
-    width: 100%;
-    margin-top: 58px;
-    margin-bottom: 42px;
-    overflow: visible;
+    display: block;
+    translate: none;
   }
 
   .hero h1 {
-    margin: 0;
-    font-size: clamp(96px, 19vw, 150px);
-    line-height: .84;
-    letter-spacing: 0;
+    /* No sideways bleed on a phone: the guides' notes stay on screen. */
+    --bp-bleed: 0px;
+    font-size: calc(100cqi / 3.32);
+  }
+
+  .hero-bp-letter {
+    -webkit-text-stroke-width: 1px;
   }
 
   .hero-im {
-    top: -27px;
-    left: 2%;
-    font-size: clamp(19px, 4vw, 27px);
+    font-size: clamp(19px, 4.4vw, 28px);
   }
 
   .hero-designer {
-    right: 0;
-    bottom: -34px;
-    font-size: clamp(18px, 4vw, 26px);
-    white-space: nowrap;
+    font-size: clamp(17px, 4.3vw, 26px);
   }
 
-  .hero-grid {
-    display: flex;
+  .hero-under {
+    position: static;
     flex-direction: column;
-    align-items: center;
-    width: 100%;
-    min-height: 0;
-    gap: 0;
+    align-items: stretch;
+    gap: 36px;
+    padding-top: clamp(64px, 14vw, 80px);
   }
 
-  /* On small screens, say what I do right after the portrait. */
-  .hero-copy {
-    order: 2;
-    display: block;
-    width: 100%;
-    max-width: 440px;
-    margin: 36px auto 0;
-    justify-self: auto;
-    text-align: center;
-    transform: none;
-  }
-
-  .avatar-stage {
-    order: 1;
-    position: relative;
-    width: 100%;
-    max-width: 430px;
-    height: 390px;
-    margin: 0 auto;
-    display: block;
-    overflow: visible;
-    transform: none;
-  }
-
-  .avatar-halo {
-    position: absolute;
-    left: 50%;
-    bottom: 10px;
-    width: 100%;
-    height: 70%;
-    transform: translateX(-50%);
-  }
-
-  .avatar-wrap {
-    position: absolute;
-    top: 0;
-    right: auto;
-    bottom: 0;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    transform: translateX(-50%);
-    overflow: visible;
-  }
-
-  .avatar-wrap img {
-    width: 100%;
-    height: 100%;
+  /* On a phone the introduction runs full width, so it reads from the start. */
+  .hero-lede {
     max-width: none;
-    object-fit: contain;
-    object-position: center bottom;
-    transform: none;
+    padding-top: 0;
+    font-size: 15px;
+    text-align: start;
   }
 
-  .avatar-stage::before {
-    display: none;
+  .hero-lede strong {
+    font-size: clamp(24px, 6.4vw, 30px);
   }
 
-  .hero-meta {
-    order: 3;
-    position: relative;
+  .hero-actions {
+    order: 0;
     width: 100%;
-    max-width: 360px;
-    margin: 48px auto 0;
-    padding: 0;
-    transform: none;
-    text-align: left;
+    gap: 28px;
+    padding-top: 0;
   }
 
-  .experience-count {
-    position: static;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin: 0;
-    transform: none;
-  }
-
-  .hero-currently {
-    position: static;
-    width: 100%;
-    max-width: none;
-    margin: 20px 0 0;
-    transform: none;
-  }
-
-  .hero-currently p {
-    margin-bottom: 0;
-  }
-
-  .hero-currently p br {
-    display: none;
-  }
-
-  .socials {
-    position: static;
-    width: 100%;
-    max-width: none;
-    margin: 26px 0 0;
-    transform: none;
-    border-radius: 16px;
+  .collab {
+    width: min(100%, 270px);
   }
 
   .socials>a {
-    height: 62px;
-  }
-
-  .hero-meta-accent {
-    display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-designer {
-    white-space: nowrap;
-  }
-
-  .avatar-stage::before {
-    display: none;
-  }
-
-  .socials {
-    margin-top: 20px;
-    border-radius: 16px;
-  }
-
-  .hero {
-    padding-bottom: 60px;
-  }
-
-  .hero-name {
-    margin-top: 54px;
-    margin-bottom: 44px;
-  }
-
-  .hero h1 {
-    font-size: clamp(76px, 25vw, 112px);
-    line-height: .86;
-    letter-spacing: 0;
-  }
-
-  .hero-im {
-    top: -25px;
-    left: 0;
-    font-size: 19px;
-  }
-
-  .hero-designer {
-    right: 0;
-    bottom: -31px;
-    font-size: clamp(16px, 4.2vw, 19px);
-  }
-
-  .avatar-stage {
-    max-width: 400px;
-  }
-
-  .avatar-wrap {
-    top: auto;
-  }
-
-  .avatar-wrap img {
-    transform: scale(1.58);
-    transform-origin: center bottom;
-  }
-
-  .hero-meta {
-    max-width: 340px;
-    margin: 44px auto 0;
-  }
-
-  .experience-count {
-    top: auto;
-  }
-
-  .experience-number {
-    width: 72px;
-    height: 72px;
-    flex: 0 0 72px;
-  }
-
-  .experience-number strong {
-    font-size: 39px;
-  }
-
-  .hero-currently {
-    top: auto;
-    margin-top: 18px;
-  }
-
-  .socials {
-    top: auto;
-    margin: 24px 0 0;
-  }
-
-  .socials>a {
-    height: 58px;
+    height: 56px;
   }
 
   .socials svg {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .hero-lens {
+    display: none;
   }
 }
 
@@ -897,133 +651,75 @@
   border-color: #3a342f;
 }
 
-:root[data-theme="dark"] .avatar-halo {
-  background: radial-gradient(circle, rgba(111, 75, 54, .31) 0%, rgba(74, 50, 36, .16) 46%, transparent 72%);
-}
-
-:root[data-theme="dark"] .avatar-stage::before {
-  background: linear-gradient(to bottom, transparent 0%, rgba(17, 16, 14, .18) 28%, rgba(17, 16, 14, .64) 67%, var(--paper) 100%);
-}
-
 :root[data-theme="dark"] .socials {
   background: rgba(255, 255, 255, .035);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, .05),
-    0 8px 30px rgba(0, 0, 0, .20);
+    0 8px 30px rgba(0, 0, 0, .2);
 }
 
-.socials>a:focus-visible {
-  z-index: 3;
-  border-radius: 999px;
-}
-
-@media (min-width: 601px) and (max-width: 800px) {
-  .avatar-wrap img {
-    transform: scale(1.28);
-    transform-origin: center bottom;
-  }
-}
-
-@keyframes experience-orbit-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes hero-im-enter {
+@keyframes hero-rise {
   from {
     opacity: 0;
-    translate: 0 12px;
-    scale: .96;
+    translate: 0 14px;
   }
 
   to {
     opacity: 1;
     translate: 0 0;
-    scale: 1;
   }
 }
 
-@keyframes hero-letter-enter {
+@keyframes hero-rule-draw {
   from {
-    opacity: 0;
-    translate: 0 60%;
-    scale: 1 1.04;
+    scale: 0 1;
   }
 
   to {
-    opacity: 1;
-    translate: 0 0;
     scale: 1 1;
   }
 }
 
-@keyframes hero-designer-enter {
-  from {
+/* The drawing is fully shown (no loupe mask) for the whole draft, then
+   fades; afterwards the loupe and drain masks take over again. */
+@keyframes hero-draft {
+  0% {
     opacity: 0;
-    translate: 16px 8px;
-    scale: .98;
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 
-  to {
+  8%,
+  72% {
     opacity: 1;
-    translate: 0 0;
-    scale: 1;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 }
 
-
-
-@keyframes hero-avatar-enter {
+/* Generous outsets so the width labels above each letter aren't trimmed. */
+@keyframes hero-letter-draw {
   from {
-    opacity: 0;
-    translate: 0 28px;
-    scale: .985;
+    clip-path: inset(100% -40% -40% -40%);
   }
 
   to {
-    opacity: 1;
-    translate: 0 0;
-    scale: 1;
+    clip-path: inset(-40% -40% -40% -40%);
   }
 }
 
-@keyframes hero-halo-enter {
+@keyframes hero-ink {
   from {
-    opacity: 0;
-    scale: .92;
+    clip-path: inset(-12% 100% -12% -12%);
   }
 
   to {
-    opacity: 1;
-    scale: 1;
-  }
-}
-
-@keyframes hero-copy-enter {
-  from {
-    opacity: 0;
-    translate: -12px 0;
-  }
-
-  to {
-    opacity: 1;
-    translate: 0 0;
-  }
-}
-
-@keyframes hero-meta-enter {
-  from {
-    opacity: 0;
-    translate: 12px 0;
-  }
-
-  to {
-    opacity: 1;
-    translate: 0 0;
+    clip-path: inset(-12% -12% -12% -12%);
   }
 }
