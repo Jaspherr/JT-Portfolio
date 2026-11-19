@@ -11,7 +11,6 @@ export type CaseStudyFeature = {
 export type CaseStudy = {
   slug: string;
   projectName: string;
-  eyebrow: string;
   role: string;
   platform: string;
   projectType: string;

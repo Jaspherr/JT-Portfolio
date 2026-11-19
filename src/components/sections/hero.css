@@ -9,8 +9,9 @@
 /* One block — name, intro row, actions — centred in the screen below the
    navigation. */
 .hero {
-  height: calc(100svh - 78px);
-  min-height: 600px;
+  /* Keep the hero at least one screen tall, but let longer copy grow naturally. */
+  height: auto;
+  min-height: max(600px, calc(100svh - 78px));
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -248,26 +249,32 @@
 
 .hero-intro-row {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: center;
-  gap: clamp(32px, 4vw, 72px);
+  /* Reserve readable space for the introduction, even with a long tagline. */
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 38%);
+  align-items: start;
+  gap: clamp(28px, 3.5vw, 60px);
   margin-top: clamp(18px, 3vh, 34px);
 }
 
 .hero-designer {
+  min-width: 0;
   margin: 0;
   font-family: Georgia, serif;
-  font-size: clamp(30px, 3.4vw, 62px);
+  font-size: clamp(26px, 2.8vw, 48px);
   font-style: italic;
   font-weight: 400;
-  line-height: 1;
+  line-height: 1.08;
   letter-spacing: -.05em;
   color: var(--ink);
-  white-space: nowrap;
+  white-space: normal;
+  text-wrap: balance;
 }
 
 .hero-lede {
   justify-self: end;
+  text-align: end;
+  min-width: 0;
+  width: 100%;
   max-width: 500px;
   margin: 0;
   padding-left: clamp(24px, 2.6vw, 44px);
@@ -567,6 +574,20 @@
   }
 }
 
+/* Medium desktops: stack tagline and introduction before either is squeezed. */
+@media (min-width: 801px) and (max-width: 1150px) {
+  .hero-intro-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .hero-lede {
+    max-width: 620px;
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
 /* Phones and small tablets: everything stacks under the name in reading
    order, and the height follows the content. */
 
@@ -658,9 +679,8 @@
   }
 }
 
-/* Small tablets have room for the desktop pairing: the link on the left,
-   the links on the right. Only phones stack them full width. */
-@media (min-width: 481px) and (max-width: 800px) {
+/* Only wider tablets have room for the two 270px action blocks and gap. */
+@media (min-width: 720px) and (max-width: 800px) {
   .hero-actions {
     flex-direction: row;
     align-items: center;

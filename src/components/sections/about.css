@@ -1,6 +1,3 @@
-/* A personal chapter: the story on the left, small notes on the right.
-   It replaces the separate experience timeline and toolkit index. */
-
 .about {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
@@ -13,10 +10,6 @@
 .about-story {
   position: sticky;
   top: clamp(40px, 8vh, 90px);
-}
-
-.about-story .kicker {
-  margin-bottom: 28px;
 }
 
 .about-story h2 {

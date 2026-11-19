@@ -6,7 +6,7 @@ import { prefersReducedMotion } from "@/lib/motion";
 
    Elements marked `data-draft` get `data-drafted` the first time they come
    into view; src/styles/draft.css turns that into the site's "drawn, then
-   built" moves (rule, set, frame, ink).
+   built" moves (set, frame, ink).
 
    The hidden "before" states only apply once `motion-draft` is on <html>,
    which happens here — so prerendered pages without JavaScript, and visitors

@@ -3,7 +3,6 @@
    The hero drafts the name and inks it; every other section speaks the same
    vocabulary, picking the move that suits what it shows:
 
-     rule   a hairline is drawn across (section kickers)
      set    type rises out of its baseline (section headings)
      frame  a frame is spec'd with its real size, then its content is
             inked in from the left (project previews, Making stages)
@@ -49,31 +48,6 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  /* rule — kickers: the line draws, then the number and label settle. */
-  .motion-draft [data-draft="rule"]:not([data-drafted]) > span {
-    scale: 0 1;
-  }
-
-  .motion-draft [data-draft="rule"]:not([data-drafted]) > :not(span) {
-    opacity: 0;
-  }
-
-  .motion-draft [data-draft="rule"] > span {
-    transform-origin: left;
-  }
-
-  .motion-draft [data-draft="rule"][data-drafted] > span {
-    animation: draft-rule var(--t-rule) var(--ease-draw) both;
-  }
-
-  .motion-draft [data-draft="rule"][data-drafted] > b {
-    animation: draft-settle .7s var(--ease-set) .1s both;
-  }
-
-  .motion-draft [data-draft="rule"][data-drafted] > p {
-    animation: draft-settle .7s var(--ease-set) .45s both;
-  }
-
   /* set — headings rise out of their baseline, the way the hero's letters
      are drawn up. */
   .motion-draft [data-draft="set"]:not([data-drafted]) {
@@ -111,28 +85,6 @@
 
   .motion-draft [data-draft="ink"][data-drafted] {
     animation: draft-ink-text 1.2s var(--ease-draw) .7s both;
-  }
-}
-
-@keyframes draft-rule {
-  from {
-    scale: 0 1;
-  }
-
-  to {
-    scale: 1 1;
-  }
-}
-
-@keyframes draft-settle {
-  from {
-    opacity: 0;
-    translate: 0 .5em;
-  }
-
-  to {
-    opacity: 1;
-    translate: 0 0;
   }
 }
 

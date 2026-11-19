@@ -13,8 +13,6 @@ export default function NotFoundPage() {
         <div className="not-found-content">
           <span className="not-found-number">404</span>
 
-          <p className="not-found-kicker">YOU&apos;VE WANDERED OFF</p>
-
           <h1>
             This page doesn&apos;t
             <br />

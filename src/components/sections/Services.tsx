@@ -3,7 +3,6 @@ import AiScene from "@/components/services/AiScene";
 import CodeScene from "@/components/services/CodeScene";
 import DesignScene from "@/components/services/DesignScene";
 import HandoffScene from "@/components/services/HandoffScene";
-import SectionKicker from "@/components/ui/SectionKicker";
 import ServiceCard from "@/components/ui/ServiceCard";
 import { services } from "@/data/services";
 
@@ -25,8 +24,6 @@ export default function Services() {
   return (
     <section id="services" className="section shell services">
       <div className="section-heading services-heading">
-        <SectionKicker n="02" label="Making" />
-
         <h2 data-draft="set">
           Design, code &amp; <em>everything between.</em>
         </h2>

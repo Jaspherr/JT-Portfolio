@@ -43,15 +43,8 @@
   color: rgba(77, 45, 26, .12);
 }
 
-.not-found-kicker {
-  margin: clamp(30px, 5vh, 54px) 0 14px;
-  font: 600 8px/1 var(--font-display);
-  letter-spacing: .15em;
-  color: var(--brown);
-}
-
 .not-found-content h1 {
-  margin: 0;
+  margin: clamp(30px, 5vh, 54px) 0 0;
   font: 700 clamp(42px, 7vw, 92px)/.95 var(--font-display);
   letter-spacing: -.065em;
 }

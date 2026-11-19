@@ -1,6 +1,5 @@
 import { Link } from "react-router";
 
-import SectionKicker from "@/components/ui/SectionKicker";
 import { experience } from "@/data/experience";
 import { skills } from "@/data/skills";
 
@@ -8,8 +7,6 @@ export default function About() {
   return (
     <section id="about" className="section shell about">
       <div className="about-story">
-        <SectionKicker n="03" label="About" />
-
         <h2 data-draft="set">
           A bit about the <em>person behind it.</em>
         </h2>

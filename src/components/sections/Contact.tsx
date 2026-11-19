@@ -1,6 +1,5 @@
 import { ArrowUpRight, Check, Mail } from "lucide-react";
 
-import SectionKicker from "@/components/ui/SectionKicker";
 import { contactLinks } from "@/data/contact";
 import { useCopyToClipboard } from "@/hooks/useCopyToClipboard";
 import { CONTACT_EMAIL } from "@/lib/site";
@@ -21,8 +20,6 @@ export default function Contact() {
 
       <div className="shell contact-inner">
         <div className="contact-top">
-          <SectionKicker n="04" label="Say hello" />
-
           <div className="contact-status">
             <span />
             Open to UI/UX and front-end roles

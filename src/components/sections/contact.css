@@ -12,15 +12,12 @@
   z-index: 2;
 }
 
+/* The availability status, on the right above the closing line. */
 .contact-top {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin-bottom: clamp(60px, 8vh, 100px);
-}
-
-.contact-top .kicker {
-  margin: 0;
 }
 
 .contact-status {

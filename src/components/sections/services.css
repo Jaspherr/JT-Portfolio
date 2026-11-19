@@ -27,13 +27,8 @@
   margin-bottom: clamp(44px, 6.5vh, 72px);
 }
 
-.services-heading .kicker {
-  grid-column: 1 / -1;
-  margin-bottom: 30px;
-}
-
 .services-heading h2 {
-  grid-row: 2 / span 2;
+  grid-row: 1 / span 2;
   max-width: 900px;
   font: 700 clamp(46px, 4.1vw, 66px)/.98 var(--font-display);
   letter-spacing: -.065em;
@@ -49,7 +44,7 @@
 
 .services-heading>p {
   grid-column: 2;
-  grid-row: 2;
+  grid-row: 1;
   max-width: 380px;
   margin: 0;
   font-size: 15px;
@@ -59,7 +54,7 @@
 
 .services-accent {
   grid-column: 2;
-  grid-row: 3;
+  grid-row: 2;
   width: min(210px, 60%);
   height: 1px;
   margin-top: 30px;
