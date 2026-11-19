@@ -155,6 +155,7 @@ const intro: SceneSpec = (() => {
 
   return {
     duration: 8.5,
+    hold: 1,
     tracks,
     prepare: (root) => {
       const prototype = root.querySelector<HTMLElement>(".sv-a-proto")!;
@@ -425,6 +426,8 @@ function direct(): Director {
 
     return {
       duration: pick + 3,
+      // The updated prototype and its counters are the result of the round.
+      hold: 1,
       tracks,
       prepare: (root) => {
         Object.entries(variants).forEach(([letter, variant]) => {

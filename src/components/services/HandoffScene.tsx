@@ -182,6 +182,8 @@ const intro: SceneSpec = (() => {
 
   return {
     duration: 8.9,
+    // Delivered: the live site holds for a moment before the next run.
+    hold: 1.3,
     tracks,
     prepare: (root) => {
       text(root, ".sv-h-artname", "Landing — final");
@@ -345,6 +347,7 @@ function direct(): Director {
 
     return {
       duration: t(9.5),
+      hold: 1.3,
       tracks,
       prepare: (root) => {
         text(root, ".sv-h-artname", `${feature.name} — final`);

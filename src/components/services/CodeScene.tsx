@@ -225,6 +225,7 @@ function buildIntro(): SceneSpec {
 
   return {
     duration: click + 1.4,
+    hold: 0.8,
     tracks,
     prepare: (root) => {
       root.querySelector<HTMLElement>(".sv-c-view")!.dataset.saved = "false";
@@ -386,6 +387,8 @@ function direct(): Director {
 
     return {
       duration,
+      // A visible change in the preview reads best with a beat to land.
+      hold: demo ? 0.5 : 0.9,
       tracks,
       cues,
       prepare: (scene) => prepares.forEach((run) => run(scene)),

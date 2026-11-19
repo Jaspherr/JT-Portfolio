@@ -25,6 +25,8 @@ const LAYER = { opacity: 0, transform: "translateX(-4px)" };
 
 const intro: SceneSpec = {
   duration: 7.7,
+  // The finished hero is the first result; let it be seen.
+  hold: 0.9,
   tracks: {
     ".sv-d-panel": [
       { at: 0, opacity: 1 },
