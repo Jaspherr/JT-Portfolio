@@ -20,7 +20,7 @@ import {
 
 const HEADING = "Clarity, by design.";
 const HEADING_WIDTH = 117;
-const WORKSPACE = "translate(58px, 12px) scale(.8)";
+const WORKSPACE = "translate(58px, 20px) scale(.8)";
 const LAYER = { opacity: 0, transform: "translateX(-4px)" };
 
 const intro: SceneSpec = {
@@ -42,16 +42,16 @@ const intro: SceneSpec = {
       [0.3, -6, 40],
       [0.7, 14, 12],
       [0.8, 14, 12, 0.82],
-      [1.6, 306, 128, 0.82],
-      [1.7, 306, 128],
-      [2.2, 250, 134],
-      [2.9, 36, 90],
-      [3.0, 36, 90, 0.82],
-      [3.5, 96, 108, 0.82],
-      [3.6, 96, 108],
-      [4.0, 112, 122],
-      [6.0, 112, 122],
-      [6.4, 70, 150],
+      [1.6, 306, 188, 0.82],
+      [1.7, 306, 188],
+      [2.2, 250, 194],
+      [2.9, 36, 114],
+      [3.0, 36, 114, 0.82],
+      [3.5, 96, 132, 0.82],
+      [3.6, 96, 132],
+      [4.0, 112, 146],
+      [6.0, 112, 146],
+      [6.4, 70, 214],
     ]),
     ".sv-d-size-board": flash(0.95, 1.6, 0.12),
     ".sv-d-size-btn": flash(3.1, 3.5, 0.12),
@@ -63,19 +63,19 @@ const intro: SceneSpec = {
     // Type sets the heading, then the supporting copy.
     ".sv-cur-type": cursor([
       [1.9, 330, 30],
-      [2.5, 30, 52],
-      [2.6, 30, 52, 0.82],
-      [2.7, 30, 52],
-      [3.9, 60, 62],
-      [4.1, 33, 68],
-      [4.15, 33, 68, 0.82],
-      [4.5, 153, 68, 0.82],
-      [4.55, 153, 68],
-      [4.7, 31, 76],
-      [4.72, 31, 76, 0.82],
-      [5.0, 119, 76, 0.82],
-      [5.1, 128, 84],
-      [6.0, 128, 84],
+      [2.5, 30, 76],
+      [2.6, 30, 76, 0.82],
+      [2.7, 30, 76],
+      [3.9, 60, 86],
+      [4.1, 33, 92],
+      [4.15, 33, 92, 0.82],
+      [4.5, 153, 92, 0.82],
+      [4.55, 153, 92],
+      [4.7, 31, 100],
+      [4.72, 31, 100, 0.82],
+      [5.0, 119, 100, 0.82],
+      [5.1, 128, 108],
+      [6.0, 128, 108],
       [6.4, 200, -20],
     ]),
     ".sv-d-caret": [
@@ -107,14 +107,14 @@ const intro: SceneSpec = {
 
     // UI places the media block.
     ".sv-cur-ui": cursor([
-      [2.0, 330, 90],
+      [2.0, 330, 120],
       [2.5, 190, 38],
       [2.6, 190, 38, 0.82],
-      [3.3, 292, 116, 0.82],
-      [3.4, 292, 116],
-      [3.8, 300, 130],
-      [6.0, 300, 130],
-      [6.4, 340, 150],
+      [3.3, 292, 158, 0.82],
+      [3.4, 292, 158],
+      [3.8, 300, 172],
+      [6.0, 300, 172],
+      [6.4, 340, 214],
     ]),
     ".sv-d-size-img": flash(2.75, 3.3, 0.12),
     ".sv-d-o2": drawBox(2.6, 0.7, 3.6),
@@ -147,14 +147,14 @@ const intro: SceneSpec = {
 
     // Align drags a guide out of the ruler and tidies the spacing.
     ".sv-cur-align": cursor([
-      [4.3, -10, 100],
-      [4.7, 6, 70],
-      [4.75, 6, 70, 0.82],
-      [5.1, 28, 70, 0.82],
-      [5.2, 28, 70],
-      [5.6, 150, 100],
-      [6.0, 150, 100],
-      [6.4, -10, 120],
+      [4.3, -10, 130],
+      [4.7, 6, 94],
+      [4.75, 6, 94, 0.82],
+      [5.1, 28, 94, 0.82],
+      [5.2, 28, 94],
+      [5.6, 150, 124],
+      [6.0, 150, 124],
+      [6.4, -10, 150],
     ]),
     ".sv-d-guide": [
       { at: 4.75, opacity: 0, transform: "translateX(-22px)", ease: GLIDE },
@@ -177,7 +177,12 @@ const intro: SceneSpec = {
    other layout. Every act starts from the design as it currently is. */
 
 const TEXT_X = 28;
-const BUTTON_Y = 90;
+const BUTTON_Y = 114;
+const HEADING_Y = 64;
+// The media block's canvas top and height, and its selection box.
+const IMAGE_Y = 38;
+const IMAGE_H = 120;
+const IMAGE_BOX = { y: IMAGE_Y - 1.5, h: IMAGE_H + 3 };
 const IMAGE_X = 190;
 const TEXT_SHIFT = 120;
 const IMAGE_SHIFT = -162;
@@ -249,10 +254,10 @@ function restyle(prefix: string, from: number, to: number, at: number, labels = 
 
 function direct(): Director {
   const crew = createCrew({
-    layout: [70, 150],
+    layout: [70, 214],
     type: [200, -20],
-    ui: [340, 150],
-    align: [-10, 120],
+    ui: [340, 214],
+    align: [-10, 150],
   });
   const state = {
     step: 0,
@@ -347,15 +352,15 @@ function direct(): Director {
       duration: typed + 1.1,
       tracks: {
         ".sv-cur-type": crew.walk("type", [
-          [0.6, x + from + 3, 52],
-          [0.66, x + from + 3, 52, 0.82],
-          [0.72, x + from + 3, 52],
-          [0.78, x + from + 3, 52, 0.82],
-          [0.84, x + from + 3, 52],
-          [type, x + from / 2, 70],
-          [typed + 0.3, x + to + 12, 66],
+          [0.6, x + from + 3, HEADING_Y + 12],
+          [0.66, x + from + 3, HEADING_Y + 12, 0.82],
+          [0.72, x + from + 3, HEADING_Y + 12],
+          [0.78, x + from + 3, HEADING_Y + 12, 0.82],
+          [0.84, x + from + 3, HEADING_Y + 12],
+          [type, x + from / 2, HEADING_Y + 30],
+          [typed + 0.3, x + to + 12, HEADING_Y + 26],
         ]),
-        ".sv-d-sel-type": select(0.78, erase, [x - 2, 40, from + 4, 20]),
+        ".sv-d-sel-type": select(0.78, erase, [x - 2, HEADING_Y, from + 4, 20]),
         ".sv-d-caret": [
           { at: 0, opacity: 0, transform: caret(from) },
           { at: erase, opacity: 0 },
@@ -389,12 +394,12 @@ function direct(): Director {
         ".sv-cur-ui": crew.walk("ui", [
           [0.6, x + 108, 24],
           [0.66, x + 108, 24, 0.82],
-          [1.2, x + 51, 66, 0.82],
-          [1.3, x + 51, 66],
-          [2.1, x + 60, 82],
+          [1.2, x + 51, IMAGE_Y + 44, 0.82],
+          [1.3, x + 51, IMAGE_Y + 44],
+          [2.1, x + 60, IMAGE_Y + 68],
         ]),
         ".sv-d-size-img": flash(1.25, 1.9, 0.12),
-        ".sv-d-sel-ui": select(1.25, 2.5, [x - 1.5, 36.5, 105, 81]),
+        ".sv-d-sel-ui": select(1.25, 2.5, [x - 1.5, IMAGE_BOX.y, 105, IMAGE_BOX.h]),
         [`.sv-d-fill-${to}`]: [
           { at: 0, clipPath: COVERED },
           { at: 1.3, clipPath: COVERED, ease: GLIDE },
@@ -513,15 +518,15 @@ function direct(): Director {
           { at: 3, opacity: 0 },
         ],
         ".sv-cur-align": crew.walk("align", [
-          [0.5, x + 4, 70],
-          [0.56, x + 4, 70, 0.82],
-          [0.95, x + 28, 70, 0.82],
-          [1.05, x + 28, 70],
-          [1.45, x + 92, 67 + from],
-          [1.5, x + 92, 67 + from, 0.82],
-          [1.95, x + 92, 67 + to, 0.82],
-          [2.05, x + 92, 67 + to],
-          [2.6, x + 100, 84],
+          [0.5, x + 4, 94],
+          [0.56, x + 4, 94, 0.82],
+          [0.95, x + 28, 94, 0.82],
+          [1.05, x + 28, 94],
+          [1.45, x + 92, 91 + from],
+          [1.5, x + 92, 91 + from, 0.82],
+          [1.95, x + 92, 91 + to, 0.82],
+          [2.05, x + 92, 91 + to],
+          [2.6, x + 100, 108],
         ]),
         ".sv-d-gap-1": [
           { at: 0, opacity: 0, transform: guide(0), height: px(gap(from)) },
@@ -567,14 +572,14 @@ function direct(): Director {
       duration: 3.4,
       tracks: {
         ".sv-cur-layout": crew.walk("layout", [
-          [0.6, fromImage + 51, 77],
-          [0.68, fromImage + 51, 77, 0.82],
-          [1.9, toImage + 51, 77, 0.82],
-          [2, toImage + 51, 77],
-          [2.6, toImage + 60, 96],
+          [0.6, fromImage + 51, IMAGE_Y + IMAGE_H / 2],
+          [0.68, fromImage + 51, IMAGE_Y + IMAGE_H / 2, 0.82],
+          [1.9, toImage + 51, IMAGE_Y + IMAGE_H / 2, 0.82],
+          [2, toImage + 51, IMAGE_Y + IMAGE_H / 2],
+          [2.6, toImage + 60, IMAGE_Y + IMAGE_H * 0.74],
         ]),
         ".sv-d-sel-layout": [
-          { at: 0, opacity: 0, ...rect([fromImage - 1.5, 36.5, 105, 81]) },
+          { at: 0, opacity: 0, ...rect([fromImage - 1.5, IMAGE_BOX.y, 105, IMAGE_BOX.h]) },
           { at: 0.7, opacity: 0 },
           { at: 0.8, left: px(fromImage - 1.5), ease: GLIDE },
           { at: 0.82, opacity: 1 },
@@ -597,12 +602,13 @@ function direct(): Director {
     const x = TEXT_X + textX();
     const y = BUTTON_Y + textY();
     const width = root.querySelector<HTMLElement>(".sv-d-h")!.offsetWidth;
-    const headingBox = rect([x - 2, 40, width + 4, 20]);
-    const imageBox = rect([imageX() - 1.5, 36.5, 105, 81]);
+    const headingBox = rect([x - 2, HEADING_Y, width + 4, 20]);
+    const imageBox = rect([imageX() - 1.5, IMAGE_BOX.y, 105, IMAGE_BOX.h]);
     const buttonBox = rect([x - 1.5, y - 1.5, 63, 21]);
     const row = (index: number) => `translateY(${index * 10}px)`;
 
-    // While zoomed out, the layers panel sits at negative workspace coordinates.
+    // While zoomed out, the layers panel sits at negative workspace
+    // coordinates (canvas y = 20 + 0.8 × workspace y).
     return {
       duration: 5.4,
       tracks: {
@@ -622,16 +628,16 @@ function direct(): Director {
         ".sv-cur-type": crew.walk(
           "type",
           [
-            [1.4, -41, 37],
-            [1.48, -41, 37, 0.82],
-            [1.56, -41, 37],
-            [2.2, -41, 49],
-            [2.28, -41, 49, 0.82],
-            [2.36, -41, 49],
-            [3, -41, 62],
-            [3.08, -41, 62, 0.82],
-            [3.16, -41, 62],
-            [3.6, 6, 118],
+            [1.4, -41, 27],
+            [1.48, -41, 27, 0.82],
+            [1.56, -41, 27],
+            [2.2, -41, 39],
+            [2.28, -41, 39, 0.82],
+            [2.36, -41, 39],
+            [3, -41, 52],
+            [3.08, -41, 52, 0.82],
+            [3.16, -41, 52],
+            [3.6, 6, 150],
           ],
           0.1,
         ),
@@ -767,13 +773,13 @@ export default function DesignScene({ title }: { title: string }) {
         <span className="sv-d-sel sv-d-sel-align" />
 
         <SceneCursor id="layout" tag="Layout">
-          <em className="sv-badge sv-d-size-board">292 × 116</em>
+          <em className="sv-badge sv-d-size-board">292 × 176</em>
           <em className="sv-badge sv-d-size-btn">60 × 18</em>
           <em className="sv-badge sv-d-tip-layout" />
         </SceneCursor>
         <SceneCursor id="type" tag="Type" />
         <SceneCursor id="ui" tag="UI">
-          <em className="sv-badge sv-d-size-img">102 × 78</em>
+          <em className="sv-badge sv-d-size-img">102 × 120</em>
           <em className="sv-badge sv-d-tip-ui" />
         </SceneCursor>
         <SceneCursor id="align" tag="Align">

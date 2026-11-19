@@ -13,7 +13,8 @@ import {
   type SceneSpec,
 } from "@/lib/scene";
 
-// The build happens in a small window on the right before it is delivered.
+// The build happens in a small window on the right before it is delivered,
+// centred on the package's line of travel (canvas y 77).
 const WORKBENCH = "translate(130px, 22px) scale(.6)";
 const UNBUILT = "grayscale(1) opacity(.55)";
 const BUILT = "grayscale(0) opacity(1)";
@@ -24,10 +25,11 @@ const PIECES: [selector: string, x: number, y: number][] = [
   [".sv-m-img", -50, 5],
   [".sv-m-cards", 0, -30],
 ];
+// From the drop point to the nav button, the hero button and the media.
 const TOKENS: [x: number, y: number][] = [
-  [47, -15],
-  [-40, 16],
-  [32, 6],
+  [47, -23],
+  [-44, 17],
+  [32, 9],
 ];
 
 function token(at: number, x: number, y: number): SceneKey[] {
@@ -135,13 +137,13 @@ const intro: SceneSpec = (() => {
       { at: 1.6, opacity: 0 },
     ],
     ".sv-cur-handoff": cursor([
-      [0.2, -8, 30],
-      [0.5, 8, 12],
-      [0.6, 8, 12, 0.82],
-      [1.3, 128, 112, 0.82],
-      [1.4, 128, 112],
-      [1.9, 146, 100],
-      [2.3, 170, 150],
+      [0.2, -8, 53],
+      [0.5, 8, 29],
+      [0.6, 8, 29, 0.82],
+      [1.3, 128, 141, 0.82],
+      [1.4, 128, 141],
+      [1.9, 146, 123],
+      [2.3, 170, 214],
     ]),
     ".sv-h-sel": drawBox(0.6, 0.7, 1.5),
 
@@ -211,9 +213,9 @@ const FEATURES: Feature[] = [
 
 // Where the design tokens land on the new section while it is on the workbench.
 const SECTION_TOKENS: [x: number, y: number][] = [
-  [-30, 14],
-  [0, 24],
-  [30, 18],
+  [-30, 38],
+  [0, 48],
+  [30, 42],
 ];
 
 const ENTER: [x: number, y: number][] = [
@@ -229,7 +231,7 @@ function text(root: HTMLElement, selector: string, value: string) {
 }
 
 function direct(): Director {
-  const crew = createCrew({ handoff: [170, 150] });
+  const crew = createCrew({ handoff: [170, 214] });
   const state = { step: 0, version: 0, scrolled: false };
 
   const release = (): SceneSpec => {
@@ -286,11 +288,11 @@ function direct(): Director {
       ],
       ".sv-h-artname": [...fade(0.6, 0, 1, 0.2), ...fade(t(0.6), 1, 0, 0.2)],
       ".sv-cur-handoff": crew.walk("handoff", [
-        [t(0.5), 8, 12],
-        [t(0.6), 8, 12, 0.82],
-        [t(1.3), 128, 112, 0.82],
-        [t(1.4), 128, 112],
-        [t(1.9), 146, 100],
+        [t(0.5), 8, 29],
+        [t(0.6), 8, 29, 0.82],
+        [t(1.3), 128, 141, 0.82],
+        [t(1.4), 128, 141],
+        [t(1.9), 146, 123],
       ]),
       ".sv-h-sel": drawBox(t(0.6), 0.7, t(1.5)),
 
@@ -430,8 +432,8 @@ export default function HandoffScene({ title }: { title: string }) {
 
       <span className="sv-box sv-h-sel" />
 
-      <svg className="sv-h-path" viewBox="0 0 320 140">
-        <path pathLength={1} d="M70 54Q160 18 250 59" />
+      <svg className="sv-h-path" viewBox="0 0 320 200">
+        <path pathLength={1} d="M70 77Q160 41 250 82" />
       </svg>
 
       <span className="sv-h-gate" />
