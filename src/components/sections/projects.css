@@ -32,10 +32,6 @@
   transform: translateY(-2vh);
 }
 
-.projects-heading .kicker {
-  margin-bottom: 27px;
-}
-
 /* The shared chapter scale, capped to this narrow sticky column so
    "Selected things" never breaks onto a third line. */
 .projects-heading-content {

@@ -106,7 +106,6 @@ export default function CaseStudyPage({ project }: Props) {
           <span className="case-label">CASE STUDY</span>
         </div>
         <div className="case-heading">
-          <span className="case-eyebrow">{project.eyebrow}</span>
           <h1 id="case-title">{project.projectName}</h1>
           <div className="case-heading-bottom">
             <p>{project.impact}</p>

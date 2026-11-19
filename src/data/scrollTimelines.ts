@@ -1,7 +1,6 @@
 import type { TimelineSpec } from "@/lib/scroll-timeline";
 
-// Supporting copy settles in here. The defining moves — kicker rules,
-// headings set on their baseline, frames spec'd then inked, the closing
+// Supporting copy settles in here. The defining moves — headings set on their baseline, frames spec'd then inked, the closing
 // "say hello." — belong to the draft system (src/styles/draft.css), so they
 // are not repeated in these timelines.
 

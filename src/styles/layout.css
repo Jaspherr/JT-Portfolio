@@ -3,29 +3,6 @@
   padding-block: clamp(70px, 8vh, 110px);
 }
 
-.kicker {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.kicker b {
-  font: 500 12px var(--font-number);
-}
-
-.kicker span {
-  width: 44px;
-  height: 1px;
-  background: #bcbab2;
-}
-
-.kicker p {
-  margin: 0;
-  font: 500 13px/1 var(--font-body);
-  color: var(--muted);
-}
-
 .section h2 {
   margin: 0;
   font: 700 clamp(39px, 3.4vw, 52px)/1.02 var(--font-display);

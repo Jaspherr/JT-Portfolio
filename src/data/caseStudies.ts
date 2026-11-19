@@ -4,7 +4,6 @@ export const caseStudies: Record<string, CaseStudy> = {
   "clarify-risksense": {
     slug: "clarify-risksense",
     projectName: "Clarify",
-    eyebrow: "ADMIN PLATFORM · UI/UX · DEVELOPMENT",
     role: "UI / UX Designer · Front-End Developer",
     platform: "Web · Figma · Front-End",
     projectType: "Risk-Analysis Admin Platform",
@@ -117,7 +116,6 @@ export const caseStudies: Record<string, CaseStudy> = {
   sakay: {
     slug: "sakay",
     projectName: "Sakay",
-    eyebrow: "WEB & MOBILE · UI/UX · DEVELOPMENT",
     role: "Lead UI/UX Designer · Front-End Developer",
     platform: "Web & Mobile · Figma · Front-End",
     projectType: "Transport Management System",
@@ -231,7 +229,6 @@ export const caseStudies: Record<string, CaseStudy> = {
   herbaplant: {
     slug: "herbaplant",
     projectName: "HerbaPlant",
-    eyebrow: "MOBILE · UI/UX · FRONT-END",
     role: "UI/UX Designer · Front-End Developer",
     platform: "Mobile · UI/UX · Front-End",
     projectType: "Herbal Plant Identification Application",
@@ -343,7 +340,6 @@ export const caseStudies: Record<string, CaseStudy> = {
   use: {
     slug: "use",
     projectName: "USE",
-    eyebrow: "UPANG STUDENT ESSENTIALS · MOBILE",
     role: "Front-End Developer",
     platform: "Mobile · Front-End",
     projectType: "Student Mobile Application",

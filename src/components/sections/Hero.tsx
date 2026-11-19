@@ -1,11 +1,5 @@
 import { useRef } from "react";
-import {
-  ArrowDownRight,
-  FileText,
-  Github,
-  Linkedin,
-  Mail,
-} from "lucide-react";
+import { ArrowDownRight, FileText, Github, Linkedin, Mail } from "lucide-react";
 
 import { useHeroBlueprint } from "@/hooks/useHeroBlueprint";
 import { useIntroReady } from "@/hooks/useIntroReady";
@@ -16,7 +10,9 @@ const NAME = "JASPHER";
 const FIRST_LINE_LETTER = 3;
 
 const letterClass = (index: number) =>
-  index >= FIRST_LINE_LETTER ? "hero-name-letter-line" : "hero-name-letter-solid";
+  index >= FIRST_LINE_LETTER
+    ? "hero-name-letter-line"
+    : "hero-name-letter-solid";
 
 /* "Drawn, then built." The name exists twice in the same place: as a
    blueprint (outlined letters on type-specimen guides) and built (solid ink).
@@ -79,15 +75,19 @@ export default function Hero() {
 
       {/* Under the name: the tagline, then the introduction beside it. */}
       <div className="hero-intro-row">
-        <p className="hero-designer">, a designer who builds</p>
+        <p className="hero-designer">
+          , a designer who enjoys figuring things out.
+        </p>
 
         <p className="hero-lede">
           <strong>
-            I design interfaces, <em>then I build them.</em>
+            I like making things look good,{" "}
+            <em>but I also want them to work well.</em>
           </strong>{" "}
-          Most of what I make lives somewhere between Figma and a code
-          editor — school projects, an internship, and a few small
-          experiments further down this page.
+          I like experimenting, exploring different approaches, and seeing what
+          I can create with design and code, with a little help from AI. This
+          little corner of the internet is where I share the projects,
+          experiments, and things I've learned along the way.
         </p>
       </div>
 
@@ -104,11 +104,7 @@ export default function Hero() {
           </span>
         </a>
 
-        <div
-          className="socials"
-          role="group"
-          aria-label="Find me elsewhere"
-        >
+        <div className="socials" role="group" aria-label="Find me elsewhere">
           <a
             href={SOCIAL_LINKS.linkedin}
             target="_blank"

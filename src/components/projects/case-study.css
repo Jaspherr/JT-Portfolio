@@ -24,11 +24,6 @@
     animation: case-study-rise-enter .42s cubic-bezier(.22, 1, .36, 1) .08s both;
   }
 
-  .case-eyebrow {
-    --case-enter-y: 14px;
-    animation: case-study-rise-enter .42s cubic-bezier(.22, 1, .36, 1) .18s both;
-  }
-
   .case-heading h1 {
     --case-enter-y: 42px;
     animation: case-study-rise-enter .72s cubic-bezier(.22, 1, .36, 1) .22s both;
@@ -185,14 +180,6 @@
 
 .case-heading {
   padding: clamp(30px, 5vw, 65px) 0 40px;
-}
-
-.case-eyebrow {
-  display: block;
-  margin-bottom: 16px;
-  font: 600 11px/1 var(--font-display);
-  letter-spacing: .12em;
-  color: var(--brown);
 }
 
 .case-heading h1 {

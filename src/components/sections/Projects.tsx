@@ -1,5 +1,4 @@
 import ProjectCard from "@/components/projects/ProjectCard";
-import SectionKicker from "@/components/ui/SectionKicker";
 import { projects } from "@/data/projects";
 import { padIndex } from "@/lib/utils";
 
@@ -11,7 +10,6 @@ export default function Projects() {
       <div className="shell projects-stage">
         <aside className="projects-heading">
           <div className="projects-heading-content">
-            <SectionKicker n="01" label="Work" />
             <h2 data-draft="set">
               Selected things
               <br />

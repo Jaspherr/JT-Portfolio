@@ -24,11 +24,10 @@
   --ease: cubic-bezier(.16, 1, .3, 1);
 
   /* Motion language — "drawn, then built" (see src/styles/draft.css).
-     Rules and ink are drawn with an even, deliberate stroke; type settles
+     Ink is drawn with an even, deliberate stroke; type settles
      with a long, soft landing. Every entrance uses one of these. */
   --ease-draw: cubic-bezier(.65, 0, .35, 1);
   --ease-set: cubic-bezier(.19, 1, .22, 1);
-  --t-rule: .9s;
   --t-set: 1s;
   --t-ink: .9s;
 
