@@ -359,54 +359,38 @@
 }
 
 /* Desktop: rows alternate — copy left for 01 and 03, right for 02 and 04 —
-   so the four sketches read as a sequence. Each row is a screen tall with
-   its contents centred, and the stage is given as much width as possible:
-   the copy column is narrow, and on wide screens the rows break out of the
-   1320px measure (up to 1720px, never closer than 72px to the screen edge,
-   clear of the scroll-progress line). A scene's size follows its stage's
-   width, so width is what makes the animations larger. */
+   so the four sketches read as a sequence. Rows stay on the page's 1320px
+   grid, so every stage shares its edges with the section heading, its
+   divider and the rest of the page, with the same outer gutters. */
 @media (min-width: 961px) {
   .services {
     --svc-copy: clamp(240px, 20vw, 300px);
     --svc-gap: clamp(32px, 3.4vw, 56px);
-    --svc-measure: max(100%, min(1720px, calc(100vw - 144px)));
-    /* The page already clips sideways overflow; the rows may break out. */
-    overflow-x: visible;
+    /* Row padding: half the gap between two capabilities. */
+    --svc-pad: clamp(18px, 2.6vh, 32px);
   }
 
   .service-grid {
-    width: var(--svc-measure);
-    margin-inline: calc((100% - var(--svc-measure)) / 2);
-    /* Lets each stage measure how far it is from the screen edge. */
+    /* Lets a stage size itself from the row's width. */
     container-type: inline-size;
   }
 
-  /* The stage runs on to the screen edge on its open side, like a panel
-     sliding out of frame. A scene's size follows its stage's width, so this
-     is what makes the sketches as large as the row allows. */
-  .service-card > .sv-stage {
-    --svc-bleed: calc((100vw - 100cqw) / 2);
-    margin-right: calc(-1 * var(--svc-bleed));
-    border-right-width: 0;
-    border-start-end-radius: 0;
-    border-end-end-radius: 0;
-  }
-
-  .service-card:nth-child(even) > .sv-stage {
-    margin-right: 0;
-    margin-left: calc(-1 * var(--svc-bleed));
-    border-right-width: 1px;
-    border-left-width: 0;
-    border-radius: clamp(14px, 1.4vw, 20px);
-    border-start-start-radius: 0;
-    border-end-start-radius: 0;
-  }
-
+  /* Rows hug their stage; the stage itself is capped at a screen's height
+     below the 78px navigation. */
   .service-card {
-    min-height: 100svh;
     grid-template-rows: auto auto;
     align-content: center;
-    padding-block: clamp(32px, 5vh, 56px);
+    padding-block: var(--svc-pad);
+  }
+
+  /* The stage fills its column and takes the drawing's 320 × 200 proportion,
+     capped by the screen height; ServiceStage fits the scene inside it. */
+  .service-card > .sv-stage {
+    aspect-ratio: auto;
+    height: min(
+      calc(100svh - 78px - 2 * var(--svc-pad)),
+      calc((100cqw - var(--svc-copy) - var(--svc-gap)) / 1.6)
+    );
   }
 
   .service-card:nth-child(even) {

@@ -120,7 +120,7 @@ const CHAR = 0.012;
 const LINE_GAP = 0.05;
 const PREVIEW = "scale(.7)";
 const POP = { opacity: 0, transform: "scale(.94)" };
-const SAVE: [x: number, y: number] = [208, 107];
+const SAVE: [x: number, y: number] = [208, 150];
 
 const length = (line: Token[]) =>
   line.reduce((total, [, value]) => total + value.length, 0);
@@ -183,11 +183,11 @@ function buildIntro(): SceneSpec {
 
   Object.assign(tracks, {
     ".sv-c-card": reveal(article, 0.4, POP),
-    ".sv-c-chip-1": chip(article - 0.1, 206, 16),
+    ".sv-c-chip-1": chip(article - 0.1, 206, 34),
     ".sv-c-title, .sv-c-meta": reveal(heading, 0.35),
-    ".sv-c-chip-2": chip(heading - 0.1, 176, 6),
+    ".sv-c-chip-2": chip(heading - 0.1, 176, 32),
     ".sv-c-btn": reveal(button, 0.35, POP),
-    ".sv-c-chip-3": chip(button - 0.1, 172, 14),
+    ".sv-c-chip-3": chip(button - 0.1, 172, 50),
     ".sv-c-hmr": [
       ...flash(article, article + 0.25, 0.1),
       ...flash(heading, heading + 0.25, 0.1),
@@ -214,12 +214,12 @@ function buildIntro(): SceneSpec {
 
     // A visitor saves the card: the state in the code is live.
     ".sv-cur-visitor": cursor([
-      [compiled + 1.2, 330, 126],
+      [compiled + 1.2, 330, 170],
       [click - 0.1, ...SAVE],
       [click, ...SAVE, 0.82],
       [click + 0.15, ...SAVE],
       [click + 0.8, ...SAVE],
-      [click + 1.2, 262, 150],
+      [click + 1.2, 262, 214],
     ]),
   });
 
@@ -241,7 +241,7 @@ function buildIntro(): SceneSpec {
 }
 
 function direct(): Director {
-  const crew = createCrew({ visitor: [262, 150] });
+  const crew = createCrew({ visitor: [262, 214] });
   const state = {
     step: 0,
     file: 0,
@@ -378,7 +378,7 @@ function direct(): Director {
         [click - 0.4, ...SAVE],
         [click, ...SAVE, 0.82],
         [click + 0.15, ...SAVE],
-        [click + 0.7, 236, 128],
+        [click + 0.7, 236, 176],
       ]);
       cues.push([click + 0.05, toggleSaved]);
       duration = click + 1.6;
@@ -416,7 +416,7 @@ export default function CodeScene({ title }: { title: string }) {
               <div
                 key={row}
                 className={`sv-c-ln sv-c-ln-${row + 1}`}
-                style={{ top: 19 + row * 9 }}
+                style={{ top: 22 + row * 12 }}
               >
                 <i>{row + 1}</i>
                 <code>

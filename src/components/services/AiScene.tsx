@@ -19,15 +19,21 @@ const BRIEF = "Clean dashboard, responsive nav, actionable analytics";
 const CONCEPTS = ["a", "b", "c"] as const;
 const OVERVIEW_BARS = [14, 22, 18, 30, 26, 36, 24, 32, 40];
 const INSIGHT_BARS = [22, 30, 26, 40, 34, 56, 44];
+// Bars are drawn at twice these heights in the full-size charts.
+const BAR_SCALE = 2;
+const CHART_H = 96;
 
-// The chosen concept sits where the prototype will grow from.
-const FROM_CONCEPT = "translate(61px, 44px) scale(.4135)";
-const TO_PROTOTYPE = "translate(-61px, -44px) scale(2.4186)";
+// The chosen concept sits where the prototype will grow from: the tiles'
+// row is 73px below the prototype's top, and a tile is .4135 of its size.
+const TILE_DY = 73;
+const FROM_CONCEPT = `translate(61px, ${TILE_DY}px) scale(.4135)`;
+const TO_PROTOTYPE = `translate(-61px, -${TILE_DY}px) scale(2.4186)`;
 const BLOCK = { opacity: 0, transform: "scale(.6)" };
 const BAR = "scaleY(0)";
 
 const TREND = OVERVIEW_BARS.map(
-  (height, index) => `${index ? "L" : "M"}${12 + index * 20} ${44 - height}`,
+  (height, index) =>
+    `${index ? "L" : "M"}${12 + index * 20} ${CHART_H - height * BAR_SCALE}`,
 ).join(" ");
 
 const intro: SceneSpec = (() => {
@@ -40,27 +46,27 @@ const intro: SceneSpec = (() => {
     ],
     ".sv-a-prompt > span": typeOn(0.5, 1.4, BRIEF.length),
     ".sv-cur-you": cursor([
-      [0.2, 300, 70],
-      [0.7, 262, 20],
-      [1.95, 262, 20],
-      [2.0, 262, 20, 0.82],
-      [2.15, 262, 20],
-      [3.5, 250, 44],
-      [3.9, 62, 88],
-      [4.2, 162, 88],
-      [4.35, 162, 88, 0.82],
-      [4.5, 162, 88],
-      [5.6, 232, 70],
-      [5.9, 196, 31],
-      [5.95, 196, 31, 0.82],
-      [6.1, 196, 31],
-      [6.45, 226, 70],
-      [7.0, 226, 70],
-      [7.25, 130, 23],
-      [7.3, 130, 23, 0.82],
-      [7.45, 130, 23],
-      [7.9, 150, 60],
-      [8.3, 200, 150],
+      [0.2, 300, 90],
+      [0.7, 262, 40],
+      [1.95, 262, 40],
+      [2.0, 262, 40, 0.82],
+      [2.15, 262, 40],
+      [3.5, 250, 66],
+      [3.9, 62, 134],
+      [4.2, 162, 134],
+      [4.35, 162, 134, 0.82],
+      [4.5, 162, 134],
+      [5.6, 232, 90],
+      [5.9, 196, 33],
+      [5.95, 196, 33, 0.82],
+      [6.1, 196, 33],
+      [6.45, 226, 90],
+      [7.0, 226, 90],
+      [7.25, 130, 25],
+      [7.3, 130, 25, 0.82],
+      [7.45, 130, 25],
+      [7.9, 150, 80],
+      [8.3, 200, 214],
     ]),
 
     // Three concepts are explored in parallel.
@@ -120,15 +126,7 @@ const intro: SceneSpec = (() => {
 
     const x = 17 + column * 100;
 
-    tracks[`.sv-a-ag-${concept}`] = cursor([
-      [2.5, x + 43, 40],
-      [2.85, x + 10, 62],
-      [3.1, x + 56, 66],
-      [3.3, x + 22, 80],
-      [3.5, x + 62, 90],
-      [3.7, x + 30, 98],
-      [4.0, x + 70, 110],
-    ]);
+    tracks[`.sv-a-ag-${concept}`] = cursor(agentPath(2.5, x, [0, 0.35, 0.6, 0.8, 1, 1.2, 1.5]));
   });
 
   [3, -2, 4].forEach((offset, index) => {
@@ -216,11 +214,28 @@ const ROUNDS: (Topic | "test")[] = ["chart", "kpi", "test"];
 const TILE_X: Record<string, number> = { a: 17, b: 117, c: 217 };
 const SETTLED = "translate(0px, 0px) scale(1)";
 
-const grownFrom = (x: number) => `translate(${x - 56}px, 44px) scale(.4135)`;
-const grownInto = (x: number) => `translate(${56 - x}px, -44px) scale(2.4186)`;
+const grownFrom = (x: number) => `translate(${x - 56}px, ${TILE_DY}px) scale(.4135)`;
+const grownInto = (x: number) => `translate(${56 - x}px, -${TILE_DY}px) scale(2.4186)`;
 
 function text(root: HTMLElement, selector: string, value: string) {
   root.querySelector(selector)!.textContent = value;
+}
+
+// An agent drops in above its tile and sketches down through it.
+function agentPath(start: number, left: number, times: number[]) {
+  const stops: [number, number][] = [
+    [43, 63],
+    [10, 96],
+    [56, 102],
+    [22, 122],
+    [62, 137],
+    [30, 149],
+    [70, 167],
+  ];
+
+  return stops.map(
+    ([x, y], index): [number, number, number] => [start + times[index], left + x, y],
+  );
 }
 
 function choose(root: HTMLElement, letter: string) {
@@ -242,7 +257,7 @@ function bump(at: number): SceneKey[] {
 }
 
 function direct(): Director {
-  const crew = createCrew({ you: [200, 150] });
+  const crew = createCrew({ you: [200, 214] });
   const state = {
     step: 0,
     chart: 0,
@@ -262,7 +277,7 @@ function direct(): Director {
     state.note += 1;
     state.tab = first === "overview" ? "insights" : "overview";
 
-    const tab = (name: string): [number, number] => [name === "overview" ? 96 : 130, 23];
+    const tab = (name: string): [number, number] => [name === "overview" ? 96 : 130, 25];
 
     return {
       duration: 5.2,
@@ -274,10 +289,10 @@ function direct(): Director {
           [1.9, ...tab(state.tab)],
           [1.98, ...tab(state.tab), 0.82],
           [2.06, ...tab(state.tab)],
-          [2.7, 196, 31],
-          [2.78, 196, 31, 0.82],
-          [2.86, 196, 31],
-          [3.6, 226, 70],
+          [2.7, 196, 33],
+          [2.78, 196, 33, 0.82],
+          [2.86, 196, 33],
+          [3.6, 226, 90],
         ]),
         ".sv-a-pin": flash(2.85, 4.3, 0.2),
       },
@@ -345,15 +360,15 @@ function direct(): Director {
       ],
       ".sv-a-cap": flash(sent + 0.7, pick + 0.4),
       ".sv-cur-you": crew.walk("you", [
-        [0.9, 262, 20],
-        [typed, 262, 20],
-        [sent, 262, 20, 0.82],
-        [sent + 0.15, 262, 20],
-        [sent + 1.2, 160, 44],
-        [pick - 0.1, x + 43, 80],
-        [pick, x + 43, 80, 0.82],
-        [pick + 0.15, x + 43, 80],
-        [pick + 1.6, 232, 120],
+        [0.9, 262, 40],
+        [typed, 262, 40],
+        [sent, 262, 40, 0.82],
+        [sent + 0.15, 262, 40],
+        [sent + 1.2, 160, 66],
+        [pick - 0.1, x + 43, 122],
+        [pick, x + 43, 122, 0.82],
+        [pick + 0.15, x + 43, 122],
+        [pick + 1.6, 232, 170],
       ], 0.2),
       ".sv-a-ring": [
         { at: 0, opacity: 0, transform: `translateX(${x - TILE_X.b}px)` },
@@ -403,15 +418,9 @@ function direct(): Director {
         ];
       }
 
-      tracks[`.sv-a-ag-${letter}`] = cursor([
-        [start, left + 43, 40],
-        [start + 0.35, left + 10, 62],
-        [start + 0.6, left + 56, 66],
-        [start + 0.8, left + 22, 80],
-        [start + 1, left + 62, 90],
-        [start + 1.2, left + 30, 98],
-        [start + 1.5, left + 70, 110],
-      ]);
+      tracks[`.sv-a-ag-${letter}`] = cursor(
+        agentPath(start, left, [0, 0.35, 0.6, 0.8, 1, 1.2, 1.5]),
+      );
     });
 
     return {
@@ -488,10 +497,10 @@ export default function AiScene({ title }: { title: string }) {
         </b>
       </div>
 
-      <svg className="sv-a-lines" viewBox="0 0 320 140">
-        <path pathLength={1} d="M160 28v9q0 5-5 5H65q-5 0-5 5v8" />
-        <path pathLength={1} d="M160 28v27" />
-        <path pathLength={1} d="M160 28v9q0 5 5 5h90q5 0 5 5v8" />
+      <svg className="sv-a-lines" viewBox="0 0 320 200">
+        <path pathLength={1} d="M160 50v15q0 5-5 5H65q-5 0-5 5v11" />
+        <path pathLength={1} d="M160 50v36" />
+        <path pathLength={1} d="M160 50v15q0 5 5 5h90q5 0 5 5v11" />
       </svg>
 
       {CONCEPTS.map((concept) => (
@@ -576,11 +585,21 @@ export default function AiScene({ title }: { title: string }) {
 
             <div className="sv-a-chart">
               {OVERVIEW_BARS.map((height, index) => (
-                <s key={index} style={{ left: 6 + index * 20, height }} />
+                <s
+                  key={index}
+                  style={{ left: 6 + index * 20, height: height * BAR_SCALE }}
+                />
               ))}
 
-              <svg className="sv-a-trend" viewBox="0 0 188 44" preserveAspectRatio="none">
-                <path className="sv-a-trend-area" d={`${TREND} L172 44 L12 44 Z`} />
+              <svg
+                className="sv-a-trend"
+                viewBox={`0 0 188 ${CHART_H}`}
+                preserveAspectRatio="none"
+              >
+                <path
+                  className="sv-a-trend-area"
+                  d={`${TREND} L172 ${CHART_H} L12 ${CHART_H} Z`}
+                />
                 <path className="sv-a-trend-line" d={TREND} />
               </svg>
             </div>
@@ -592,7 +611,10 @@ export default function AiScene({ title }: { title: string }) {
 
             <div className="sv-a-big">
               {INSIGHT_BARS.map((height, index) => (
-                <s key={index} style={{ left: 4 + index * 27, height }} />
+                <s
+                  key={index}
+                  style={{ left: 4 + index * 27, height: height * BAR_SCALE }}
+                />
               ))}
             </div>
           </div>

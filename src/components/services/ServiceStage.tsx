@@ -10,7 +10,11 @@ import {
 import { prefersReducedMotion } from "@/lib/motion";
 import { createPlayer, type Director } from "@/lib/scene";
 
+// Every scene is drawn on this canvas. It is fitted to the stage by whichever
+// side constrains it and centred, so a stage capped by the screen height
+// shows the whole drawing.
 const DESIGN_WIDTH = 320;
+const DESIGN_HEIGHT = 200;
 
 type ServiceStageProps = {
   n: string;
@@ -39,9 +43,20 @@ export default function ServiceStage({
     if (!stage) return;
 
     const fit = () => {
+      const width = stage.clientWidth;
+      const scale = Math.min(
+        width / DESIGN_WIDTH,
+        stage.clientHeight / DESIGN_HEIGHT,
+      );
+
+      stage.style.setProperty("--sv-scale", String(scale));
       stage.style.setProperty(
-        "--sv-scale",
-        String(stage.clientWidth / DESIGN_WIDTH),
+        "--sv-x",
+        `${(width - DESIGN_WIDTH * scale) / 2}px`,
+      );
+      stage.style.setProperty(
+        "--sv-y",
+        `${(stage.clientHeight - DESIGN_HEIGHT * scale) / 2}px`,
       );
     };
 
