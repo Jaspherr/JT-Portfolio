@@ -15,6 +15,9 @@ export type SceneSpec = {
   tracks: Tracks;
   prepare?: (root: HTMLElement) => void;
   cues?: Cue[];
+  // Seconds the act's result stays on screen before the next act begins.
+  // Set it for results worth reading; otherwise a short breath is used.
+  hold?: number;
 };
 
 // Plays the intro once, then keeps asking for the next act. Acts are built
@@ -24,9 +27,38 @@ export type Director = {
   next: (root: HTMLElement) => SceneSpec;
 };
 
-// Stillness between acts, in seconds. The rotation keeps the rhythm from
-// feeling metronomic; a workspace that never pauses reads as a screensaver.
-const RESTS = [2.2, 3.6, 1.6, 4.4, 2.8];
+// The breath between acts, in seconds, counted from the moment an act stops
+// changing. Short enough that the work reads as continuous; the rotation
+// keeps the rhythm from feeling metronomic.
+const BREATHS = [0.4, 0.7, 0.3, 0.9, 0.5];
+
+// When an act stops changing: the last keyframe that changes a value, or its
+// last cue. Durations and holding keyframes can run past that, and waiting
+// them out would only add idle time.
+function settledAt(act: SceneSpec) {
+  let end = 0;
+
+  for (const keys of Object.values(act.tracks)) {
+    const held: Record<string, unknown> = {};
+
+    for (const key of [...keys].sort((a, b) => a.at - b.at)) {
+      const props = Object.entries(key).filter(
+        ([prop]) => prop !== "at" && prop !== "ease",
+      );
+      // A track's first keyframe is eased into from the current style.
+      const changes = props.some(([prop, value]) =>
+        prop in held ? held[prop] !== value : key.at > 0,
+      );
+
+      if (changes) end = Math.max(end, key.at);
+      props.forEach(([prop, value]) => (held[prop] = value));
+    }
+  }
+
+  for (const [at] of act.cues ?? []) end = Math.max(end, at);
+
+  return Math.min(end, act.duration);
+}
 
 export type CursorPoint = [at: number, x: number, y: number, scale?: number];
 
@@ -134,6 +166,7 @@ export function together(a: SceneSpec, b: SceneSpec, offset = 0): SceneSpec {
 
   return {
     duration: Math.max(a.duration, b.duration + offset),
+    hold: Math.max(a.hold ?? 0, b.hold ?? 0) || undefined,
     tracks,
     prepare: (root) => {
       a.prepare?.(root);
@@ -249,8 +282,9 @@ export function createPlayer(root: HTMLElement, director: Director) {
       timers.push(cue);
     }
 
-    const rest = RESTS[acts % RESTS.length] * 1000;
-    const clock = root.animate(null, { duration: duration + rest });
+    // The next act starts once this one has settled and had its moment.
+    const hold = act.hold ?? BREATHS[acts % BREATHS.length];
+    const clock = root.animate(null, { duration: (settledAt(act) + hold) * 1000 });
 
     acts += 1;
     clock.onfinish = () => {
