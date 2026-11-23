@@ -14,12 +14,6 @@ const letterClass = (index: number) =>
     ? "hero-name-letter-line"
     : "hero-name-letter-solid";
 
-/* "Drawn, then built." The name exists twice in the same place: as a
-   blueprint (outlined letters on type-specimen guides) and built (solid ink).
-   It is drafted first and inked after; a loupe under the pointer peels the
-   ink back to the drawing, and scrolling away drains the ink back into it.
-   The name runs the full measure; under it, the tagline with the
-   introduction beside it, then the way into the work and the links. */
 export default function Hero() {
   const heroRef = useRef<HTMLElement>(null);
   const nameRef = useRef<HTMLHeadingElement>(null);
@@ -73,7 +67,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Under the name: the tagline, then the introduction beside it. */}
       <div className="hero-intro-row">
         <p className="hero-designer">
           , a designer who enjoys figuring things out.
@@ -91,7 +84,6 @@ export default function Hero() {
         </p>
       </div>
 
-      {/* The way into the work on the left, the links on the right. */}
       <div className="hero-actions">
         <a className="collab" href="#projects">
           <span className="collab-label">

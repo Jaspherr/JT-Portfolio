@@ -30,8 +30,6 @@ export function useHeroBlueprint(nameRef: RefObject<HTMLElement | null>) {
     const context = document.createElement("canvas").getContext("2d");
     const set = (key: string, value: string) => name.style.setProperty(key, value);
 
-    // --- Measurements -----------------------------------------------------
-
     const measure = () => {
       const first = built.firstElementChild as HTMLElement | null;
       if (!context || !first) return;
@@ -61,8 +59,6 @@ export function useHeroBlueprint(nameRef: RefObject<HTMLElement | null>) {
         letter.dataset.w = String(Math.round(width));
       });
     };
-
-    // --- Loupe -------------------------------------------------------------
 
     const lens = { x: 0, y: 0, r: 0, tx: 0, ty: 0, tr: 0 };
     let lensFrame = 0;
@@ -113,8 +109,6 @@ export function useHeroBlueprint(nameRef: RefObject<HTMLElement | null>) {
       runLens();
     };
 
-    // --- Drain on scroll ---------------------------------------------------
-
     let drainFrame = 0;
 
     const drain = () => {
@@ -139,8 +133,6 @@ export function useHeroBlueprint(nameRef: RefObject<HTMLElement | null>) {
         drain();
       });
     };
-
-    // --- Wiring ------------------------------------------------------------
 
     drawLens();
     document.fonts.ready.then(measure);

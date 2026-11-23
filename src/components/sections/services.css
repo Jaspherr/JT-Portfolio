@@ -5,9 +5,6 @@
   color: var(--muted);
 }
 
-/* An editorial header, then one full-width row per service: copy on the left,
-   the animated stage as the centerpiece on the right. */
-
 .services {
   --svc-copy: clamp(270px, 25vw, 350px);
   --svc-gap: clamp(40px, 5vw, 76px);

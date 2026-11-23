@@ -22,6 +22,9 @@ const INSIGHT_BARS = [22, 30, 26, 40, 34, 56, 44];
 // Bars are drawn at twice these heights in the full-size charts.
 const BAR_SCALE = 2;
 const CHART_H = 96;
+// Where review notes are pinned: under the middle summary card, flush with its
+// right edge. The note's pointed corner sits on this point.
+const NOTE_AT: [number, number] = [190, 69];
 
 // The chosen concept sits where the prototype will grow from: the tiles'
 // row is 73px below the prototype's top, and a tile is .4135 of its size.
@@ -57,9 +60,9 @@ const intro: SceneSpec = (() => {
       [4.35, 162, 134, 0.82],
       [4.5, 162, 134],
       [5.6, 232, 90],
-      [5.9, 196, 33],
-      [5.95, 196, 33, 0.82],
-      [6.1, 196, 33],
+      [5.9, ...NOTE_AT],
+      [5.95, ...NOTE_AT, 0.82],
+      [6.1, ...NOTE_AT],
       [6.45, 226, 90],
       [7.0, 226, 90],
       [7.25, 130, 25],
@@ -211,7 +214,54 @@ const BRIEFS: Record<string, string> = {
 };
 
 const NOTES = ["Spacing feels right", "Ready for a usability test", "Share with the team"];
-const ROUNDS: (Topic | "test")[] = ["chart", "kpi", "test"];
+const ROUNDS: (Topic | "code" | "test")[] = ["code", "chart", "kpi", "test"];
+
+type Token = [kind: string, text: string];
+type CodeLine = { add?: boolean; tokens: Token[] };
+type CodeTask = {
+  file: string;
+  first: number;
+  brief: string;
+  tab: string;
+  lines: CodeLine[];
+};
+
+const CODE_TASKS: Record<"filter" | "export", CodeTask> = {
+  filter: {
+    file: "Insights.tsx",
+    first: 14,
+    brief: "Wire the date filter to the analytics API",
+    tab: "insights",
+    lines: [
+      { add: true, tokens: [["k", "const "], ["", "[range, setRange] = "], ["f", "useState"], ["p", "("], ["s", '"7d"'], ["p", ");"]] },
+      { add: true, tokens: [["k", "const "], ["", "{ data } = "], ["f", "useAnalytics"], ["p", "({ "], ["", "range"], ["p", " });"]] },
+      { tokens: [["k", "return "], ["p", "("]] },
+      { tokens: [["p", "  <"], ["t", "Panel"], ["p", ">"]] },
+      { add: true, tokens: [["p", "    <"], ["t", "DateFilter "], ["", "value"], ["p", "={"], ["", "range"], ["p", "} "], ["", "set"], ["p", "={"], ["", "setRange"], ["p", "} />"]] },
+      { add: true, tokens: [["p", "    <"], ["t", "Chart "], ["", "data"], ["p", "={"], ["", "data.daily"], ["p", "} />"]] },
+    ],
+  },
+  export: {
+    file: "Overview.tsx",
+    first: 8,
+    brief: "Add a CSV export to the overview",
+    tab: "overview",
+    lines: [
+      { add: true, tokens: [["k", "import "], ["p", "{ "], ["", "toCsv"], ["p", " } "], ["k", "from "], ["s", '"@/lib/csv"'], ["p", ";"]] },
+      { add: true, tokens: [["k", "const "], ["f", "onExport"], ["p", " = () =>"]] },
+      { add: true, tokens: [["p", "  "], ["f", "save"], ["p", "("], ["f", "toCsv"], ["p", "("], ["", "data"], ["p", "), "], ["s", '"report.csv"'], ["p", ");"]] },
+      { tokens: [["k", "return "], ["p", "("]] },
+      { tokens: [["p", "  <"], ["t", "Toolbar"], ["p", ">"]] },
+      { add: true, tokens: [["p", "    <"], ["t", "Button "], ["", "onClick"], ["p", "={"], ["f", "onExport"], ["p", "}>"], ["", "CSV"], ["p", "</"], ["t", "Button"], ["p", ">"]] },
+    ],
+  },
+};
+
+const CODE_ORDER = ["filter", "export"] as const;
+const ASIDE = "translate(-42px, 46px) scale(.6)";
+const ACCEPT: [number, number] = [286, 154];
+
+const lineText = ({ tokens }: CodeLine) => tokens.map(([, value]) => value).join("");
 const TILE_X: Record<string, number> = { a: 17, b: 117, c: 217 };
 const SETTLED = "translate(0px, 0px) scale(1)";
 
@@ -261,6 +311,7 @@ function direct(): Director {
   const crew = createCrew({ you: [200, 214] });
   const state = {
     step: 0,
+    code: 0,
     chart: 0,
     kpi: 0,
     pick: 0,
@@ -290,9 +341,9 @@ function direct(): Director {
           [1.9, ...tab(state.tab)],
           [1.98, ...tab(state.tab), 0.82],
           [2.06, ...tab(state.tab)],
-          [2.7, 196, 33],
-          [2.78, 196, 33, 0.82],
-          [2.86, 196, 33],
+          [2.7, ...NOTE_AT],
+          [2.78, ...NOTE_AT, 0.82],
+          [2.86, ...NOTE_AT],
           [3.6, 226, 90],
         ]),
         ".sv-a-pin": flash(2.85, 4.3, 0.2),
@@ -463,6 +514,135 @@ function direct(): Director {
     };
   };
 
+  const code = (): SceneSpec => {
+    const key = CODE_ORDER[state.code % CODE_ORDER.length];
+    const task = CODE_TASKS[key];
+    const added = state.code >= CODE_ORDER.length;
+
+    state.code += 1;
+    state.revisions += 1;
+    state.tab = task.tab;
+
+    const typed = 0.95 + task.brief.length * 0.035;
+    const sent = typed + 0.25;
+    const tracks: SceneSpec["tracks"] = {
+      ".sv-a-trail, .sv-a-meta": fade(0.1, 1, 0, 0.35),
+      ".sv-a-proto": [
+        { at: 0, opacity: 1, transform: SETTLED },
+        { at: 0.3, transform: SETTLED, ease: GLIDE },
+        { at: 1.1, transform: ASIDE },
+      ],
+      ".sv-a-prompt": fade(0.5, 0, 1, 0.3),
+      ".sv-a-prompt > span": typeOn(0.95, typed - 0.95, task.brief.length),
+      ".sv-a-code": [
+        { at: 0, opacity: 0, transform: "translateX(6px)" },
+        { at: sent + 0.1, opacity: 0, transform: "translateX(6px)" },
+        { at: sent + 0.5, opacity: 1, transform: "none" },
+      ],
+      ".sv-a-accept": [{ at: 0, opacity: 0.35, transform: "scale(1)" }],
+    };
+
+    // The agent types each added line; the context around it is already there.
+    let at = sent + 0.6;
+
+    task.lines.forEach((line, index) => {
+      if (!line.add) return;
+
+      const chars = lineText(line).length;
+      const duration = Math.max(0.3, chars * 0.018);
+
+      tracks[`.sv-a-task-${key} .sv-a-cl:nth-child(${index + 1}) > code`] =
+        typeOn(at, duration, chars);
+      at += duration + 0.12;
+    });
+
+    const checks = at + 0.1;
+    const passed = checks + 0.9;
+    const accept = passed + 0.9;
+    const back = accept + 0.7;
+
+    tracks[".sv-a-accept"].push(
+      { at: passed, opacity: 0.35 },
+      { at: passed + 0.2, opacity: 1 },
+      { at: accept, transform: "scale(1)" },
+      { at: accept + 0.1, transform: "scale(.9)" },
+      { at: accept + 0.3, transform: "scale(1)" },
+    );
+    tracks[".sv-a-code"].push(
+      { at: back - 0.1, opacity: 1 },
+      { at: back + 0.25, opacity: 0 },
+    );
+    tracks[".sv-a-prompt"].push(...fade(back - 0.1, 1, 0, 0.3));
+    tracks[".sv-a-proto"].push(
+      { at: back, transform: ASIDE, ease: GLIDE },
+      { at: back + 0.8, transform: SETTLED },
+    );
+    tracks[".sv-a-trail, .sv-a-meta"].push(...fade(back + 0.7, 0, 1, 0.35));
+    tracks[".sv-a-m3 b"] = bump(back + 1.1);
+
+    // The feature lands in the prototype once the diff is accepted.
+    tracks[`.sv-a-feat-${key}`] = added
+      ? [
+          { at: 0, opacity: 1, transform: "scale(1)" },
+          { at: accept + 0.2, transform: "scale(1)" },
+          { at: accept + 0.4, transform: "scale(1.2)" },
+          { at: accept + 0.7, transform: "scale(1)" },
+        ]
+      : [
+          { at: 0, opacity: 0, transform: "scale(.6)" },
+          { at: accept + 0.2, opacity: 0, transform: "scale(.6)" },
+          { at: accept + 0.45, opacity: 1, transform: "scale(1.2)" },
+          { at: accept + 0.7, transform: "scale(1)" },
+        ];
+
+    tracks[".sv-cur-you"] = crew.walk(
+      "you",
+      [
+        [0.9, 262, 40],
+        [typed, 262, 40],
+        [sent, 262, 40, 0.82],
+        [sent + 0.15, 262, 40],
+        [sent + 1.1, 226, 180],
+        [passed, 236, 180],
+        [accept - 0.1, ...ACCEPT],
+        [accept, ...ACCEPT, 0.82],
+        [accept + 0.15, ...ACCEPT],
+        [back + 1.2, 232, 182],
+      ],
+      0.2,
+    );
+
+    const status = (value: string) => (root: HTMLElement) =>
+      text(root, ".sv-a-status", value);
+
+    return {
+      duration: back + 2,
+      hold: 1,
+      tracks,
+      prepare: (root) => {
+        const editor = root.querySelector<HTMLElement>(".sv-a-code")!;
+
+        editor.dataset.task = key;
+        editor.classList.remove("is-merged");
+        text(root, ".sv-a-prompt > span", task.brief);
+        status("✦ Agent is writing…")(root);
+      },
+      cues: [
+        [0.2, (root) => showTab(root, task.tab)],
+        [checks, status("Running checks…")],
+        [passed, status("✓ 4 checks passed")],
+        [
+          accept + 0.15,
+          (root) => {
+            root.querySelector(".sv-a-code")!.classList.add("is-merged");
+            status("Merged")(root);
+          },
+        ],
+        [back + 1.1, (root) => text(root, ".sv-a-m3 b", String(state.revisions))],
+      ],
+    };
+  };
+
   return {
     intro,
     next: () => {
@@ -470,7 +650,9 @@ function direct(): Director {
 
       state.step += 1;
 
-      return topic === "test" ? test() : round(topic);
+      if (topic === "test") return test();
+
+      return topic === "code" ? code() : round(topic);
     },
   };
 }
@@ -487,7 +669,7 @@ export default function AiScene({ title }: { title: string }) {
       n="03"
       title={title}
       direct={direct}
-      summary="Illustration: a person keeps iterating on a dashboard prototype — writing follow-up briefs, comparing generated alternatives against the current design, choosing one and testing the result."
+      summary="Illustration: a person keeps iterating on a dashboard prototype — writing follow-up briefs, comparing generated alternatives against the current design, choosing one, having an AI agent code a feature, reviewing and accepting its diff, and testing the result."
     >
       <div className="sv-a-prompt">
         <i>✦</i>
@@ -567,6 +749,42 @@ export default function AiScene({ title }: { title: string }) {
             Insights
           </button>
           <span className="sv-a-ind" />
+          {/* Drawn as SVG so the labels sit on an exact baseline; at this
+              size HTML text centres on rounded font metrics and drifts. */}
+          <span className="sv-a-feats">
+            <svg
+              className="sv-a-feat sv-a-feat-export"
+              width="20.5"
+              height="8"
+              viewBox="0 0 20.5 8"
+              aria-hidden="true"
+            >
+              <rect x=".3" y=".3" width="19.9" height="7.4" rx="3.7" />
+              <path
+                transform="translate(3 1.75) scale(.55)"
+                d="M4 1.2v4.6M2 3.9 4 5.9l2-2M1.6 7h4.8"
+              />
+              <text x="8.6" y="5.6">
+                CSV
+              </text>
+            </svg>
+            <svg
+              className="sv-a-feat sv-a-feat-filter"
+              width="16.8"
+              height="8"
+              viewBox="0 0 16.8 8"
+              aria-hidden="true"
+            >
+              <rect x=".3" y=".3" width="16.2" height="7.4" rx="3.7" />
+              <text x="3" y="5.6">
+                7d
+              </text>
+              <path
+                transform="translate(9.4 1.75) scale(.55)"
+                d="M2.2 3.2 4 5l1.8-1.8"
+              />
+            </svg>
+          </span>
           <em />
         </div>
 
@@ -636,6 +854,43 @@ export default function AiScene({ title }: { title: string }) {
         <span className="sv-a-m3">
           <b>2</b>revisions
         </span>
+      </div>
+
+      <div className="sv-a-code" data-task="filter">
+        <div className="sv-a-code-bar">
+          <span className="sv-a-agent">✦ Agent</span>
+        </div>
+
+        {CODE_ORDER.map((key) => (
+          <div key={key} className={`sv-a-task sv-a-task-${key}`}>
+            <span className="sv-a-fname">{CODE_TASKS[key].file}</span>
+
+            <div className="sv-a-file">
+              {CODE_TASKS[key].lines.map((line, index) => (
+                <div
+                  key={index}
+                  className="sv-a-cl"
+                  data-add={line.add ? "" : undefined}
+                >
+                  <i>{CODE_TASKS[key].first + index}</i>
+                  {line.add && <u>+</u>}
+                  <code>
+                    {line.tokens.map(([kind, value], token) => (
+                      <span key={token} className={kind || undefined}>
+                        {value}
+                      </span>
+                    ))}
+                  </code>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+
+        <div className="sv-a-foot">
+          <span className="sv-a-status">✦ Agent is writing…</span>
+          <span className="sv-a-accept">Accept</span>
+        </div>
       </div>
 
       <SceneCursor id="you" tag="JT" />

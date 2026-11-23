@@ -15,16 +15,12 @@ const watchUrl = ({ id, format }: Video) =>
     ? `https://www.youtube.com/shorts/${id}`
     : `https://www.youtube.com/watch?v=${id}`;
 
-/* Work samples as a strip of thumbnails. Nothing from YouTube loads but the
-   thumbnails until a video is chosen; it then plays in a dialog from the
-   privacy-enhanced domain, and closing the dialog removes the player. */
 export default function VideoReel({ label, videos }: VideoReelProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
   const [current, setCurrent] = useState<Video | null>(null);
   const [edges, setEdges] = useState({ start: true, end: false });
 
-  // Tracks whether the strip can scroll further either way.
   useEffect(() => {
     const list = listRef.current;
 

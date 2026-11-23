@@ -1,15 +1,4 @@
-/* Hero — "drawn, then built".
-   The name runs the full measure and exists in two states in the same
-   place: a blueprint (outlined letters on type-specimen guides) and built
-   (solid ink). It is drafted, then inked; a loupe under the pointer peels
-   the ink back to the drawing; scrolling away drains it back. Under it: the
-   tagline with the introduction beside it, then the way into the work and
-   the links. Behaviour lives in useHeroBlueprint. */
-
-/* One block — name, intro row, actions — centred in the screen below the
-   navigation. */
 .hero {
-  /* Keep the hero at least one screen tall, but let longer copy grow naturally. */
   height: auto;
   min-height: max(600px, calc(100svh - 78px));
   display: flex;
@@ -59,8 +48,6 @@
   white-space: nowrap;
 }
 
-/* Built: the solid name. The loupe punches a hole in it and the scroll
-   drain trims it from the right; the blueprint shows through both. */
 .hero-name-letters {
   position: relative;
   z-index: 1;
@@ -167,7 +154,6 @@
   -webkit-text-stroke: 1.5px currentColor;
 }
 
-/* Sidebearing lines between the letters... */
 .hero-bp-letter::before {
   content: "";
   position: absolute;
@@ -179,7 +165,6 @@
   border-left: 1px dashed var(--bp-line);
 }
 
-/* ...and each letter's measured width, just above the cap height. */
 .hero-bp-letter::after {
   content: attr(data-w);
   position: absolute;
@@ -193,7 +178,6 @@
   translate: -50% 0;
 }
 
-/* The loupe's rim, with a small crosshair at its centre. */
 .hero-lens {
   position: absolute;
   z-index: 3;
@@ -228,8 +212,6 @@
   height: 11px;
 }
 
-/* "I'M" sits on the J's left edge, just above the cap height. */
-
 .hero-im {
   position: absolute;
   z-index: 3;
@@ -243,9 +225,6 @@
   letter-spacing: -.05em;
   color: var(--brown);
 }
-
-/* Under the name: the tagline, large, on the left; the introduction on the
-   right behind a hairline, its edge on the measure's right edge. */
 
 .hero-intro-row {
   display: grid;
@@ -298,7 +277,6 @@
   letter-spacing: -.03em;
 }
 
-/* The way into the work on the left, the links on the right. */
 .hero-actions {
   display: flex;
   align-items: center;
@@ -306,8 +284,6 @@
   gap: 32px;
   margin-top: clamp(26px, 4.4vh, 48px);
 }
-
-/* "See what I've made" — the boxed link, unchanged. */
 
 .collab {
   position: relative;
@@ -481,11 +457,6 @@
   }
 }
 
-/* Entrance — drafted, then inked. The guides rule across, the outlined
-   letters are drawn up out of the baseline, ink fills each letter left to
-   right, and the drawing fades back under the finished name. The name reads
-   from the first moment; nothing waits on the user. */
-
 @media (prefers-reduced-motion: no-preference) {
   .hero-intro .hero-im,
   .hero-intro .hero-designer,
@@ -649,7 +620,6 @@
     font-size: clamp(20px, 5.4vw, 24px);
   }
 
-  /* The link and the socials share one full-width column. */
   .hero-actions {
     flex-direction: column;
     align-items: stretch;

@@ -18,8 +18,8 @@ export const services: Service[] = [
   {
     n: "03",
     icon: "ai",
-    title: "AI-Assisted Prototyping & Design",
-    text: "AI is a speed layer for me — for exploring, iterating and testing ideas. Deciding what's actually good stays my job.",
+    title: "AI-Assisted Design, Prototyping & Coding",
+    text: "AI is a speed layer for me — for exploring, iterating, testing ideas and writing code. Deciding what's actually good stays my job.",
     chips: ["Cursor", "v0", "Figma Make", "Rapid Prototyping"],
   },
   {

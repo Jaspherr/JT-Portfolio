@@ -708,11 +708,11 @@
   opacity: 0;
 }
 
-.sv-c-ln .k { color: #e08a5b; }
-.sv-c-ln .f { color: #f0d9a8; }
-.sv-c-ln .t { color: #a8c79a; }
-.sv-c-ln .s { color: #d9c07a; }
-.sv-c-ln .p { color: #9a9187; }
+:is(.sv-c-ln, .sv-a-cl) .k { color: #e08a5b; }
+:is(.sv-c-ln, .sv-a-cl) .f { color: #f0d9a8; }
+:is(.sv-c-ln, .sv-a-cl) .t { color: #a8c79a; }
+:is(.sv-c-ln, .sv-a-cl) .s { color: #d9c07a; }
+:is(.sv-c-ln, .sv-a-cl) .p { color: #9a9187; }
 
 .sv-c-chip {
   z-index: 3;
@@ -1404,15 +1404,16 @@
   white-space: nowrap;
 }
 
+/* The pointed corner sits on NOTE_AT in AiScene. */
 .sv-a-pin {
   z-index: 4;
-  top: 21px;
-  left: 203px;
-  height: 13px;
+  top: 69px;
+  right: 130px;
+  height: 11px;
   padding: 0 6px;
-  border-radius: 2px 7px 7px;
+  border-radius: 6px 2px 6px 6px;
   background: var(--ink);
-  font: 500 5px/13px var(--font-body);
+  font: 500 5px/11px var(--font-body);
   color: var(--paper);
   white-space: nowrap;
   opacity: 0;
@@ -1453,6 +1454,172 @@
 .sv-a-m1 { top: 0; }
 .sv-a-m2 { top: 28px; }
 .sv-a-m3 { top: 56px; }
+
+.sv-a-feats {
+  top: 4.5px;
+  right: 21px;
+  height: 8px;
+  display: flex;
+  gap: 4px;
+}
+
+.sv-a-feat {
+  position: static;
+  flex: none;
+  overflow: visible;
+  opacity: 0;
+}
+
+.sv-a-feat rect {
+  fill: var(--sv-surface);
+  stroke: var(--line);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.sv-a-feat path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: .9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sv-a-feat text {
+  font: 600 4.2px var(--font-display);
+  fill: var(--ink);
+}
+
+.sv-a-code {
+  z-index: 2;
+  top: 60px;
+  left: 146px;
+  width: 160px;
+  height: 103px;
+  overflow: hidden;
+  border: var(--sv-hair) solid #2c2622;
+  border-radius: 7px;
+  background: #1a1613;
+  box-shadow: 0 10px 26px rgba(42, 31, 24, .14);
+  color: #ebe5db;
+  opacity: 0;
+}
+
+.sv-a-code-bar {
+  inset: 0 0 auto;
+  height: 13px;
+  border-bottom: var(--sv-hair) solid #2c2622;
+}
+
+.sv-a-agent {
+  top: 3px;
+  right: 5px;
+  height: 7px;
+  padding: 0 3px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--sv-c2) 30%, transparent);
+  font: 600 4.2px/7px var(--font-body);
+  color: #f0c3a4;
+}
+
+.sv-a-task {
+  inset: 0;
+}
+
+.sv-a-code[data-task="filter"] .sv-a-task-export,
+.sv-a-code[data-task="export"] .sv-a-task-filter {
+  visibility: hidden;
+}
+
+.sv-a-fname {
+  top: 0;
+  left: 7px;
+  font: 500 4.8px/13px var(--sv-mono);
+  color: #cfc6ba;
+}
+
+.sv-a-file {
+  top: 17px;
+  right: 0;
+  left: 0;
+  height: 66px;
+}
+
+.sv-a-cl {
+  right: 0;
+  left: 0;
+  height: 11px;
+  font: 400 4.6px/11px var(--sv-mono);
+  transition: background .5s var(--ease);
+}
+
+.sv-a-cl:nth-child(1) { top: 0; }
+.sv-a-cl:nth-child(2) { top: 11px; }
+.sv-a-cl:nth-child(3) { top: 22px; }
+.sv-a-cl:nth-child(4) { top: 33px; }
+.sv-a-cl:nth-child(5) { top: 44px; }
+.sv-a-cl:nth-child(6) { top: 55px; }
+
+.sv-a-cl[data-add] {
+  background: rgba(168, 199, 154, .12);
+}
+
+.sv-a-cl > i {
+  left: 0;
+  width: 11px;
+  font-size: 4px;
+  text-align: right;
+  color: #5f5850;
+}
+
+.sv-a-cl > u {
+  left: 13px;
+  color: #a8c79a;
+  transition: opacity .5s var(--ease);
+}
+
+.sv-a-cl > code {
+  left: 19px;
+  font: inherit;
+  white-space: pre;
+}
+
+.sv-a-cl > code span {
+  position: static;
+}
+
+.sv-a-code.is-merged .sv-a-cl[data-add] {
+  background: transparent;
+}
+
+.sv-a-code.is-merged .sv-a-cl > u {
+  opacity: 0;
+}
+
+.sv-a-foot {
+  inset: auto 0 0;
+  height: 18px;
+  border-top: var(--sv-hair) solid #2c2622;
+}
+
+.sv-a-status {
+  top: 0;
+  left: 7px;
+  font: 500 4.6px/18px var(--sv-mono);
+  color: #cfc6ba;
+  white-space: nowrap;
+}
+
+.sv-a-accept {
+  top: 3.5px;
+  right: 5px;
+  height: 11px;
+  padding: 0 5px;
+  border-radius: 3px;
+  background: var(--sv-c3);
+  font: 600 5px/11px var(--font-display);
+  color: #fff;
+}
 
 /* 04 — Handoff and delivery */
 
@@ -2033,7 +2200,7 @@
   --sv-c4: #7d9dc0;
 }
 
-:root[data-theme="dark"] .sv-c-editor {
+:root[data-theme="dark"] :is(.sv-c-editor, .sv-a-code) {
   border-color: var(--line);
   background: #0c0b0a;
 }

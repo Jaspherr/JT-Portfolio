@@ -12,7 +12,6 @@
   z-index: 2;
 }
 
-/* The availability status, on the right above the closing line. */
 .contact-top {
   display: flex;
   align-items: flex-start;

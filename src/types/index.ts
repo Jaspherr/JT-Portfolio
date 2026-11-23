@@ -42,7 +42,6 @@ export type Experience = {
   role: string;
   date: string;
   text: string;
-  // Work samples shown under the role.
   reel?: {
     label: string;
     videos: Video[];
