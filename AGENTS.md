@@ -25,3 +25,5 @@ Conventions:
   `.draft-spec` child). Supporting copy settles via timelines declared in
   `src/data/scrollTimelines.ts` and run by `src/lib/scroll-timeline.ts`.
   Easing and duration tokens live in `src/styles/tokens.css`.
+- Commit messages use Conventional Commits: `feat:`, `fix:`, `refactor:`,
+  `style:`, `docs:`, `chore:` plus a short imperative summary.
