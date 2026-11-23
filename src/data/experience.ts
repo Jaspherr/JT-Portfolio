@@ -14,5 +14,35 @@ export const experience: Experience[] = [
     role: "Freelance Video Editor",
     date: "Dec 2025 – Apr 2026",
     text: "Edited video for pacing, colour, sound and motion — work that sharpened the storytelling instincts I bring into interfaces.",
+    reel: {
+      label: "Edits for Orphans PH",
+      videos: [
+        {
+          id: "qk0VgF9zeEg",
+          title: "Where Purpose Leads, Faith Moves: One Team on a Mission in the Philippines",
+          format: "landscape",
+        },
+        {
+          id: "Zk4T99NXkXQ",
+          title: "Chosen to Shine: Held by Love, United in Hope",
+          format: "landscape",
+        },
+        {
+          id: "3KKpNQZ-Ss8",
+          title: "A Day of Connection and Celebration at St. Martin De Porres",
+          format: "landscape",
+        },
+        {
+          id: "5KQQXIaaBEg",
+          title: "Tiny Dancers, Big Smiles: Kuya Center Kids",
+          format: "short",
+        },
+        {
+          id: "JWQ9g5ToChs",
+          title: "Hearts That Inspire: Joy and Hope for St. Martin De Porres Kids",
+          format: "short",
+        },
+      ],
+    },
   },
 ];

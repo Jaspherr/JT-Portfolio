@@ -2,14 +2,9 @@
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
   align-items: start;
-  gap: clamp(48px, 7vw, 120px);
+  gap: clamp(48px, 5vw, 88px);
   padding-block: clamp(90px, 12vh, 140px);
   border-top: 1px solid var(--line);
-}
-
-.about-story {
-  position: sticky;
-  top: clamp(40px, 8vh, 90px);
 }
 
 .about-story h2 {
@@ -43,13 +38,13 @@
 
 .about-notes {
   display: grid;
-  gap: clamp(44px, 6vh, 64px);
+  gap: clamp(44px, 6vh, 60px);
   padding-top: 6px;
 }
 
 .about-block h3 {
-  margin: 0 0 18px;
-  padding-bottom: 12px;
+  margin: 0 0 14px;
+  padding-bottom: 10px;
   border-bottom: 1px solid var(--line);
   font: 500 13px var(--font-body);
   color: var(--brown);
@@ -57,7 +52,7 @@
 
 .about-roles {
   display: grid;
-  gap: 26px;
+  gap: 30px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -65,8 +60,13 @@
 
 .about-role {
   display: grid;
-  grid-template-columns: 140px minmax(0, 1fr);
-  gap: 18px;
+  grid-template-columns: 124px minmax(0, 1fr);
+  gap: 16px;
+}
+
+/* Lets a video strip scroll inside the column instead of widening it. */
+.about-role > div {
+  min-width: 0;
 }
 
 .about-role-date {
@@ -90,9 +90,9 @@
 }
 
 .about-role p {
-  margin: 10px 0 0;
+  margin: 6px 0 0;
   font-size: 14px;
-  line-height: 1.7;
+  line-height: 1.65;
   color: var(--muted);
 }
 
@@ -130,9 +130,9 @@
 
 .about-tool {
   display: grid;
-  grid-template-columns: 150px minmax(0, 1fr);
-  gap: 18px;
-  padding: 14px 0;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: 16px;
+  padding: 11px 0;
   border-bottom: 1px solid var(--line);
 }
 
@@ -157,13 +157,280 @@
 .about-tool dd {
   margin: 0;
   font-size: 14px;
-  line-height: 1.75;
+  line-height: 1.6;
   color: var(--muted);
+}
+
+.video-reel {
+  --reel-h: clamp(96px, 8vw, 118px);
+  margin-top: 20px;
+}
+
+.video-reel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.video-reel-label {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0;
+  font: 500 12px/1.4 var(--font-body);
+  color: var(--text);
+}
+
+.video-reel-label span {
+  font: 400 11px/1 var(--font-number);
+  color: var(--subtle);
+}
+
+.video-reel-nav {
+  display: flex;
+  gap: 6px;
+}
+
+.video-reel-nav button {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.video-reel-nav button:disabled {
+  opacity: .35;
+  cursor: default;
+}
+
+.video-reel-nav svg {
+  width: 14px;
+  height: 14px;
+}
+
+.video-reel-nav button:focus-visible {
+  outline: 2px solid var(--brown);
+  outline-offset: 2px;
+}
+
+.video-reel-list {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  padding: 0 0 4px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  list-style: none;
+  mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent);
+}
+
+.video-reel-list::-webkit-scrollbar {
+  display: none;
+}
+
+.video-reel-list li {
+  flex: none;
+  height: var(--reel-h);
+  aspect-ratio: 16 / 9;
+  scroll-snap-align: start;
+}
+
+.video-reel-list li[data-format="short"] {
+  aspect-ratio: 9 / 16;
+}
+
+/* The last tile clears the fade. */
+.video-reel-list li:last-child {
+  margin-right: 28px;
+}
+
+.video-tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--line);
+  cursor: pointer;
+}
+
+.video-tile img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-tile-play {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgb(17 17 15 / .72);
+  color: #fff;
+}
+
+.video-tile-play svg {
+  width: 11px;
+  height: 11px;
+  fill: currentColor;
+  translate: 1px 0;
+}
+
+.video-tile:focus-visible {
+  outline: 2px solid var(--brown);
+  outline-offset: 3px;
+}
+
+/* The player. Sized to the video's own shape and the screen. */
+
+.video-dialog {
+  max-width: none;
+  max-height: none;
+  margin: auto;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+}
+
+.video-dialog::backdrop {
+  background: rgb(10 10 9 / .82);
+}
+
+html:has(.video-dialog[open]) {
+  overflow: hidden;
+}
+
+.video-dialog-body {
+  display: grid;
+  gap: 12px;
+}
+
+.video-dialog-frame {
+  width: min(92vw, 1100px, calc((100svh - 120px) * 16 / 9));
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #000;
+}
+
+.video-dialog[data-format="short"] .video-dialog-frame {
+  width: min(92vw, calc((100svh - 120px) * 9 / 16));
+  aspect-ratio: 9 / 16;
+}
+
+.video-dialog-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-dialog-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  color: #fff;
+}
+
+.video-dialog-bar p {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  font: 500 14px/1.4 var(--font-display);
+  letter-spacing: -.01em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.video-dialog-bar a,
+.video-dialog-bar button {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 36px;
+  border: 1px solid rgb(255 255 255 / .22);
+  border-radius: 999px;
+  background: transparent;
+  font: 500 12px/1 var(--font-body);
+  color: #fff;
+  cursor: pointer;
+}
+
+.video-dialog-bar a {
+  padding: 0 14px;
+}
+
+.video-dialog-bar button {
+  width: 36px;
+}
+
+.video-dialog-bar svg {
+  width: 15px;
+  height: 15px;
+}
+
+.video-dialog-bar :is(a, button):focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
 }
 
 @media (hover: hover) {
   .about-moment a:hover {
     text-decoration-color: var(--brown);
+  }
+
+  .video-tile:hover,
+  .video-reel-nav button:not(:disabled):hover {
+    border-color: var(--brown);
+  }
+
+  .video-tile:hover .video-tile-play {
+    background: var(--brown);
+  }
+
+  .video-dialog-bar :is(a, button):hover {
+    border-color: #fff;
+    background: rgb(255 255 255 / .1);
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .video-tile img {
+    transition: scale .6s var(--ease);
+  }
+
+  .video-tile:hover img {
+    scale: 1.05;
+  }
+
+  .video-tile,
+  .video-tile-play {
+    transition:
+      border-color .3s var(--ease),
+      background .3s var(--ease);
   }
 }
 
@@ -171,10 +438,6 @@
   .about {
     grid-template-columns: 1fr;
     gap: 56px;
-  }
-
-  .about-story {
-    position: static;
   }
 
   .about-story h2 {

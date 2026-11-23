@@ -29,12 +29,24 @@ export type Service = {
   chips: string[];
 };
 
+export type Video = {
+  // The YouTube video ID.
+  id: string;
+  title: string;
+  format: "landscape" | "short";
+};
+
 export type Experience = {
   index: string;
   company: string;
   role: string;
   date: string;
   text: string;
+  // Work samples shown under the role.
+  reel?: {
+    label: string;
+    videos: Video[];
+  };
 };
 
 export type Skill = {
