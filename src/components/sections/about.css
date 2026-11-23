@@ -1,7 +1,6 @@
 .about {
   --about-border: color-mix(in srgb, var(--brown) 20%, var(--line));
   --about-soft: color-mix(in srgb, var(--brown) 4%, var(--paper));
-  --about-ease: var(--ease, cubic-bezier(.22, 1, .36, 1));
 
   display: grid;
   grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
@@ -190,7 +189,7 @@
   text-decoration-color: var(--brown);
   text-decoration-thickness: 1px;
   text-underline-offset: 4px;
-  transition: color .2s var(--about-ease);
+  transition: color .2s var(--ease);
 }
 
 .about-moment a:focus-visible {
@@ -279,7 +278,7 @@
   background: var(--paper);
   color: var(--ink);
   cursor: pointer;
-  transition: border-color .2s var(--about-ease), color .2s var(--about-ease), background-color .2s var(--about-ease);
+  transition: border-color .2s var(--ease), color .2s var(--ease), background-color .2s var(--ease);
 }
 
 .video-reel-nav button:disabled {
@@ -505,7 +504,7 @@ html:has(.video-dialog[open]) {
 
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .video-tile img {
-    transition: transform .45s var(--about-ease);
+    transition: transform .45s var(--ease);
   }
 
   .video-tile:hover img {
@@ -514,7 +513,7 @@ html:has(.video-dialog[open]) {
 
   .video-tile,
   .video-tile-play {
-    transition: border-color .2s var(--about-ease), background-color .2s var(--about-ease);
+    transition: border-color .2s var(--ease), background-color .2s var(--ease);
   }
 }
 

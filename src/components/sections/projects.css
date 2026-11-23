@@ -28,14 +28,11 @@
   border-right: 1px solid var(--line);
 }
 
-.projects-heading-content {
-  transform: translateY(-2vh);
-}
-
-/* The shared chapter scale, capped to this narrow sticky column so
-   "Selected things" never breaks onto a third line. */
+/* The container lets the shared chapter scale cap itself to this narrow
+   sticky column, so "Selected things" never breaks onto a third line. */
 .projects-heading-content {
   container-type: inline-size;
+  transform: translateY(-2vh);
 }
 
 .projects-heading h2 {
@@ -549,15 +546,6 @@
   opacity: .35;
 }
 
-.project-position>div {
-  height: 1px;
-  background: var(--line);
-}
-
-.project-position span:first-child {
-  color: var(--brown);
-}
-
 @media (hover: hover) {
   .project-case:hover .project-case-heading h3 {
     color: var(--brown);
@@ -824,14 +812,6 @@
     margin-top: 25px;
   }
 
-  .projects-heading-footer {
-    position: relative;
-    right: auto;
-    bottom: auto;
-    left: auto;
-    margin-top: 45px;
-  }
-
   .project-case {
     padding: 90px 0 110px;
   }
@@ -914,10 +894,6 @@
     align-items: flex-end;
   }
 
-  .project-position {
-    width: 140px;
-  }
-
   .project-media-nav {
     gap: 15px;
   }
@@ -949,10 +925,6 @@
 
   .projects-heading h2 {
     font-size: var(--section-title-mobile);
-  }
-
-  .projects-heading-footer {
-    margin-top: 35px;
   }
 
   .project-case {
@@ -1004,11 +976,6 @@
 
   .project-footer {
     display: block;
-  }
-
-  .project-position {
-    width: 100%;
-    margin-top: 25px;
   }
 
   .project-media-nav {

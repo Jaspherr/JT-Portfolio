@@ -404,39 +404,39 @@
   }
 
   .nav-intro.nav-ready .monogram {
-    animation: nav-item-enter .42s cubic-bezier(.22, 1, .36, 1) .08s both;
+    animation: nav-item-enter .42s var(--ease-ui) .08s both;
   }
 
   .nav-intro.nav-ready .nav-primary .nav-link:nth-child(1) {
-    animation: nav-item-enter .38s cubic-bezier(.22, 1, .36, 1) .18s both;
+    animation: nav-item-enter .38s var(--ease-ui) .18s both;
   }
 
   .nav-intro.nav-ready .nav-primary .nav-link:nth-child(2) {
-    animation: nav-item-enter .38s cubic-bezier(.22, 1, .36, 1) .23s both;
+    animation: nav-item-enter .38s var(--ease-ui) .23s both;
   }
 
   .nav-intro.nav-ready .nav-primary .nav-link:nth-child(3) {
-    animation: nav-item-enter .38s cubic-bezier(.22, 1, .36, 1) .28s both;
+    animation: nav-item-enter .38s var(--ease-ui) .28s both;
   }
 
   .nav-intro.nav-ready .nav-primary .nav-link:nth-child(4) {
-    animation: nav-item-enter .38s cubic-bezier(.22, 1, .36, 1) .33s both;
+    animation: nav-item-enter .38s var(--ease-ui) .33s both;
   }
 
   .nav-intro.nav-ready .nav-cta {
-    animation: nav-item-enter .42s cubic-bezier(.22, 1, .36, 1) .40s both;
+    animation: nav-item-enter .42s var(--ease-ui) .40s both;
   }
 
   .nav-intro.nav-ready .nav-resume {
-    animation: nav-item-enter .42s cubic-bezier(.22, 1, .36, 1) .46s both;
+    animation: nav-item-enter .42s var(--ease-ui) .46s both;
   }
 
   .nav-intro.nav-ready .nav-toggle {
-    animation: nav-item-enter .42s cubic-bezier(.22, 1, .36, 1) .18s both;
+    animation: nav-item-enter .42s var(--ease-ui) .18s both;
   }
 
   .nav-intro.nav-ready::after {
-    animation: nav-rule-enter .7s cubic-bezier(.22, 1, .36, 1) .08s both;
+    animation: nav-rule-enter .7s var(--ease-ui) .08s both;
   }
 }
 

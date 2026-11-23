@@ -1,0 +1,546 @@
+/* 04 — Handoff and delivery */
+
+.sv-h-artname {
+  top: 28px;
+  left: 14px;
+  font: 500 4.6px/1 var(--font-body);
+  color: var(--sv-c4);
+  opacity: 0;
+}
+
+.sv-h-art {
+  top: 35px;
+  left: 14px;
+  width: 108px;
+  height: 82px;
+  border: var(--sv-hair) solid var(--line);
+  border-radius: 6px;
+  background: var(--sv-surface);
+  opacity: 0;
+}
+
+.sv-h-art .sv-m {
+  top: 9px;
+  transform: scale(.541);
+  transform-origin: 0 0;
+}
+
+.sv-h-tok {
+  top: 123px;
+  left: 14px;
+  width: 108px;
+  height: 12px;
+  opacity: 0;
+}
+
+.sv-h-tok i {
+  top: 2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brown);
+}
+
+.sv-h-tok i:nth-child(2) { left: 11px; background: var(--ink); }
+.sv-h-tok i:nth-child(3) { left: 22px; background: var(--sv-c2); }
+.sv-h-tok i:nth-child(4) { left: 33px; background: var(--sv-bar); }
+
+.sv-h-tok b {
+  top: 0;
+  left: 49px;
+  font: 700 8px/12px var(--font-display);
+  letter-spacing: -.04em;
+}
+
+.sv-h-tok span {
+  top: 0;
+  left: 66px;
+  font: 500 5px/12px var(--font-number);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.sv-h-sel {
+  top: 29px;
+  left: 8px;
+  width: 120px;
+  height: 112px;
+}
+
+.sv-h-gate {
+  top: 41px;
+  left: 155px;
+  width: 10px;
+  height: 38px;
+  border: var(--sv-hair) solid var(--brown);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.sv-h-chip {
+  top: 29px;
+  left: 110px;
+  width: 100px;
+  font: 500 4.6px/1 var(--sv-mono);
+  text-align: center;
+  color: var(--muted);
+  opacity: 0;
+}
+
+.sv-h-site {
+  top: 8px;
+  left: 62px;
+  width: 196px;
+  height: 156px;
+  overflow: hidden;
+  border: var(--sv-hair) solid var(--line);
+  border-radius: 8px;
+  background: var(--sv-surface);
+  box-shadow: 0 12px 30px rgba(42, 31, 24, .12);
+  transform-origin: 0 0;
+}
+
+.sv-h-bar {
+  inset: 0 0 auto;
+  height: 12px;
+  border-bottom: var(--sv-hair) solid var(--line);
+  background: var(--sv-chrome);
+}
+
+.sv-h-bar > i {
+  top: 4px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--sv-bar);
+}
+
+.sv-h-bar > i:nth-child(1) { left: 7px; }
+.sv-h-bar > i:nth-child(2) { left: 13px; }
+.sv-h-bar > i:nth-child(3) { left: 19px; }
+
+.sv-h-bar > span {
+  top: 2px;
+  left: 50%;
+  width: 80px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--sv-surface);
+  font: 400 4.4px/8px var(--font-body);
+  text-align: center;
+  color: var(--muted);
+  translate: -50% 0;
+}
+
+.sv-h-live {
+  top: 0;
+  right: 8px;
+  padding-left: 6px;
+  font: 600 4.4px/12px var(--font-display);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--sv-c3);
+}
+
+.sv-h-live::before {
+  content: "";
+  position: absolute;
+  top: 4.5px;
+  left: 0;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.sv-h-ver {
+  top: 0;
+  right: 34px;
+  font: 500 4.4px/12px var(--font-number);
+  color: var(--muted);
+}
+
+.sv-h-check {
+  z-index: 3;
+  top: 15px;
+  left: 196px;
+  padding: 2px 4px;
+  border-radius: 3px;
+  background: var(--green);
+  font: 500 4.6px/1 var(--font-body);
+  color: var(--ink);
+  white-space: nowrap;
+  opacity: 0;
+}
+
+.sv-h-scroll {
+  top: 0;
+  left: 0;
+  width: 196px;
+  height: 190px;
+}
+
+/* Starts just below the fold of the live page; a release scrolls to it. */
+.sv-f {
+  top: 146px;
+  left: 10px;
+  width: 176px;
+  height: 40px;
+}
+
+.sv-h-art .sv-f {
+  top: 30px;
+  left: 5px;
+  opacity: 0;
+  transform: scale(.56);
+  transform-origin: 0 0;
+}
+
+.sv-f > i {
+  top: 0;
+  width: 54px;
+  height: 40px;
+  border: var(--sv-hair) solid var(--line);
+  border-radius: 4px;
+  background-color: var(--sv-surface);
+  background-repeat: no-repeat;
+}
+
+.sv-f > i:nth-child(2) { left: 61px; }
+.sv-f > i:nth-child(3) { left: 122px; }
+
+.sv-f[data-f="pricing"] > i {
+  background-image:
+    linear-gradient(var(--sv-bar), var(--sv-bar)),
+    linear-gradient(var(--ink), var(--ink)),
+    linear-gradient(var(--sv-bar), var(--sv-bar)),
+    linear-gradient(var(--brown), var(--brown));
+  background-position: 6px 6px, 6px 13px, 6px 23px, 6px 29px;
+  background-size: 22px 3px, 18px 6px, 38px 2.5px, 42px 6px;
+}
+
+.sv-f[data-f="pricing"] > i:nth-child(2) {
+  border-color: var(--brown);
+}
+
+.sv-f[data-f="reviews"] > i {
+  width: 84.5px;
+  background-image:
+    radial-gradient(circle at 4.5px 4.5px, var(--sv-c2) 4px, transparent 4.5px),
+    linear-gradient(var(--ink), var(--ink)),
+    linear-gradient(var(--sv-bar), var(--sv-bar)),
+    linear-gradient(var(--sv-bar), var(--sv-bar));
+  background-position: 6px 6px, 19px 9px, 6px 22px, 6px 28px;
+  background-size: 9px 9px, 30px 3px, 70px 2.5px, 54px 2.5px;
+}
+
+.sv-f[data-f="reviews"] > i:nth-child(2) { left: 91.5px; }
+
+.sv-f[data-f="signup"] > i:nth-child(1) {
+  width: 176px;
+  background-image:
+    linear-gradient(var(--ink), var(--ink)),
+    linear-gradient(var(--sv-bar-soft), var(--sv-bar-soft)),
+    linear-gradient(var(--brown), var(--brown)),
+    linear-gradient(var(--sv-bar), var(--sv-bar));
+  background-position: 8px 6px, 8px 19px, 122px 19px, 8px 33px;
+  background-size: 56px 5px, 108px 10px, 46px 10px, 72px 2.5px;
+}
+
+.sv-f:is([data-f="reviews"], [data-f="signup"]) > i:nth-child(3),
+.sv-f[data-f="signup"] > i:nth-child(2) {
+  visibility: hidden;
+}
+
+.sv-h-page {
+  overflow: hidden;
+  inset: 12px 0 0;
+}
+
+.sv-m {
+  top: 0;
+  left: 0;
+  width: 196px;
+  height: 120px;
+}
+
+.sv-m-nav,
+.sv-m-hero,
+.sv-m-cards {
+  inset: 0;
+}
+
+.sv-m-nav {
+  bottom: auto;
+  height: 22px;
+}
+
+.sv-m-nav i {
+  top: 7px;
+  left: 10px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--brown);
+}
+
+.sv-m-nav span {
+  top: 9.5px;
+  width: 14px;
+  height: 2.5px;
+  border-radius: 2px;
+  background: var(--sv-bar);
+}
+
+.sv-m-nav span:nth-child(2) { left: 96px; }
+.sv-m-nav span:nth-child(3) { left: 116px; }
+.sv-m-nav span:nth-child(4) { left: 136px; }
+
+.sv-m-nav b {
+  top: 5px;
+  left: 160px;
+  width: 26px;
+  height: 11px;
+  border-radius: 999px;
+  background: var(--brown);
+}
+
+/* Centred on the media block beside it. */
+.sv-m-hero {
+  inset: 41px auto auto 10px;
+  width: 90px;
+  height: 44px;
+}
+
+.sv-m-hero i {
+  left: 0;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--ink);
+}
+
+.sv-m-hero i:nth-child(1) { top: 0; width: 84px; }
+.sv-m-hero i:nth-child(2) { top: 10px; width: 60px; }
+
+.sv-m-hero span {
+  top: 22px;
+  left: 0;
+  width: 70px;
+  height: 2.5px;
+  border-radius: 2px;
+  background: var(--sv-bar);
+}
+
+.sv-m-hero b {
+  top: 31px;
+  left: 0;
+  width: 38px;
+  height: 11px;
+  border-radius: 999px;
+  background: var(--brown);
+}
+
+.sv-m-img {
+  top: 30px;
+  left: 112px;
+  width: 74px;
+  height: 66px;
+  border-radius: 6px;
+  background: linear-gradient(140deg, #7a4a2e, #2b1a10);
+}
+
+.sv-m-cards {
+  inset: 104px 10px auto;
+  height: 12px;
+}
+
+.sv-m-cards span {
+  top: 0;
+  width: 54px;
+  height: 12px;
+  border: var(--sv-hair) solid var(--line);
+  border-radius: 3px;
+}
+
+.sv-m-cards span:nth-child(2) { left: 61px; }
+.sv-m-cards span:nth-child(3) { left: 122px; }
+
+.sv-h-css {
+  z-index: 3;
+  top: 15px;
+  left: 208px;
+  padding: 2px 4px;
+  border-radius: 3px;
+  background: var(--ink);
+  font: 500 4.6px/1 var(--sv-mono);
+  color: var(--paper);
+  white-space: nowrap;
+  opacity: 0;
+}
+
+.sv-h-pkg {
+  z-index: 3;
+  top: 59px;
+  left: 48px;
+  width: 40px;
+  height: 36px;
+  opacity: 0;
+}
+
+.sv-h-box {
+  inset: 0;
+}
+
+.sv-h-box > i {
+  inset: -5px 5px auto;
+  height: 12px;
+  border: var(--sv-hair) solid var(--brown);
+  border-radius: 5px 5px 0 0;
+  background: var(--sv-surface);
+  opacity: .55;
+}
+
+.sv-h-box > i:nth-child(2) {
+  inset: -2.5px 2.5px auto;
+  opacity: .8;
+}
+
+.sv-h-f1,
+.sv-h-f2 {
+  inset: 0;
+  border-radius: 7px;
+  box-shadow: 0 8px 18px rgba(42, 31, 24, .14);
+}
+
+.sv-h-f1 {
+  border: var(--sv-hair) solid var(--brown);
+  background: var(--sv-surface);
+}
+
+.sv-h-f1 i {
+  left: 8px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--brown);
+}
+
+.sv-h-f1 i:nth-child(1) { top: 17px; width: 22px; }
+.sv-h-f1 i:nth-child(2) { top: 23px; width: 15px; opacity: .55; }
+.sv-h-f1 i:nth-child(3) { top: 29px; width: 9px; opacity: .3; }
+
+.sv-h-f2 {
+  display: grid;
+  place-items: center;
+  padding-top: 9px;
+  background: var(--ink);
+  font: 600 8px/1 var(--sv-mono);
+  color: var(--paper);
+  opacity: 0;
+}
+
+.sv-h-box > s {
+  inset: 10px 0 auto;
+  height: var(--sv-hair);
+  background: var(--brown);
+  transform-origin: 0 50%;
+}
+
+.sv-h-lbl {
+  top: 101px;
+  left: 18px;
+  width: 100px;
+  height: 18px;
+  text-align: center;
+  opacity: 0;
+}
+
+.sv-h-lbl b {
+  inset: 0 0 auto;
+  font: 600 5.6px/1 var(--font-display);
+  letter-spacing: -.01em;
+}
+
+.sv-h-lbl span {
+  inset: 9px 0 auto;
+  font: 500 4.6px/1 var(--font-body);
+  color: var(--muted);
+}
+
+.sv-h-td {
+  z-index: 4;
+  top: 66px;
+  left: 249px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--brown);
+  opacity: 0;
+}
+
+.sv-h-td-2 { background: var(--sv-c2); }
+.sv-h-td-3 { background: var(--ink); }
+
+/* Labels, dots and connecting lines, centred under the scene; each line
+   sits 10px clear of the labels either side. */
+.sv-h-steps {
+  top: 176px;
+  left: 42px;
+  width: 237px;
+  height: 16px;
+  font: 600 4px/16px var(--font-display);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.sv-h-st {
+  top: 0;
+  height: 16px;
+  padding-left: 10px;
+  white-space: nowrap;
+}
+
+.sv-h-st > b {
+  position: static;
+}
+
+.sv-h-st > i,
+.sv-h-st > em {
+  top: 5px;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brown);
+}
+
+.sv-h-st > em {
+  top: 3.5px;
+  left: -1.5px;
+  width: 9px;
+  height: 9px;
+  display: grid;
+  place-items: center;
+  font: 700 5px/1 var(--font-body);
+  letter-spacing: 0;
+  color: #fff;
+}
+
+.sv-h-s1 { left: 0; }
+.sv-h-s2 { left: 92px; }
+.sv-h-s3 { left: 201px; }
+
+.sv-h-ln {
+  top: 7.5px;
+  width: 44px;
+  height: var(--sv-hair);
+  background: var(--sv-bar);
+}
+
+.sv-h-l1 { left: 38px; }
+.sv-h-l2 { left: 147px; }
+
+.sv-h-ln > s {
+  inset: 0;
+  background: var(--brown);
+  transform-origin: 0 50%;
+}

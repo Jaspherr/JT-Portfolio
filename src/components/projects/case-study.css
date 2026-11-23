@@ -1,6 +1,6 @@
 @media (prefers-reduced-motion: no-preference) {
   .case-study-nav-links a {
-    animation: case-study-nav-enter .38s cubic-bezier(.22, 1, .36, 1) both;
+    animation: case-study-nav-enter .38s var(--ease-ui) both;
   }
 
   .case-study-nav-links a:nth-child(1) {
@@ -16,35 +16,35 @@
   }
 
   .case-study-nav-current {
-    animation: case-study-nav-enter .4s cubic-bezier(.22, 1, .36, 1) .18s both;
+    animation: case-study-nav-enter .4s var(--ease-ui) .18s both;
   }
 
   .case-topbar {
     --case-enter-y: -10px;
-    animation: case-study-rise-enter .42s cubic-bezier(.22, 1, .36, 1) .08s both;
+    animation: case-study-rise-enter .42s var(--ease-ui) .08s both;
   }
 
   .case-heading h1 {
     --case-enter-y: 42px;
-    animation: case-study-rise-enter .72s cubic-bezier(.22, 1, .36, 1) .22s both;
+    animation: case-study-rise-enter .72s var(--ease-ui) .22s both;
   }
 
   .case-heading-bottom {
     --case-enter-y: 18px;
-    animation: case-study-rise-enter .48s cubic-bezier(.22, 1, .36, 1) .48s both;
+    animation: case-study-rise-enter .48s var(--ease-ui) .48s both;
   }
 
   .case-hero-showcase {
-    animation: case-study-showcase-enter .78s cubic-bezier(.22, 1, .36, 1) .52s both;
+    animation: case-study-showcase-enter .78s var(--ease-ui) .52s both;
   }
 
   .case-hero-media img {
-    animation: case-study-image-enter 1s cubic-bezier(.22, 1, .36, 1) .56s both;
+    animation: case-study-image-enter 1s var(--ease-ui) .56s both;
   }
 
   .case-meta>div {
     --case-enter-y: 16px;
-    animation: case-study-rise-enter .45s cubic-bezier(.22, 1, .36, 1) both;
+    animation: case-study-rise-enter .45s var(--ease-ui) both;
   }
 
   .case-meta>div:nth-child(1) {
@@ -73,7 +73,7 @@
 
   .case-actions {
     --case-enter-y: 12px;
-    animation: case-study-rise-enter .42s cubic-bezier(.22, 1, .36, 1) .94s both;
+    animation: case-study-rise-enter .42s var(--ease-ui) .94s both;
   }
 }
 

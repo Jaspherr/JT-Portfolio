@@ -87,7 +87,7 @@ html[data-theme="dark"] .theme-toggle-trigger {
   }
 
   .nav-intro.nav-ready .nav-actions .theme-toggle {
-    animation: theme-toggle-enter .42s cubic-bezier(.22, 1, .36, 1) .52s both;
+    animation: theme-toggle-enter .42s var(--ease-ui) .52s both;
   }
 }
 

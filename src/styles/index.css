@@ -9,7 +9,11 @@
 @import "./draft.css" layer(components);
 
 @import "../components/sections/services.css" layer(components);
-@import "../components/services/service-scenes.css" layer(components);
+@import "../components/services/service-stage.css" layer(components);
+@import "../components/services/design-scene.css" layer(components);
+@import "../components/services/code-scene.css" layer(components);
+@import "../components/services/ai-scene.css" layer(components);
+@import "../components/services/handoff-scene.css" layer(components);
 @import "../components/layout/scroll-progress.css" layer(components);
 @import "../components/layout/navbar.css" layer(components);
 @import "../components/sections/hero.css" layer(components);

@@ -481,15 +481,15 @@
   }
 
   .hero-intro.hero-ready .hero-bp-cap {
-    animation: hero-rule-draw .9s cubic-bezier(.65, 0, .35, 1) .05s both;
+    animation: hero-rule-draw .9s var(--ease-draw) .05s both;
   }
 
   .hero-intro.hero-ready .hero-bp-base {
-    animation: hero-rule-draw .9s cubic-bezier(.65, 0, .35, 1) .15s both;
+    animation: hero-rule-draw .9s var(--ease-draw) .15s both;
   }
 
   .hero-intro.hero-ready .hero-bp-letter {
-    animation: hero-letter-draw .8s cubic-bezier(.19, 1, .22, 1) both;
+    animation: hero-letter-draw .8s var(--ease-set) both;
   }
 
   .hero-intro.hero-ready .hero-bp-letter:nth-child(1) { animation-delay: .2s; }
@@ -501,7 +501,7 @@
   .hero-intro.hero-ready .hero-bp-letter:nth-child(7) { animation-delay: .5s; }
 
   .hero-intro.hero-ready .hero-name-letter {
-    animation: hero-ink .6s cubic-bezier(.65, 0, .35, 1) both;
+    animation: hero-ink .6s var(--ease-draw) both;
   }
 
   .hero-intro.hero-ready .hero-name-letter:nth-child(1) { animation-delay: .8s; }

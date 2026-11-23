@@ -1,12 +1,11 @@
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo } from "react";
 import { Link } from "react-router";
 
 import Image from "@/components/ui/Image";
+import { useDragCarousel } from "@/hooks/useDragCarousel";
 import { cn, padIndex } from "@/lib/utils";
 import type { Project } from "@/types";
-
-const DRAG_THRESHOLD = 55;
 
 type ProjectCardProps = Project & {
   index: string;
@@ -28,15 +27,6 @@ export default function ProjectCard({
   index,
   position,
 }: ProjectCardProps) {
-  const [activeImage, setActiveImage] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-
-  const visualFrameRef = useRef<HTMLDivElement>(null);
-  const dragStartX = useRef(0);
-  const pointerId = useRef<number | null>(null);
-  const dragFrame = useRef(0);
-  const pendingDragX = useRef(0);
-
   const mobileImages = useMemo(
     () => images.filter((image) => image.type === "mobile"),
     [images],
@@ -54,6 +44,15 @@ export default function ProjectCard({
     [images, isSakay, mobileImages, webImages],
   );
 
+  const {
+    active: activeImage,
+    isDragging,
+    frameRef,
+    previous: previousImage,
+    next: nextImage,
+    handlers,
+  } = useDragCarousel(projectImages.length, ".project-sakay-slide");
+
   const activeProjectImage = projectImages[activeImage];
 
   const isMobileImage = activeProjectImage?.type === "mobile";
@@ -66,141 +65,6 @@ export default function ProjectCard({
     activeProjectImage?.type === "web"
       ? webImages.findIndex((image) => image.src === activeProjectImage?.src)
       : -1;
-
-  const previousImage = () => {
-    setActiveImage((current) => Math.max(current - 1, 0));
-  };
-
-  const nextImage = () => {
-    setActiveImage((current) =>
-      Math.min(current + 1, projectImages.length - 1),
-    );
-  };
-
-  const getDragDistance = (clientX: number) => {
-    let distance = clientX - dragStartX.current;
-
-    if (
-      (activeImage === 0 && distance > 0) ||
-      (activeImage === projectImages.length - 1 && distance < 0)
-    ) {
-      distance *= 0.25;
-    }
-
-    return distance;
-  };
-
-  const applyDragDistance = (distance: number) => {
-    const frame = visualFrameRef.current;
-
-    if (!frame) return;
-
-    const value = `${distance}px`;
-
-    frame.style.setProperty("--drag-x", value);
-    frame
-      .querySelectorAll<HTMLElement>(".project-sakay-slide")
-      .forEach((slide) => {
-        slide.style.setProperty("--drag-x", value);
-      });
-  };
-
-  const scheduleDragPaint = (distance: number) => {
-    pendingDragX.current = distance;
-
-    window.cancelAnimationFrame(dragFrame.current);
-
-    dragFrame.current = window.requestAnimationFrame(() => {
-      applyDragDistance(pendingDragX.current);
-    });
-  };
-
-  const resetPointerState = () => {
-    window.cancelAnimationFrame(dragFrame.current);
-    pendingDragX.current = 0;
-    applyDragDistance(0);
-
-    setIsDragging(false);
-    pointerId.current = null;
-  };
-
-  useEffect(() => {
-    return () => {
-      window.cancelAnimationFrame(dragFrame.current);
-    };
-  }, []);
-
-  const releasePointer = (
-    element: HTMLDivElement,
-    id: number,
-  ) => {
-    if (element.hasPointerCapture(id)) {
-      element.releasePointerCapture(id);
-    }
-  };
-
-  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (projectImages.length <= 1) return;
-
-    pointerId.current = e.pointerId;
-    dragStartX.current = e.clientX;
-
-    setIsDragging(true);
-
-    window.cancelAnimationFrame(dragFrame.current);
-    pendingDragX.current = 0;
-    applyDragDistance(0);
-
-    e.currentTarget.setPointerCapture(e.pointerId);
-  };
-
-  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (pointerId.current !== e.pointerId) {
-      return;
-    }
-
-    scheduleDragPaint(getDragDistance(e.clientX));
-  };
-
-  const handlePointerEnd = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (pointerId.current !== e.pointerId) {
-      return;
-    }
-    const finalDistance = getDragDistance(e.clientX);
-
-    if (
-      finalDistance <= -DRAG_THRESHOLD &&
-      activeImage < projectImages.length - 1
-    ) {
-      setActiveImage((current) => current + 1);
-    } else if (
-      finalDistance >= DRAG_THRESHOLD &&
-      activeImage > 0
-    ) {
-      setActiveImage((current) => current - 1);
-    }
-
-    releasePointer(e.currentTarget, e.pointerId);
-    resetPointerState();
-  };
-
-  const handlePointerCancel = (
-    e: React.PointerEvent<HTMLDivElement>,
-  ) => {
-    if (pointerId.current !== e.pointerId) {
-      return;
-    }
-    releasePointer(e.currentTarget, e.pointerId);
-    resetPointerState();
-  };
-
-  const handleLostPointerCapture = (
-    e: React.PointerEvent<HTMLDivElement>,
-  ) => {
-    if (pointerId.current === e.pointerId) {
-      resetPointerState();
-    }
-  };
 
   const reverse = position % 2 !== 0;
 
@@ -237,7 +101,7 @@ export default function ProjectCard({
           </div>
 
           <div
-            ref={visualFrameRef}
+            ref={frameRef}
             className={cn(
               "project-visual-frame",
               isMobileImage && "is-mobile-carousel",
@@ -245,11 +109,7 @@ export default function ProjectCard({
               projectImages.length > 1 && "is-draggable",
               isDragging && "is-dragging",
             )}
-            onPointerDown={handlePointerDown}
-            onPointerMove={handlePointerMove}
-            onPointerUp={handlePointerEnd}
-            onPointerCancel={handlePointerCancel}
-            onLostPointerCapture={handleLostPointerCapture}
+            {...handlers}
             data-draft="frame"
           >
             <span className="draft-spec" aria-hidden="true">
