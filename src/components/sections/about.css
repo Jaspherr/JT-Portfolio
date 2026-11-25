@@ -29,15 +29,6 @@
   padding-top: 9px;
 }
 
-.about-story::before {
-  content: "";
-  display: block;
-  width: 34px;
-  height: 2px;
-  margin-bottom: 24px;
-  background: var(--brown);
-}
-
 .about-story h2 {
   max-width: 580px;
   margin: 0;

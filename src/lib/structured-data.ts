@@ -36,7 +36,7 @@ export const profileJsonLd = [
       name: "Jaspher Tania",
       url: SITE_URL,
       image: absoluteUrl("/extendedavatar.png"),
-      jobTitle: "UI/UX Designer & Front-End Developer",
+      jobTitle: "AI Design Engineer",
       sameAs: [SOCIAL_LINKS.linkedin, SOCIAL_LINKS.github],
       knowsAbout: [
         "UI/UX Design",

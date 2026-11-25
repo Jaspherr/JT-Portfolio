@@ -21,6 +21,7 @@ const SITE_KEYWORDS = [
   "UI UX Designer",
   "UI Designer",
   "UX Designer",
+  "AI Design Engineer",
   "Front-End Developer",
   "Web Designer",
   "Product Designer",

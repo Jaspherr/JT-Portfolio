@@ -13,7 +13,7 @@ export default function About() {
             A bit about the <em>person behind it.</em>
           </h2>
           <p className="about-lead">
-            I&apos;m Jaspher, a UI/UX designer who enjoys figuring things out,
+            I&apos;m Jaspher, an AI Design Engineer who enjoys figuring things out,
             trying different approaches, and seeing where an idea can go.
             I&apos;m currently exploring how design, code, and prompt
             engineering fit together.

@@ -16,11 +16,10 @@ export const SITE_URL = normalizeSiteUrl(
 
 export const SITE_NAME = "Jaspher Tania Portfolio";
 
-export const SITE_TITLE =
-  "Jaspher Tania — UI/UX Designer & Front-End Developer";
+export const SITE_TITLE = "Jaspher Tania — AI Design Engineer";
 
 export const SITE_DESCRIPTION =
-  "Jaspher Tania designs interfaces and then builds them. Projects, animated experiments and notes from a UI/UX designer who also builds the front-end.";
+  "Jaspher Tania is an AI Design Engineer who designs interfaces and then builds them. Projects, animated experiments and notes along the way.";
 
 export const SOCIAL_LINKS = {
   github: "https://github.com/jaspherr",

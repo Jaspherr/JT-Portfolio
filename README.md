@@ -4,13 +4,13 @@ A personal space for design, front-end work and the experiments in between.
 
 **Live site:** [jt-portfolio-rho.vercel.app](https://jt-portfolio-rho.vercel.app)
 
-![The portfolio's hero: the name "JASPHER" set large across the screen, with "a designer who enjoys figuring things out" beneath it and a short introduction on the right.](.github/assets/portfolio-preview.webp)
+![The portfolio's hero: the name "JASPHER" set large across the screen, with "an AI Design Engineer who enjoys figuring things out" beneath it and a short introduction on the right.](.github/assets/portfolio-preview.webp)
 
 ## About
 
-I'm a UI/UX designer who also builds what I design. This site is where I share
-the projects I've worked on, how I approach design and code, and a few things I
-tried along the way.
+I'm an AI Design Engineer: I design interfaces and build them with the help of
+AI. This site is where I share the projects I've worked on, how I approach
+design and code, and a few things I tried along the way.
 
 The site is built the way it describes my process: I start with an idea, work
 through the details with ChatGPT, build it with Claude Code, then review and

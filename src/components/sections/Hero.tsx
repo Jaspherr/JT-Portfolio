@@ -69,7 +69,7 @@ export default function Hero() {
 
       <div className="hero-intro-row">
         <p className="hero-designer">
-          , a designer who enjoys figuring things out.
+          , an AI Design Engineer who enjoys figuring things out.
         </p>
 
         <p className="hero-lede">
