@@ -21,6 +21,18 @@ export type Project = {
   tags: string[];
 };
 
+export type ExploredProject = {
+  name: string;
+  category: string;
+  description: string;
+  stack: string[];
+  preview: string;
+  previewAlt: string;
+  url: string;
+  // The project's own colour, behind its preview.
+  tone: string;
+};
+
 export type Service = {
   n: string;
   icon: "design" | "code" | "ai" | "boxes";

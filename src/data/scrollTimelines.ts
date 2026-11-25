@@ -43,6 +43,22 @@ const projectCase: TimelineSpec = {
   ],
 };
 
+const explored: TimelineSpec = {
+  scope: ".explored-heading",
+  start: 0.9,
+  tweens: [
+    { targets: "p", from: { autoAlpha: 0, y: 18 }, duration: 0.8, ease: "power4.out", at: 0.35 },
+  ],
+};
+
+const exploredItem: TimelineSpec = {
+  scope: ".explored-copy",
+  start: 0.94,
+  tweens: [
+    { targets: ".explored-title, .explored-copy > p, .explored-foot", from: { opacity: 0, y: 18 }, duration: 0.7, stagger: 0.07, ease: "power4.out", flat: true, at: 0, clearTransform: true },
+  ],
+};
+
 const about: TimelineSpec = {
   scope: ".about",
   start: 0.85,
@@ -77,6 +93,8 @@ export const homeTimelines: TimelineSpec[] = [
   services,
   serviceRow,
   projectCase,
+  explored,
+  exploredItem,
   about,
   contact,
   contactElsewhere,
