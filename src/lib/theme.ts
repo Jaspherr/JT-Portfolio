@@ -5,7 +5,7 @@ const THEME_EVENT = "jaspher-theme-change";
 
 const THEME_COLORS: Record<Theme, string> = {
   light: "#fdfdfb",
-  dark: "#11100e",
+  dark: "#000000",
 };
 
 function isTheme(value: string | null | undefined): value is Theme {

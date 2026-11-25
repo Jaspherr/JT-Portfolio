@@ -86,7 +86,7 @@ h3 {
   overflow-wrap: break-word;
 }
 
+/* The grain would lift and tint true black. */
 :root[data-theme="dark"] body::before {
-  opacity: .08;
-  filter: invert(1);
+  display: none;
 }

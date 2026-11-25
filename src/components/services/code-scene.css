@@ -261,9 +261,9 @@
 
 :root[data-theme="dark"] .sv-c-editor {
   border-color: var(--line);
-  background: #0c0b0a;
+  background: #0a0a0a;
 }
 
 :root[data-theme="dark"] .sv-c-thumb {
-  background: linear-gradient(120deg, #2e2620, #3d3027);
+  background: linear-gradient(120deg, #222, #303030);
 }

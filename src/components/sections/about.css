@@ -43,7 +43,7 @@
   font-weight: 400;
   font-style: italic;
   letter-spacing: -.055em;
-  color: var(--brown);
+  color: var(--brown-heading);
 }
 
 .about-story>p {

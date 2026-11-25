@@ -212,11 +212,11 @@
 }
 
 :root[data-theme="dark"] .sv-stage {
-  --sv-chrome: #1a191d;
+  --sv-chrome: #1a1a1a;
   background: rgb(255 255 255 / .03);
-  --sv-surface: #1c1916;
-  --sv-bar: #3a342f;
-  --sv-bar-soft: #25211d;
+  --sv-surface: #141414;
+  --sv-bar: #363636;
+  --sv-bar-soft: #222;
   --sv-guide: #e8704c;
   --sv-c2: #d17a52;
   --sv-c3: #7fa386;
