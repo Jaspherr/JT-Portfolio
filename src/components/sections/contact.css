@@ -80,7 +80,7 @@
   font-family: Georgia, serif;
   font-weight: 400;
   font-style: italic;
-  color: var(--brown);
+  color: var(--brown-heading);
 }
 
 .contact-description {
@@ -583,7 +583,7 @@
 
 :root[data-theme="dark"] .contact-email-arrow,
 :root[data-theme="dark"] .contact-link-arrow {
-  border-color: #3a342f;
+  border-color: #333;
 }
 
 :root[data-theme="dark"] .contact-link::before {

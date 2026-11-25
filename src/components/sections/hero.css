@@ -72,7 +72,7 @@
 }
 
 .hero-name-letter-line {
-  color: var(--brown);
+  color: var(--brown-name);
 }
 
 /* Blueprint: the same letters, outlined, on cap-height and baseline guides
@@ -667,7 +667,7 @@
 }
 
 :root[data-theme="dark"] .collab-arrow {
-  border-color: #3a342f;
+  border-color: #333;
 }
 
 :root[data-theme="dark"] .socials {

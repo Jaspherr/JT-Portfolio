@@ -73,8 +73,8 @@ html[data-theme="dark"] .theme-toggle-trigger {
 @media (hover: hover) {
   html[data-theme="dark"] .theme-toggle-trigger:hover {
     color: var(--brown);
-    border-color: rgba(164, 118, 94, .38);
-    background: rgba(164, 118, 94, .08);
+    border-color: rgba(161, 103, 65, .38);
+    background: rgba(161, 103, 65, .08);
     box-shadow: 0 6px 20px rgba(0, 0, 0, .18);
   }
 }

@@ -534,7 +534,7 @@
   font-family: Georgia, serif;
   font-weight: 400;
   font-style: italic;
-  color: var(--brown);
+  color: var(--brown-heading);
 }
 
 .case-features-header>p {
@@ -1212,7 +1212,7 @@
 }
 
 :root[data-theme="dark"] .case-study-nav {
-  background: rgba(17, 16, 18, .88);
+  background: rgba(0, 0, 0, .88);
 }
 
 :root[data-theme="dark"] .case-hero-showcase {
@@ -1244,7 +1244,7 @@
 :root[data-theme="dark"] .case-feature-image,
 :root[data-theme="dark"] .case-feature-image--mobile {
   border-color: var(--line);
-  background: #19181c;
+  background: #121212;
 }
 
 @keyframes case-study-nav-enter {

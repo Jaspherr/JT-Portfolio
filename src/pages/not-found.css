@@ -52,7 +52,7 @@
 .not-found-content h1 em {
   font-family: Georgia, serif;
   font-weight: 400;
-  color: var(--brown);
+  color: var(--brown-heading);
 }
 
 .not-found-description {

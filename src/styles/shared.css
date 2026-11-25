@@ -19,6 +19,10 @@
   color: var(--brown);
 }
 
+.contact h2 em {
+  color: var(--brown-heading);
+}
+
 .nav a:focus-visible,
 .collab:focus-visible,
 .project-media-controls button:focus-visible,

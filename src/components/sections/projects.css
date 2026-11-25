@@ -48,7 +48,7 @@
   font-family: Georgia, serif;
   font-weight: 400;
   font-style: italic;
-  color: var(--brown);
+  color: var(--brown-heading);
 }
 
 .projects-heading-description {
@@ -996,7 +996,7 @@
 }
 
 :root[data-theme="dark"] .project-visual-frame {
-  background: radial-gradient(circle at 50% 38%, rgba(255, 255, 255, .055), rgba(25, 24, 28, .94) 64%, #151418);
+  background: radial-gradient(circle at 50% 38%, rgba(255, 255, 255, .055), rgba(16, 16, 16, .94) 64%, #0c0c0c);
 }
 
 @media (hover: hover) {

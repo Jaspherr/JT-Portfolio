@@ -36,7 +36,7 @@
   font-family: Georgia, serif;
   font-weight: 400;
   font-style: italic;
-  color: var(--brown);
+  color: var(--brown-heading);
 }
 
 .services-heading>p {
@@ -331,7 +331,7 @@
 
 :root[data-theme="dark"] .service-icon,
 :root[data-theme="dark"] .chip {
-  border-color: #3a342f;
+  border-color: #333;
   background: rgba(255, 255, 255, .04);
 }
 
@@ -345,7 +345,7 @@
 
 @media (hover: hover) {
   :root[data-theme="dark"] .service-card:hover .sv-stage {
-    border-color: rgba(164, 118, 94, .38);
+    border-color: rgba(161, 103, 65, .38);
     box-shadow: 0 30px 70px rgba(0, 0, 0, .22), 0 5px 16px rgba(0, 0, 0, .14);
   }
 }
