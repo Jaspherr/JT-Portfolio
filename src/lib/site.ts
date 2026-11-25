@@ -1,4 +1,4 @@
-export const FALLBACK_SITE_URL = "https://jt-portfolio-rho.vercel.app";
+export const FALLBACK_SITE_URL = "https://jtfolio.vercel.app";
 
 function normalizeSiteUrl(value?: string) {
   const raw = value?.trim() || FALLBACK_SITE_URL;

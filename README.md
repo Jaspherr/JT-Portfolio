@@ -2,7 +2,7 @@
 
 A personal space for design, front-end work and the experiments in between.
 
-**Live site:** [jt-portfolio-rho.vercel.app](https://jt-portfolio-rho.vercel.app)
+**Live site:** [jtfolio.vercel.app](https://jtfolio.vercel.app)
 
 ![The portfolio's hero: the name "JASPHER" set large across the screen, with "an AI Design Engineer who enjoys figuring things out" beneath it and a short introduction on the right.](.github/assets/portfolio-preview.webp)
 
