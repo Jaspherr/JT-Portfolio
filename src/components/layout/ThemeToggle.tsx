@@ -3,10 +3,10 @@ import { useSyncExternalStore } from "react";
 
 import {
   getTheme,
-  setTheme,
   subscribeToTheme,
   type Theme,
 } from "@/lib/theme";
+import { toggleTheme } from "@/lib/theme-reveal";
 
 const getServerTheme = (): Theme => "light";
 
@@ -20,7 +20,7 @@ export default function ThemeToggle() {
       <button
         type="button"
         className="theme-toggle-trigger"
-        onClick={() => setTheme(isDark ? "light" : "dark")}
+        onClick={(event) => toggleTheme(event.currentTarget)}
         aria-label={label}
         title={label}
       >
