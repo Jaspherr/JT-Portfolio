@@ -32,6 +32,10 @@
   --ease-set: cubic-bezier(.19, 1, .22, 1);
   --t-set: 1s;
   --t-ink: .9s;
+  /* Theme reveal: gentle at its fastest. Across a whole screen, a steeper curve
+     moves the edge so far per frame that it looks like dropped frames. */
+  --ease-reveal: cubic-bezier(.37, 0, .63, 1);
+  --t-reveal: .75s;
 
   /* Chapter headings (Work, About) share one scale per breakpoint. */
   --section-title: clamp(40px, 3.6vw, 56px);

@@ -141,6 +141,29 @@ html[data-theme="dark"] .theme-toggle-trigger {
   }
 }
 
+/* Theme reveal: the new theme opens in a circle from the toggle, over a still
+   of the old one. lib/theme-reveal.ts sets the variables. */
+:root[data-theme-reveal]::view-transition-old(root),
+:root[data-theme-reveal]::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+:root[data-theme-reveal]::view-transition-new(root) {
+  z-index: 1;
+  animation: theme-reveal var(--t-reveal) var(--ease-reveal) both;
+}
+
+@keyframes theme-reveal {
+  from {
+    clip-path: circle(0 at var(--reveal-x) var(--reveal-y));
+  }
+
+  to {
+    clip-path: circle(var(--reveal-radius) at var(--reveal-x) var(--reveal-y));
+  }
+}
+
 @keyframes theme-toggle-enter {
   from {
     opacity: 0;
