@@ -12,14 +12,9 @@ export default function ExploredProjects() {
       aria-labelledby="explored-title"
     >
       <div className="explored-heading">
-        <div className="explored-heading-main">
-          <span className="explored-eyebrow" aria-hidden="true">
-            <span className="explored-eyebrow-mark" /> Independent work
-          </span>
-          <h2 id="explored-title" data-draft="set">
-            Explored <em>Projects</em>
-          </h2>
-        </div>
+        <h2 id="explored-title" data-draft="set">
+          Explored <em>Projects</em>
+        </h2>
 
         <div className="explored-heading-aside">
           <span className="explored-count" aria-hidden="true">

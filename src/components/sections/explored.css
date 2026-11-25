@@ -12,28 +12,6 @@
   margin-bottom: clamp(32px, 5vw, 62px);
 }
 
-.explored-heading-main,
-.explored-heading-aside {
-  min-width: 0;
-}
-
-.explored-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: clamp(14px, 2vw, 22px);
-  font: 600 11px/1.2 var(--font-body);
-  letter-spacing: .17em;
-  text-transform: uppercase;
-  color: var(--brown);
-}
-
-.explored-eyebrow-mark {
-  width: 23px;
-  height: 1px;
-  background: currentColor;
-}
-
 .explored-heading h2 {
   max-width: 800px;
   margin: 0;
@@ -52,6 +30,7 @@
 }
 
 .explored-heading-aside {
+  min-width: 0;
   padding-bottom: 6px;
 }
 
