@@ -3,6 +3,7 @@ import Navbar from "@/components/layout/Navbar";
 import ScrollProgress from "@/components/layout/ScrollProgress";
 import About from "@/components/sections/About";
 import Contact from "@/components/sections/Contact";
+import ExploredProjects from "@/components/sections/ExploredProjects";
 import Hero from "@/components/sections/Hero";
 import Projects from "@/components/sections/Projects";
 import Services from "@/components/sections/Services";
@@ -33,6 +34,7 @@ export default function HomePage() {
       <main id="main-content" tabIndex={-1}>
         <Hero />
         <Projects />
+        <ExploredProjects />
         <Services />
         <About />
         <Contact />

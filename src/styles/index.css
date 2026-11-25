@@ -18,6 +18,7 @@
 @import "../components/layout/navbar.css" layer(components);
 @import "../components/sections/hero.css" layer(components);
 @import "../components/sections/projects.css" layer(components);
+@import "../components/sections/explored.css" layer(components);
 @import "../components/sections/about.css" layer(components);
 @import "../components/sections/contact.css" layer(components);
 @import "../components/layout/footer.css" layer(components);
