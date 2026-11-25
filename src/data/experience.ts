@@ -4,7 +4,7 @@ export const experience: Experience[] = [
   {
     index: "01",
     company: "Boom Technologies Inc.",
-    role: "Web Developer & UI Designer Intern",
+    role: "Web Developer & UI/UX Designer Intern",
     date: "Dec 2025 – Mar 2026",
     text: "Designed and helped build Clarify, a multi-page admin platform — where I learned how much a design changes once real development constraints show up.",
   },
