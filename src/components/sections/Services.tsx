@@ -31,9 +31,9 @@ export default function Services() {
         </h2>
 
         <p>
-          The four things I keep coming back to. Each has a small animated
-          sketch I built for this page — they keep working on their own, so
-          pause them whenever you like.
+          The four things I keep coming back to. Each one has a small animated
+          sketch I explored and made with AI for this page. They run on their
+          own, so pause them whenever you like.
         </p>
 
         <div className="services-accent" aria-hidden="true">

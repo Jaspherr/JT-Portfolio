@@ -669,7 +669,7 @@ export default function AiScene({ title }: { title: string }) {
       n="03"
       title={title}
       direct={direct}
-      summary="Illustration: a person keeps iterating on a dashboard prototype — writing follow-up briefs, comparing generated alternatives against the current design, choosing one, having an AI agent code a feature, reviewing and accepting its diff, and testing the result."
+      summary="Illustration: a person keeps iterating on a dashboard prototype. They write follow-up briefs, compare generated alternatives against the current design, choose one, have an AI agent code a feature, review and accept its diff, and test the result."
     >
       <div className="sv-a-prompt">
         <i>✦</i>

@@ -77,10 +77,10 @@ export default function Hero() {
             I like making things look good,{" "}
             <em>but I also want them to work well.</em>
           </strong>{" "}
-          I like experimenting, exploring different approaches, and seeing what
-          I can create with design and code, with a little help from AI. This
-          little corner of the internet is where I share the projects,
-          experiments, and things I've learned along the way.
+          I like experimenting, trying different approaches, and seeing what I
+          can make with design and code, with some help from AI. This is where
+          I share my projects, experiments, and what I&apos;ve learned along
+          the way.
         </p>
       </div>
 

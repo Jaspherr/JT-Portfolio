@@ -699,7 +699,7 @@ export default function DesignScene({ title }: { title: string }) {
       n="01"
       title={title}
       direct={direct}
-      summary="Illustration: a design team keeps building and refining a landing page hero on a shared canvas — retyping the heading, restyling the button, swapping media and trying layouts."
+      summary="Illustration: a design team keeps building and refining a landing page hero on a shared canvas, retyping the heading, restyling the button, swapping media and trying layouts."
     >
       <div className="sv-d-grid" />
 

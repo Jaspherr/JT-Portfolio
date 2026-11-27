@@ -415,7 +415,7 @@ export default function HandoffScene({ title }: { title: string }) {
       n="04"
       title={title}
       direct={direct}
-      summary="Illustration: a continuous delivery pipeline — each new feature is designed, packaged as a design system, handed to development, assembled into the live site, validated and shipped as the next version."
+      summary="Illustration: a continuous delivery pipeline. Each new feature is designed, packaged as a design system, handed to development, assembled into the live site, validated and shipped as the next version."
     >
       <span className="sv-h-artname">Landing — final</span>
 

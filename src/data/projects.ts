@@ -28,7 +28,7 @@ export const projects: Project[] = [
     description:
       "A risk-analysis admin platform designed to make document analysis, information review, and risk assessment easier to navigate.",
 
-    role: "UI / UX Designer · Front-End Developer",
+    role: "UI/UX Designer · Front-End Developer",
 
     contributions: [
       "Admin Interface Design",
@@ -38,7 +38,7 @@ export const projects: Project[] = [
     ],
 
     outcome:
-      "Completed as part of the Boom Technologies internship, with the finished project retained by the mentor and QA tester.",
+      "Built during my internship at Boom Technologies. Our mentor and QA tester kept the finished project.",
 
     tags: ["Figma", "UI/UX", "Admin Platform"],
   },
@@ -108,7 +108,7 @@ export const projects: Project[] = [
     ],
 
     outcome:
-      "Designed both the web and mobile experiences in Figma and handled front-end implementation. The project received Best System Development, and my UI/UX contribution was recognized with Most Outstanding UI/UX Designer.",
+      "Designed the web and mobile experiences in Figma and handled the front-end. The project received Best System Development, and my UI/UX work was recognized as Most Outstanding UI/UX Designer.",
 
     tags: ["Figma", "UI/UX", "Front-End"],
   },
@@ -142,7 +142,7 @@ export const projects: Project[] = [
     ],
 
     description:
-      "A mobile application centered on identifying herbal plants and presenting useful plant information through a clear mobile interface.",
+      "A mobile app for identifying herbal plants and showing useful information about them.",
 
     role: "UI/UX Designer · Front-End Developer",
 
@@ -154,7 +154,7 @@ export const projects: Project[] = [
     ],
 
     outcome:
-      "Redesigned and improved the team's existing interface, refined the front-end implementation, and delivered the updated work back to the team for integration.",
+      "Redesigned the team's existing interface, refined the front-end, and handed the updated work back to the team to integrate.",
 
     tags: ["Mobile", "UI/UX", "Front-End"],
   },
@@ -184,7 +184,7 @@ export const projects: Project[] = [
     ],
 
     description:
-      "A mobile application designed to give UPang students convenient access to essential school information and everyday student features.",
+      "A mobile app that puts school information and everyday student features in one place for UPang students.",
 
     role: "Front-End Developer",
 
@@ -196,7 +196,7 @@ export const projects: Project[] = [
     ],
 
     outcome:
-      "Contributed to and helped coordinate the application's front-end development, supporting a consistent mobile experience across the team's core student-facing screens.",
+      "Contributed to the app's front-end and helped coordinate it, so the team's core student screens stayed consistent.",
 
     tags: ["Mobile", "Front-End", "Team Project"],
   },

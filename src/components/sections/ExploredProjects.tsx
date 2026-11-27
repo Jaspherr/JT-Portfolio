@@ -18,7 +18,7 @@ export default function ExploredProjects() {
 
         <div className="explored-heading-aside">
           <span className="explored-count" aria-hidden="true">
-            {String(exploredProjects.length).padStart(2, "0")} / Selected projects
+            {String(exploredProjects.length).padStart(2, "0")} / Live projects
           </span>
           <p>
             Independent experiments and software ideas I worked through in design
