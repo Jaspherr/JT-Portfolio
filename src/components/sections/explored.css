@@ -51,281 +51,353 @@
   color: var(--muted);
 }
 
-/* A quiet asymmetric rhythm, not a masonry script or dramatic stagger. */
-.explored-grid {
+/* Editorial rows: a large preview and a narrow column of copy, swapping
+   sides from one project to the next. */
+.explored-list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: var(--explored-gap);
-  row-gap: clamp(44px, 5vw, 74px);
-  align-items: start;
+  row-gap: clamp(76px, 8.5vw, 132px);
 }
 
 .explored-item {
-  min-width: 0;
+  --explored-row-gap: clamp(32px, 5.2vw, 88px);
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  align-items: center;
+  column-gap: var(--explored-row-gap);
 }
 
-@media (min-width: 901px) {
-  .explored-item:nth-child(even) {
-    margin-top: clamp(36px, 4.3vw, 64px);
-  }
+.explored-item:nth-child(even) {
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
 }
 
-/* A single semantic link makes the whole project card clickable. */
-.explored-card-link {
-  display: block;
-  min-width: 0;
-  border-radius: 18px;
-  color: inherit;
-  text-decoration: none;
-  -webkit-tap-highlight-color: transparent;
+.explored-item:nth-child(even) .explored-media {
+  order: 2;
 }
 
-.explored-card-link:focus-visible {
-  outline: 2px solid var(--brown);
-  outline-offset: 8px;
-}
-
-.explored-frame {
+/* The preview: one tinted panel in the project's colour, with the real
+   screenshot set into it and bleeding off the right edge. */
+.explored-media {
   position: relative;
   isolation: isolate;
-  padding: clamp(12px, 1.3vw, 19px);
+  aspect-ratio: 16 / 11;
   overflow: hidden;
-  border: 1px solid color-mix(in srgb, var(--tone) 20%, var(--line));
+  border: 1px solid color-mix(in srgb, var(--tone) 18%, var(--line));
   border-radius: clamp(15px, 1.7vw, 24px);
-  background: color-mix(in srgb, var(--tone) 12%, var(--backdrop, var(--paper)));
-  transition: background-color .42s var(--ease), border-color .42s var(--ease);
+  background: color-mix(in srgb, var(--tone) 13%, var(--backdrop, var(--paper)));
+  transition: background-color .45s var(--ease), border-color .45s var(--ease);
 }
 
-.explored-frame-meta {
+.explored-shot,
+.explored-blueprint {
+  position: absolute;
+  top: 10%;
+  left: 8%;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+}
+
+.explored-shot {
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 10px 0 0;
+  background: var(--paper);
+  box-shadow: 0 24px 54px rgba(25, 18, 13, .16),
+              0 2px 8px rgba(25, 18, 13, .07);
+  transition: transform .7s var(--ease);
+}
+
+.explored-shot img {
+  object-fit: cover;
+  object-position: left top;
+  transition: transform .8s var(--ease);
+}
+
+/* Blueprint: the screenshot's main blocks as drafting lines. It sits under
+   the screenshot, so it only shows while the preview is being drafted. */
+.explored-blueprint {
+  z-index: 0;
+  pointer-events: none;
+  border: 1px dashed color-mix(in srgb, var(--tone) 60%, var(--ink));
+  border-radius: 10px 0 0;
+}
+
+.explored-blueprint i {
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  width: var(--w);
+  height: var(--h);
+  border: 1px solid color-mix(in srgb, var(--tone) 72%, var(--ink));
+  border-radius: 3px;
+}
+
+.explored-blueprint i[data-rule="row"] {
+  border-width: 1px 0 0;
+  border-radius: 0;
+}
+
+.explored-blueprint i[data-rule="column"] {
+  border-width: 0 0 0 1px;
+  border-radius: 0;
+}
+
+/* Copy column. */
+.explored-copy {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin: 0 2px clamp(12px, 1.4vw, 18px);
-  font: 500 11px/1.1 var(--font-number);
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--ink);
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
 }
 
-.explored-frame-symbol {
-  font: 400 20px/1 var(--font-body);
+/* The number is outlined, like a mark on a drawing, and fills with the
+   project's colour on hover. */
+.explored-index {
+  margin-bottom: clamp(14px, 1.6vw, 22px);
+  font: 700 clamp(54px, 5.6vw, 92px)/.86 var(--font-display);
+  letter-spacing: -.06em;
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--tone) 60%, var(--ink));
+  transition: color .45s var(--ease);
+}
+
+.explored-kind {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font: 500 11px/1.4 var(--font-number);
+  letter-spacing: .07em;
+  text-transform: uppercase;
   color: var(--brown);
 }
 
-.explored-mat {
-  position: relative;
-  padding: clamp(10px, 1.4vw, 20px);
-  border-radius: clamp(9px, 1vw, 14px);
-  background: color-mix(in srgb, var(--tone) 13%, var(--paper));
+.explored-kind::before {
+  content: "";
+  width: 18px;
+  height: 0;
+  border-top: 1px solid var(--tone);
 }
 
-.explored-browser {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
-  border-radius: 10px;
-  background: var(--paper);
-  box-shadow: 0 18px 40px rgba(25, 18, 13, .13),
-              0 2px 7px rgba(25, 18, 13, .06);
-  transition: transform .65s var(--ease), box-shadow .65s var(--ease);
+.explored-kind[data-kind="demo"]::before {
+  border-top-style: dashed;
 }
 
-.explored-browser-bar {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 10px;
-  height: 32px;
-  padding-inline: 12px;
-  border-bottom: 1px solid color-mix(in srgb, var(--ink) 9%, transparent);
-  background: color-mix(in srgb, var(--paper) 92%, white);
-  color: var(--muted);
-}
-
-.explored-browser-label {
-  grid-column: 2;
-  font: 500 9px/1 var(--font-number);
-  letter-spacing: .055em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.explored-browser-suffix {
-  grid-column: 3;
-  justify-self: end;
-  font-size: 13px;
-  line-height: 1;
-}
-
-.explored-screen {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  overflow: hidden;
-  background: var(--paper);
-}
-
-.explored-screen img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  transition: transform .75s var(--ease);
-}
-
-.explored-copy {
-  padding: clamp(17px, 2vw, 26px) 2px 0;
-}
-
-.explored-title {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 8px 18px;
-}
-
-.explored-title h3 {
-  margin: 0;
-  font: 650 clamp(26px, 2.55vw, 37px)/1.14 var(--font-display);
+.explored-copy h3 {
+  margin: 10px 0 0;
+  font: 650 clamp(32px, 3.1vw, 48px)/1.05 var(--font-display);
   letter-spacing: -.052em;
   color: var(--ink);
 }
 
-.explored-title > span {
-  font: 500 11px/1.4 var(--font-body);
-  letter-spacing: .04em;
-  color: var(--brown);
-}
-
-.explored-copy > p {
-  max-width: 550px;
-  margin: 11px 0 0;
-  font-size: 14px;
+.explored-description {
+  max-width: 440px;
+  margin: 14px 0 0;
+  font-size: 15px;
   line-height: 1.75;
   color: var(--muted);
 }
 
-.explored-foot {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 14px 22px;
-  margin-top: 21px;
-  padding-top: 15px;
-  border-top: 1px solid var(--line);
-}
-
-.explored-foot ul {
+.explored-stack {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   gap: 5px 9px;
-  max-width: 100%;
-  margin: 0;
+  margin: 18px 0 0;
   padding: 0;
   list-style: none;
   font: 400 11px/1.5 var(--font-number);
   color: var(--muted);
 }
 
-.explored-foot li + li::before {
+.explored-stack li + li::before {
   content: "/";
   margin-right: 9px;
   color: var(--brown);
   opacity: .52;
 }
 
+/* The one call to action. Its ::after stretches over the whole project, so
+   the preview opens the demo too. */
 .explored-link {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  flex: none;
-  font: 600 12px/1.2 var(--font-display);
+  gap: 10px;
+  min-height: 44px;
+  margin-top: 26px;
+  padding: 0 18px 0 20px;
+  border: 1px solid color-mix(in srgb, var(--ink) 16%, transparent);
+  border-radius: 999px;
+  font: 600 13px/1 var(--font-display);
   color: var(--ink);
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color .35s var(--ease), border-color .35s var(--ease), color .35s var(--ease);
 }
 
-.explored-link-icon {
-  display: grid;
-  width: 22px;
-  height: 22px;
-  place-items: center;
+.explored-link::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+}
+
+.explored-link svg {
+  width: 16px;
+  height: 16px;
   color: var(--brown);
   transition: transform .35s var(--ease), color .35s var(--ease);
 }
 
-.explored-link-icon svg {
-  width: 17px;
-  height: 17px;
+.explored-link:focus-visible {
+  outline: 2px solid var(--brown);
+  outline-offset: 4px;
 }
 
 @media (hover: hover) {
-  .explored-card-link:hover .explored-frame {
+  .explored-item:hover .explored-media {
+    border-color: color-mix(in srgb, var(--tone) 40%, var(--line));
     background: color-mix(in srgb, var(--tone) 21%, var(--backdrop, var(--paper)));
-    border-color: color-mix(in srgb, var(--tone) 43%, var(--line));
   }
 
-  .explored-card-link:hover .explored-link-icon {
-    transform: translate(3px, -3px);
-    color: var(--ink);
+  .explored-item:hover .explored-index {
+    color: color-mix(in srgb, var(--tone) 14%, transparent);
+  }
+
+  .explored-item:hover .explored-link {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .explored-item:hover .explored-link svg {
+    color: var(--paper);
+    transform: translate(2px, -2px);
   }
 }
 
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .explored-card-link:hover .explored-browser {
-    transform: translateY(-5px);
-    box-shadow: 0 27px 50px rgba(25, 18, 13, .16),
-                0 3px 9px rgba(25, 18, 13, .08);
+  .explored-item:hover .explored-shot {
+    transform: translate3d(-6px, -8px, 0);
   }
-  .explored-card-link:hover .explored-screen img {
-    transform: scale(1.025);
+
+  .explored-item:hover .explored-shot img {
+    transform: scale(1.015);
   }
 }
 
-:root[data-theme="dark"] .explored-browser-bar {
-  background: color-mix(in srgb, var(--paper) 96%, white);
+:root[data-theme="dark"] .explored-shot {
+  box-shadow: 0 24px 54px rgba(0, 0, 0, .5),
+              0 0 0 1px rgba(255, 255, 255, .06);
 }
 
-@media (max-width: 1050px) {
-  .explored-foot {
-    align-items: flex-start;
+/* Blueprint to ink. Uses the frame move from draft.css: the spec marks show
+   the measured size, the blueprint is ruled in, then the screenshot inks over
+   it from the left. Runs once, when the preview first comes into view. */
+@media (prefers-reduced-motion: no-preference) {
+  .motion-draft .explored-media[data-draft="frame"]:not([data-drafted]) > .explored-blueprint {
+    clip-path: none;
+  }
+
+  .motion-draft .explored-media[data-draft="frame"]:not([data-drafted]) .explored-blueprint i {
+    clip-path: inset(0 100% 100% 0);
+  }
+
+  .motion-draft .explored-media[data-draft="frame"][data-drafted] > .explored-blueprint {
+    animation: explored-blueprint-out .5s linear 1.55s both;
+  }
+
+  .motion-draft .explored-media[data-draft="frame"][data-drafted] .explored-blueprint i {
+    animation: explored-rule .55s var(--ease-draw) calc(.1s + var(--i) * 50ms) both;
+  }
+
+  .motion-draft .explored-media[data-draft="frame"][data-drafted] > .explored-shot {
+    animation: draft-ink-in var(--t-ink) var(--ease-draw) .7s both;
+  }
+}
+
+@keyframes explored-rule {
+  from {
+    clip-path: inset(0 100% 100% 0);
+  }
+
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes explored-blueprint-out {
+  to {
+    opacity: 0;
   }
 }
 
 @media (max-width: 900px) {
-  .explored-heading,
-  .explored-grid {
+  .explored-heading {
     grid-template-columns: minmax(0, 1fr);
   }
   .explored-heading { row-gap: 19px; }
   .explored-heading h2 { font-size: var(--section-title-tablet); }
   .explored-heading-aside { padding-bottom: 0; }
   .explored-heading p { max-width: 580px; }
-  .explored-grid { row-gap: clamp(44px, 6.5vw, 64px); }
-  .explored-frame { padding: clamp(12px, 2.3vw, 20px); }
-  .explored-mat { padding: clamp(12px, 2.5vw, 22px); }
+
+  .explored-list { row-gap: clamp(56px, 9vw, 80px); }
+
+  .explored-item,
+  .explored-item:nth-child(even) {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 24px;
+  }
+
+  .explored-item:nth-child(even) .explored-media { order: 0; }
+
+  .explored-copy {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: end;
+    column-gap: 16px;
+  }
+
+  .explored-index {
+    grid-row: 1 / span 2;
+    margin-bottom: 0;
+    font-size: clamp(48px, 9vw, 64px);
+  }
+
+  .explored-kind { grid-column: 2; }
+  .explored-copy h3 { grid-column: 2; margin-top: 4px; }
+
+  .explored-description,
+  .explored-stack,
+  .explored-link {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .explored-description { max-width: 600px; }
 }
 
 @media (max-width: 480px) {
   .explored { padding-block: 70px; }
   .explored-heading h2 { font-size: var(--section-title-mobile); }
   .explored-heading p { font-size: 14px; line-height: 1.7; }
-  .explored-frame { padding: 10px; border-radius: 15px; }
-  .explored-mat { padding: 8px; }
-  .explored-frame-meta { margin-bottom: 10px; }
-  .explored-browser { border-radius: 8px; }
-  .explored-browser-bar { height: 26px; }
-  .explored-browser-label { font-size: 8px; }
-  .explored-title h3 { font-size: 28px; }
-  .explored-copy { padding-top: 17px; }
-  .explored-foot { margin-top: 17px; }
+
+  .explored-media { border-radius: 15px; }
+  .explored-shot,
+  .explored-blueprint { top: 9%; left: 7%; }
+  .explored-shot { border-radius: 7px 0 0; }
+
+  .explored-index { font-size: 46px; }
+  .explored-copy h3 { font-size: 30px; }
+  .explored-description { margin-top: 12px; font-size: 14px; line-height: 1.7; }
+  .explored-stack { margin-top: 14px; }
+  .explored-link { margin-top: 20px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .explored-frame,
-  .explored-browser,
-  .explored-screen img,
-  .explored-link-icon { transition: none !important; transform: none !important; }
+  .explored-media,
+  .explored-shot,
+  .explored-shot img,
+  .explored-index,
+  .explored-link,
+  .explored-link svg { transition: none !important; transform: none !important; }
 }
