@@ -103,8 +103,12 @@
   transform-origin: left;
 }
 
+/* Both rules frame the letters: the baseline's 1px line hangs just below
+   the baseline and the cap line rests just above the cap height, so each
+   meets the outline's outer edge. Starting the cap line at the cap height
+   drew it a pixel inside the letters' tops at some screen scalings. */
 .hero-bp-cap {
-  top: calc(var(--bp-bleed-y) + var(--bp-cap));
+  top: calc(var(--bp-bleed-y) + var(--bp-cap) - 1px);
 }
 
 .hero-bp-base {

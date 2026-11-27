@@ -38,11 +38,14 @@ export function useHeroBlueprint(nameRef: RefObject<HTMLElement | null>) {
       context.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
 
       const metrics = context.measureText("H");
-      const lineHeight = first.getBoundingClientRect().height;
-      const ascent = metrics.fontBoundingBoxAscent;
-      const descent = metrics.fontBoundingBoxDescent;
-      // The font's ascent + descent sit centred in the line box.
-      const baseline = (lineHeight - ascent - descent) / 2 + ascent;
+      // Ask the layout where the baseline really is: a zero-size inline block
+      // sits on it. Working it out from the font's ascent and descent lands a
+      // few pixels low, which lifts the letters off both guides.
+      const probe = document.createElement("span");
+      probe.style.cssText = "display:inline-block;width:0;height:0;vertical-align:baseline";
+      first.append(probe);
+      const baseline = probe.getBoundingClientRect().top - name.getBoundingClientRect().top;
+      probe.remove();
       const capHeight = metrics.actualBoundingBoxAscent;
 
       set("--bp-base", `${baseline.toFixed(1)}px`);
