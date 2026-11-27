@@ -59,8 +59,11 @@
   margin-block: -.12em;
   padding-block: .12em;
   clip-path: inset(-20% calc(var(--drain) * 100%) -20% -20%);
-  -webkit-mask-image: radial-gradient(circle max(var(--lr), .5px) at var(--lx) calc(var(--ly) + .12em), transparent 97%, #000 100%);
-  mask-image: radial-gradient(circle max(var(--lr), .5px) at var(--lx) calc(var(--ly) + .12em), transparent 97%, #000 100%);
+  /* The loupe's hole has a hard edge: its one anti-aliased pixel sits right
+     under the 1px .hero-lens ring. A percentage fade would scale with the
+     type and smear the ink into a grey band inside the ring. */
+  -webkit-mask-image: radial-gradient(circle max(var(--lr), .5px) at var(--lx) calc(var(--ly) + .12em), transparent calc(var(--lr) - 1px), #000 var(--lr));
+  mask-image: radial-gradient(circle max(var(--lr), .5px) at var(--lx) calc(var(--ly) + .12em), transparent calc(var(--lr) - 1px), #000 var(--lr));
 }
 
 .hero-name-letter {
@@ -84,10 +87,10 @@
   inset: calc(-1 * var(--bp-bleed-y)) calc(-1 * var(--bp-bleed));
   pointer-events: none;
   -webkit-mask-image:
-    radial-gradient(circle max(var(--lr), .5px) at calc(var(--lx) + var(--bp-bleed)) calc(var(--ly) + var(--bp-bleed-y)), #000 97%, transparent 100%),
+    radial-gradient(circle max(var(--lr), .5px) at calc(var(--lx) + var(--bp-bleed)) calc(var(--ly) + var(--bp-bleed-y)), #000 calc(var(--lr) - 1px), transparent var(--lr)),
     linear-gradient(to right, transparent var(--bp-stop), #000 var(--bp-stop));
   mask-image:
-    radial-gradient(circle max(var(--lr), .5px) at calc(var(--lx) + var(--bp-bleed)) calc(var(--ly) + var(--bp-bleed-y)), #000 97%, transparent 100%),
+    radial-gradient(circle max(var(--lr), .5px) at calc(var(--lx) + var(--bp-bleed)) calc(var(--ly) + var(--bp-bleed-y)), #000 calc(var(--lr) - 1px), transparent var(--lr)),
     linear-gradient(to right, transparent var(--bp-stop), #000 var(--bp-stop));
 }
 
