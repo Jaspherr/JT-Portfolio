@@ -25,7 +25,9 @@ export default function Services() {
     <section id="services" className="section shell services">
       <div className="section-heading services-heading">
         <h2 data-draft="set">
-          Design, code &amp; <em>everything between.</em>
+          Design, code &amp;
+          <br />
+          <em>everything between.</em>
         </h2>
 
         <p>
