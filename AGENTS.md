@@ -29,3 +29,25 @@ Conventions:
   Easing and duration tokens live in `src/styles/tokens.css`.
 - Commit messages use Conventional Commits: `feat:`, `fix:`, `refactor:`,
   `style:`, `docs:`, `chore:` plus a short imperative summary.
+
+Branches:
+
+- `main` is the only long-lived branch, and Vercel deploys every commit on it
+  to production. Never commit or push to `main` directly, and never delete
+  it.
+- Work on a short-lived branch cut from an up-to-date `main`
+  (`git pull --ff-only` first), named `feat/`, `fix/`, `refactor/`, `style/`,
+  `docs/`, `chore/` or `ui/` plus a short slug. Never reuse or overwrite an
+  existing branch; carry uncommitted work over rather than discarding it.
+- Stage only the files the task changed. Push with `-u` once the first commit
+  has been reviewed and lint and the build pass.
+- Changes reach `main` through a pull request into `main`. Never merge one
+  without the owner's approval.
+- After a merge: confirm the pull request is merged, switch to `main`, run
+  `git pull --ff-only` and `git fetch --prune`, then remove the local branch
+  with `git branch -d`. GitHub already deletes merged branches on the remote;
+  remove one by hand with `git push origin --delete <branch>` only after
+  checking it holds nothing missing from `main` and has no open pull request.
+- If `git branch -d` refuses, for example after a squash merge, check the
+  branch's pull request and diff against `main` before deleting anything.
+  Never force-delete, force-push or rewrite history as routine cleanup.
