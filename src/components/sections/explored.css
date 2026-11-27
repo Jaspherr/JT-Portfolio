@@ -15,8 +15,8 @@
 .explored-heading h2 {
   max-width: 800px;
   margin: 0;
-  font: 700 clamp(46px, 5.8vw, 88px)/.98 var(--font-display);
-  letter-spacing: -.068em;
+  font: 700 clamp(46px, 4.1vw, 66px)/.98 var(--font-display);
+  letter-spacing: -.065em;
   color: var(--ink);
   text-wrap: balance;
 }
