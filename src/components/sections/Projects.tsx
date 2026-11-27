@@ -16,7 +16,7 @@ export default function Projects() {
               <em>I&apos;ve shaped.</em>
             </h2>
             <p className="projects-heading-description">
-              Four projects from school and an internship — what each one
+              Four projects from school and an internship: what each one
               was, what I did on it, and how it turned out.
             </p>
           </div>

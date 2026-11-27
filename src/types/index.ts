@@ -21,9 +21,15 @@ export type Project = {
   tags: string[];
 };
 
+/* A drafting line or box over a project preview, in percent of the preview.
+   A zero width or height draws a single rule. */
+export type BlueprintMark = [x: number, y: number, width: number, height: number];
+
 export type ExploredProject = {
   name: string;
-  category: string;
+  // "independent" for my own explorations, "demo" for software
+  // demonstrations that run on fictional data.
+  kind: "independent" | "demo";
   description: string;
   stack: string[];
   preview: string;
@@ -31,6 +37,8 @@ export type ExploredProject = {
   url: string;
   // The project's own colour, behind its preview.
   tone: string;
+  // The preview's main layout blocks, drawn before the screenshot inks in.
+  blueprint: BlueprintMark[];
 };
 
 export type Service = {

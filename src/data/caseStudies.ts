@@ -4,7 +4,7 @@ export const caseStudies: Record<string, CaseStudy> = {
   "clarify-risksense": {
     slug: "clarify-risksense",
     projectName: "Clarify",
-    role: "UI / UX Designer · Front-End Developer",
+    role: "UI/UX Designer · Front-End Developer",
     platform: "Web · Figma · Front-End",
     projectType: "Risk-Analysis Admin Platform",
     year: "2025–2026",
@@ -19,19 +19,19 @@ export const caseStudies: Record<string, CaseStudy> = {
     tags: ["Figma", "UI/UX", "Admin Platform"],
 
     impact:
-      "Completed as part of the Boom Technologies internship, with the finished project retained by the mentor and QA tester.",
+      "Built during my internship at Boom Technologies. Our mentor and QA tester kept the finished project.",
 
     challenge: {
       heading: "Making complex risk information easier to review.",
       description: [
-        "Clarify is a risk-analysis administration platform designed around document analysis, information review, and risk assessment.",
-        "The core challenge was presenting analysis-oriented information in a way that remained structured and navigable across multiple stages of the workflow.",
+        "Clarify is a risk-analysis admin platform built around document analysis, information review, and risk assessment.",
+        "The hard part was keeping a lot of analysis information organized and easy to move through across several stages of the workflow.",
       ],
     },
 
     strategy: {
       introduction:
-        "The experience was separated into clear stages — entry, dashboard, analysis preview, and results — helping users maintain context as they move through the platform.",
+        "The experience is split into four clear stages: entry, dashboard, analysis preview, and results. Users keep their bearings as they move through the platform.",
 
       designPrinciples: [
         "Separate major workflow stages into clearly defined views.",
@@ -41,9 +41,9 @@ export const caseStudies: Record<string, CaseStudy> = {
       ],
 
       technicalConsiderations: [
-        "Responsibilities covered admin UI/UX design and front-end contribution alongside three backend developers and another front-end developer.",
+        "I handled the admin UI/UX design and contributed to the front-end, working with three backend developers and another front-end developer.",
         "The product used ReactJS, FastAPI, Python, OpenAI, and PostgreSQL across the analysis workflow.",
-        "Mentor and QA review helped focus decisions on what users needed rather than adding unnecessary complexity.",
+        "Reviews with our mentor and QA tester kept decisions focused on what users needed instead of extra complexity.",
       ],
     },
 
@@ -54,11 +54,11 @@ export const caseStudies: Record<string, CaseStudy> = {
         image: "/projects/Clarify/DashboardV2.png",
         imageType: "web",
         description:
-          "A central workspace for navigating the platform's risk-analysis experience.",
+          "The main workspace for getting around the platform's risk analysis.",
         userValue:
-          "Creates a clear starting point for accessing analysis-related information and workflows.",
+          "Gives users one clear place to start before they get into analysis information and workflows.",
         implementation:
-          "Designed and refined as the second dashboard iteration, represented in the project assets as DashboardV2.",
+          "This is the second iteration of the dashboard, which I designed and refined.",
       },
       {
         number: "02",
@@ -66,11 +66,11 @@ export const caseStudies: Record<string, CaseStudy> = {
         image: "/projects/Clarify/AnalyzerPreviewModal.png",
         imageType: "web",
         description:
-          "A contextual preview experience for reviewing analyzer information.",
+          "A preview for checking analyzer details in context.",
         userValue:
-          "Allows information to be inspected without unnecessarily disrupting the surrounding workflow.",
+          "Users can inspect the details without leaving what they're working on.",
         implementation:
-          "Presented through a modal pattern to introduce an additional layer of information while preserving context.",
+          "It opens as a modal, so the extra detail sits on top of the current view instead of replacing it.",
       },
       {
         number: "03",
@@ -78,11 +78,11 @@ export const caseStudies: Record<string, CaseStudy> = {
         image: "/projects/Clarify/RiskSense_ResultPage.png",
         imageType: "web",
         description:
-          "A dedicated results experience for presenting the outcome of the risk-analysis process.",
+          "A dedicated page for the outcome of a risk analysis.",
         userValue:
-          "Separates final analysis information from setup and navigation, creating a more focused review experience.",
+          "Keeps final results apart from setup and navigation, so reviewing them is easier to focus on.",
         implementation:
-          "Designed as its own results view within the broader admin workflow.",
+          "Designed as its own view within the admin workflow.",
       },
       {
         number: "04",
@@ -92,23 +92,23 @@ export const caseStudies: Record<string, CaseStudy> = {
         description:
           "A redesigned entry point for the platform.",
         userValue:
-          "Provides users with a clearer introduction before entering the primary administrative workflow.",
+          "Gives users a clearer introduction before they reach the main admin workflow.",
         implementation:
-          "Developed as a new landing-page direction alongside the broader interface refinement work.",
+          "A new direction for the landing page, developed alongside the wider interface refinements.",
       },
     ],
 
     results: {
       outcomes: [
-        "Completed both UI/UX and front-end responsibilities during the Boom Technologies internship.",
+        "Handled both UI/UX and front-end work during my Boom Technologies internship.",
         "Designed multiple stages of the risk-analysis experience.",
         "Refined the interface through collaboration and review.",
-        "The finished project was retained by the mentor and QA tester.",
+        "Our mentor and QA tester kept the finished project.",
       ],
       takeaways: [
-        "Complex information products benefit from workflow-based information architecture.",
-        "Designing and implementing the interface creates stronger awareness of practical development constraints.",
-        "Iteration and review are essential when presenting analysis-heavy information.",
+        "When a product holds a lot of information, organizing it around the workflow makes it much easier to follow.",
+        "Building the interface I designed made me much more aware of real development constraints.",
+        "Analysis-heavy screens need several rounds of iteration and review before they read clearly.",
       ],
     },
   },
@@ -130,19 +130,19 @@ export const caseStudies: Record<string, CaseStudy> = {
     tags: ["Figma", "UI/UX", "Front-End"],
 
     impact:
-      "Designed the web and mobile experiences and handled front-end implementation. The project received a Best System Development award, while the UI/UX work received Most Outstanding UI/UX Designer.",
+      "Designed the web and mobile experiences and handled the UI/UX and front-end. The project received Best System Development, and my UI/UX work was recognized as Most Outstanding UI/UX Designer.",
 
     challenge: {
       heading: "Designing one transport system for two very different contexts.",
       description: [
-        "Sakay combines a mobile experience for users with a web-based administration platform for managing transport operations.",
-        "The main design challenge was creating two interfaces with different priorities while keeping them connected as parts of the same product ecosystem.",
+        "Sakay pairs a mobile app for users with a web admin platform for managing transport operations.",
+        "The challenge was designing two interfaces with different priorities that still felt like one product.",
       ],
     },
 
     strategy: {
       introduction:
-        "The product was divided according to context: task-focused mobile interactions for users and a more information-oriented web interface for administration.",
+        "Each side was designed for its context: quick, task-focused screens on mobile, and a more information-heavy web interface for admins.",
 
       designPrinciples: [
         "Prioritize immediate actions and status information on mobile.",
@@ -152,10 +152,10 @@ export const caseStudies: Record<string, CaseStudy> = {
       ],
 
       technicalConsiderations: [
-        "Designed the complete mobile interface in Figma and translated it into the front-end implementation.",
-        "Designed the web experience as a base reference while focusing implementation ownership on the mobile and web front-end work.",
-        "The project was demonstrated as a live prototype, including working location tracking during presentation testing.",
-        "Backend implementation was owned by other team members.",
+        "Designed the whole mobile interface in Figma, then built it on the front-end.",
+        "Designed the web experience as a base reference, and owned the front-end implementation for both mobile and web.",
+        "We demoed it as a live prototype, with location tracking working during the presentation tests.",
+        "Other team members owned the backend.",
       ],
     },
 
@@ -166,11 +166,11 @@ export const caseStudies: Record<string, CaseStudy> = {
         image: "/projects/Sakay/Mobile/CurrentLocation.png",
         imageType: "mobile",
         description:
-          "A mobile view centered around the user's current location within the transport experience.",
+          "A mobile view built around the user's current location.",
         userValue:
-          "Keeps location context immediately accessible during transport-related interactions.",
+          "Users can always see where they are while they use the app.",
         implementation:
-          "Designed as part of the mobile user experience with a task-focused interface.",
+          "Part of the mobile app, designed to keep the task in focus.",
       },
       {
         number: "02",
@@ -178,11 +178,11 @@ export const caseStudies: Record<string, CaseStudy> = {
         image: "/projects/Sakay/Mobile/OnRide.png",
         imageType: "mobile",
         description:
-          "A dedicated state for the user's ongoing ride.",
+          "A dedicated screen for the ride in progress.",
         userValue:
-          "Separates active-trip information from other areas of the application.",
+          "Keeps trip details apart from the rest of the app.",
         implementation:
-          "Created as a distinct mobile ride state within the wider transport workflow.",
+          "Designed as its own ride state within the transport flow.",
       },
       {
         number: "03",
@@ -190,11 +190,11 @@ export const caseStudies: Record<string, CaseStudy> = {
         image: "/projects/Sakay/Mobile/DriverManageVehicle.png",
         imageType: "mobile",
         description:
-          "A mobile interface supporting driver vehicle-management tasks.",
+          "A mobile screen where drivers manage their vehicles.",
         userValue:
-          "Gives drivers a dedicated place to manage vehicle-related information.",
+          "Gives drivers one place for their vehicle information.",
         implementation:
-          "Designed around the driver's operational context within the mobile application.",
+          "Designed around what drivers need to do while they're working.",
       },
       {
         number: "04",
@@ -202,26 +202,26 @@ export const caseStudies: Record<string, CaseStudy> = {
         image: "/projects/Sakay/Web/Reports.png",
         imageType: "web",
         description:
-          "Web-based operational and reporting interfaces for the administration side of Sakay.",
+          "The web screens admins use to run operations and check reports.",
         userValue:
-          "Provides administrators with a more structured environment for reviewing and managing transport operations.",
+          "Gives admins a more structured space for reviewing and managing transport operations.",
         implementation:
-          "Designed as part of the web administration experience alongside supporting side-panel interactions.",
+          "Part of the web admin experience, with side panels for supporting details.",
       },
     ],
 
     results: {
       outcomes: [
         "Designed both web and mobile experiences.",
-        "Handled front-end implementation responsibilities.",
+        "Handled the front-end implementation.",
         "Delivered interfaces for users, drivers, and administrators.",
-        "Received a Best System Development award.",
-        "UI/UX contribution was recognized with Most Outstanding UI/UX Designer.",
+        "The project received the Best System Development award.",
+        "My UI/UX work was recognized as Most Outstanding UI/UX Designer.",
       ],
       takeaways: [
-        "Multi-platform products should respond to context instead of duplicating the same interface.",
-        "User roles are a strong foundation for information architecture.",
-        "Owning both design and front-end implementation helps maintain consistency from concept to final interface.",
+        "When a product spans web and mobile, each side should fit its own context instead of copying the other.",
+        "User roles make a good starting point for information architecture.",
+        "Designing and building the same screens kept them consistent from concept to final interface.",
       ],
     },
   },
@@ -243,19 +243,19 @@ export const caseStudies: Record<string, CaseStudy> = {
     tags: ["Mobile", "UI/UX", "Front-End"],
 
     impact:
-      "Redesigned and improved the team's existing interface, refined the front-end implementation, and delivered the updated work back to the team for integration.",
+      "Redesigned the team's existing interface, refined the front-end, and handed the updated work back to the team to integrate.",
 
     challenge: {
       heading: "Improving an existing mobile experience without losing its purpose.",
       description: [
-        "HerbaPlant is centered around identifying herbal plants and presenting useful plant information through a mobile interface.",
-        "Rather than starting from an empty canvas, the work involved improving an existing team interface and strengthening its visual and interaction consistency.",
+        "HerbaPlant is a mobile app for identifying herbal plants and showing useful information about them.",
+        "I wasn't starting from scratch. The job was to improve the team's existing interface and make its visuals and interactions more consistent.",
       ],
     },
 
     strategy: {
       introduction:
-        "The redesign focused on refinement: improving the existing experience while preserving the application's established purpose and preparing the updated work for team integration.",
+        "The redesign was about refinement: improving what was there, keeping the app's purpose intact, and getting the work ready for the team to integrate.",
 
       designPrinciples: [
         "Improve rather than redesign without reason.",
@@ -266,8 +266,8 @@ export const caseStudies: Record<string, CaseStudy> = {
 
       technicalConsiderations: [
         "Led the UI redesign and refined the mobile front-end for an existing five-member team project.",
-        "Because the team was working under a tight deadline, the work prioritized static wireframes and layout specifications over a long interactive prototype cycle.",
-        "The updated interface was translated into Dart front-end code and delivered back to the team for integration.",
+        "The team was on a tight deadline, so I focused on static wireframes and layout specs instead of a long interactive prototyping cycle.",
+        "I translated the updated interface into Dart and handed it back to the team to integrate.",
       ],
     },
 
@@ -278,11 +278,11 @@ export const caseStudies: Record<string, CaseStudy> = {
         image: "/projects/HerbaPlant/Scan.png",
         imageType: "mobile",
         description:
-          "The central mobile interaction for initiating plant identification.",
+          "The main screen for starting a plant scan.",
         userValue:
-          "Gives users a focused entry point into the application's primary purpose.",
+          "Takes users straight to what the app is for.",
         implementation:
-          "Refined as part of the existing mobile interface and front-end improvement work.",
+          "Refined as part of the interface and front-end improvements.",
       },
       {
         number: "02",
@@ -290,11 +290,11 @@ export const caseStudies: Record<string, CaseStudy> = {
         image: "/projects/HerbaPlant/PlantInfo.png",
         imageType: "mobile",
         description:
-          "A dedicated view for presenting information associated with an identified plant.",
+          "A dedicated view for details about an identified plant.",
         userValue:
           "Turns identification into useful, readable plant information.",
         implementation:
-          "Designed as a distinct information state following the scanning experience.",
+          "Designed as its own screen that follows a scan.",
       },
       {
         number: "03",
@@ -302,11 +302,11 @@ export const caseStudies: Record<string, CaseStudy> = {
         image: "/projects/HerbaPlant/Chatbot.png",
         imageType: "mobile",
         description:
-          "A conversational interface included within the wider HerbaPlant experience.",
+          "A chatbot built into the HerbaPlant app.",
         userValue:
-          "Provides an additional interaction method for accessing application information.",
+          "Gives users another way to get information from the app.",
         implementation:
-          "My contribution focused on redesigning and refining the chatbot interface.",
+          "I redesigned and refined the chatbot's interface.",
       },
       {
         number: "04",
@@ -314,11 +314,11 @@ export const caseStudies: Record<string, CaseStudy> = {
         image: "/projects/HerbaPlant/PromptHistory.png",
         imageType: "mobile",
         description:
-          "A history view for previous conversational prompts.",
+          "A list of the user's earlier chatbot prompts.",
         userValue:
-          "Creates continuity by giving users access to earlier interactions.",
+          "Lets users go back to earlier conversations.",
         implementation:
-          "Designed as a supporting view for the chatbot experience.",
+          "Designed as a supporting view for the chatbot.",
       },
     ],
 
@@ -326,13 +326,13 @@ export const caseStudies: Record<string, CaseStudy> = {
       outcomes: [
         "Redesigned the team's existing mobile interface.",
         "Refined the front-end implementation.",
-        "Improved consistency across core application views.",
-        "Delivered the updated work back to the team for integration.",
+        "Made the core screens more consistent.",
+        "Handed the updated work back to the team to integrate.",
       ],
       takeaways: [
-        "Redesign work should identify what already works before introducing change.",
-        "Consistency becomes especially important when several interaction types exist in one mobile product.",
-        "Effective team handoff is part of the design and development process.",
+        "Before changing a design, it's worth working out what already works.",
+        "Consistency matters even more when one mobile app mixes scanning, reading, and chatting.",
+        "Handing work back to the team cleanly is part of design and development too.",
       ],
     },
   },
@@ -354,19 +354,19 @@ export const caseStudies: Record<string, CaseStudy> = {
     tags: ["Mobile", "Front-End", "Team Project"],
 
     impact:
-      "Contributed to and helped coordinate the application's front-end development, supporting a consistent mobile experience across the team's core student-facing screens.",
+      "Contributed to the app's front-end and helped coordinate it, so the team's core student screens stayed consistent.",
 
     challenge: {
       heading: "Bringing everyday student essentials into one mobile experience.",
       description: [
-        "UPang Student Essentials was designed to give students convenient access to essential school information and everyday student features.",
-        "As a team project, the work also required front-end coordination so that individual screens and contributions remained part of a coherent mobile experience.",
+        "UPang Student Essentials puts school information and everyday student features in one app.",
+        "Several of us built screens, so the front-end needed coordinating to keep everything feeling like one app.",
       ],
     },
 
     strategy: {
       introduction:
-        "The front-end was organized around clear destinations for the application's primary student-facing information and features.",
+        "The front-end was organized around a few clear destinations for the app's main student information and features.",
 
       designPrinciples: [
         "Provide a clear entry into the application.",
@@ -377,8 +377,8 @@ export const caseStudies: Record<string, CaseStudy> = {
 
       technicalConsiderations: [
         "Contributed to mobile front-end development and supported UI/UX decisions within the four-member team.",
-        "The project used Dart, Swift, Laravel, MySQL, and Heroku across the application and deployment workflow.",
-        "Front-end coordination was important because multiple team members contributed to the mobile experience.",
+        "The project used Dart, Swift, Laravel, MySQL, and Heroku for the app and its deployment.",
+        "With several people working on the mobile app, front-end coordination mattered.",
       ],
     },
 
@@ -389,11 +389,11 @@ export const caseStudies: Record<string, CaseStudy> = {
         image: "/projects/USE/Welcome.png",
         imageType: "mobile",
         description:
-          "The introductory view into the UPang Student Essentials application.",
+          "The first screen students see in UPang Student Essentials.",
         userValue:
-          "Provides students with a clear starting point before entering the main experience.",
+          "Gives students a clear starting point before the main app.",
         implementation:
-          "Implemented as part of the application's coordinated front-end development.",
+          "Built as part of the team's coordinated front-end work.",
       },
       {
         number: "02",
@@ -401,11 +401,11 @@ export const caseStudies: Record<string, CaseStudy> = {
         image: "/projects/USE/Home.png",
         imageType: "mobile",
         description:
-          "The primary mobile destination for accessing student-oriented features.",
+          "The main screen for reaching student features.",
         userValue:
-          "Centralizes the application's everyday student experience.",
+          "Puts everyday student tasks in one place.",
         implementation:
-          "Developed as one of the application's core front-end views.",
+          "One of the app's core front-end views.",
       },
       {
         number: "03",
@@ -413,11 +413,11 @@ export const caseStudies: Record<string, CaseStudy> = {
         image: "/projects/USE/Profile1.png",
         imageType: "mobile",
         description:
-          "A dedicated profile experience within the application.",
+          "A dedicated profile screen.",
         userValue:
-          "Keeps student-specific information separate from general application content.",
+          "Keeps each student's information apart from general app content.",
         implementation:
-          "Implemented as part of the coordinated mobile front-end.",
+          "Built as part of the coordinated mobile front-end.",
       },
       {
         number: "04",
@@ -425,25 +425,25 @@ export const caseStudies: Record<string, CaseStudy> = {
         image: "/projects/USE/Announcement.png",
         imageType: "mobile",
         description:
-          "A dedicated area for student-facing announcements.",
+          "A dedicated place for school announcements.",
         userValue:
-          "Makes important school information easier to access from within the application.",
+          "Makes important school news easier to find in the app.",
         implementation:
-          "Developed as a distinct informational view within the overall mobile experience.",
+          "Built as its own screen within the app.",
       },
     ],
 
     results: {
       outcomes: [
-        "Contributed directly to front-end development.",
-        "Supported implementation and organization of the mobile experience.",
+        "Contributed directly to the front-end.",
+        "Helped implement and organize the mobile app.",
         "Helped coordinate development work within the team.",
-        "Implemented core student-facing application views.",
+        "Built core student-facing screens.",
       ],
       takeaways: [
-        "Front-end consistency matters especially in collaborative projects.",
-        "Development coordination is part of delivering a coherent interface.",
-        "Clear separation of core destinations helps simplify information-oriented mobile products.",
+        "Front-end consistency matters most when several people build the screens.",
+        "Coordinating the team's work was part of keeping the interface coherent.",
+        "Giving each core destination its own screen keeps an information-heavy app simple.",
       ],
     },
   },

@@ -404,7 +404,7 @@ export default function CodeScene({ title }: { title: string }) {
       n="02"
       title={title}
       direct={direct}
-      summary="Illustration: an ongoing front-end session — a React component is written, styled, refactored into a hook, given new props and tested, while a live preview updates and stays clickable."
+      summary="Illustration: an ongoing front-end session. A React component is written, styled, refactored into a hook, given new props and tested, while a live preview updates and stays clickable."
     >
       <div className="sv-c-editor">
         <div className="sv-c-tabs">

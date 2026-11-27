@@ -160,9 +160,8 @@ export default function About() {
 
             <p>
               I&apos;d rather make something useful and thoughtful than
-              complicated for the sake of it. Still learning, still
-              experimenting, and still figuring things out. This portfolio
-              included.
+              complicated for the sake of it. I&apos;m still learning as I go,
+              and this portfolio is part of that.
             </p>
           </div>
 
@@ -171,7 +170,7 @@ export default function About() {
 
             <p className="about-moment">
               <Link to="/projects/sakay">Sakay</Link>, our capstone, received{" "}
-              <em>Best System Development</em> — and my UI/UX work on it was
+              <em>Best System Development</em>, and my UI/UX work on it was
               recognised as{" "}
               <a
                 href="/certificate/cor.jpg"

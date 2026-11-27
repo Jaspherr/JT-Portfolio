@@ -203,7 +203,7 @@ export default function CaseStudyPage({ project }: Props) {
           <div className="case-technical-grid">
             <div className="case-technical-intro">
               <span className="case-small-label">TECHNICAL CONSIDERATIONS</span>
-              <h2 data-draft="set">How the product thinking translated into the build.</h2>
+              <h2 data-draft="set">How the design carried into the build.</h2>
             </div>
             <ul className="case-technical-list">
               {technicalConsiderations.map((consideration, index) => (
@@ -263,7 +263,7 @@ export default function CaseStudyPage({ project }: Props) {
                     </span>
                     <Image
                       src={feature.image}
-                      alt={`${project.projectName} — ${feature.title}`}
+                      alt={`${project.projectName}: ${feature.title}`}
                       fill
                       loading="eager"
                       sizes={

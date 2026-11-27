@@ -55,7 +55,7 @@ const exploredItem: TimelineSpec = {
   scope: ".explored-copy",
   start: 0.94,
   tweens: [
-    { targets: ".explored-title, .explored-copy > p, .explored-foot", from: { opacity: 0, y: 18 }, duration: 0.7, stagger: 0.07, ease: "power4.out", flat: true, at: 0, clearTransform: true },
+    { targets: ".explored-index, .explored-kind, .explored-copy h3, .explored-description, .explored-stack, .explored-link", from: { opacity: 0, y: 18 }, duration: 0.7, stagger: 0.06, ease: "power4.out", flat: true, at: 0.45, clearTransform: true },
   ],
 };
 

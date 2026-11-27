@@ -16,7 +16,7 @@ export const SITE_URL = normalizeSiteUrl(
 
 export const SITE_NAME = "Jaspher Tania Portfolio";
 
-export const SITE_TITLE = "Jaspher Tania — AI Design Engineer";
+export const SITE_TITLE = "Jaspher Tania | AI Design Engineer";
 
 export const SITE_DESCRIPTION =
   "Jaspher Tania is an AI Design Engineer who designs interfaces and then builds them. Projects, animated experiments and notes along the way.";

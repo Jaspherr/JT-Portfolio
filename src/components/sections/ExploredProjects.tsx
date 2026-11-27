@@ -3,6 +3,29 @@ import type { CSSProperties } from "react";
 
 import Image from "@/components/ui/Image";
 import { exploredProjects } from "@/data/exploredProjects";
+import type { BlueprintMark } from "@/types";
+
+const KIND_LABEL = {
+  independent: "Independent project",
+  demo: "Interactive demo · fictional data",
+} as const;
+
+// One drafting mark; a zero width or height makes it a single rule.
+function markStyle([x, y, width, height]: BlueprintMark, index: number) {
+  return {
+    "--x": `${x}%`,
+    "--y": `${y}%`,
+    "--w": `${width}%`,
+    "--h": `${height}%`,
+    "--i": index,
+  } as CSSProperties;
+}
+
+function markKind([, , width, height]: BlueprintMark) {
+  if (height === 0) return "row";
+  if (width === 0) return "column";
+  return undefined;
+}
 
 export default function ExploredProjects() {
   return (
@@ -18,7 +41,7 @@ export default function ExploredProjects() {
 
         <div className="explored-heading-aside">
           <span className="explored-count" aria-hidden="true">
-            {String(exploredProjects.length).padStart(2, "0")} / Selected projects
+            {String(exploredProjects.length).padStart(2, "0")} / Live projects
           </span>
           <p>
             Independent experiments and software ideas I worked through in design
@@ -27,71 +50,89 @@ export default function ExploredProjects() {
         </div>
       </div>
 
-      <div className="explored-grid">
-        {exploredProjects.map((project, index) => (
-          <article
-            key={project.name}
-            className="explored-item"
-            style={{ "--tone": project.tone } as CSSProperties}
-          >
-            <a
-              href={project.url}
-              className="explored-card-link"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Explore project: ${project.name}, opens in a new tab`}
-            >
-              <div className="explored-frame" data-draft="frame">
-                <div className="explored-frame-meta" aria-hidden="true">
-                  <span>Project / {String(index + 1).padStart(2, "0")}</span>
-                  <span className="explored-frame-symbol">↗</span>
-                </div>
+      <div className="explored-list">
+        {exploredProjects.map((project, index) => {
+          const id = `explored-${project.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
 
-                <div className="explored-mat">
-                  <div className="explored-browser">
-                    <div className="explored-browser-bar" aria-hidden="true">
-                      <span className="explored-browser-label">Project preview</span>
-                      <span className="explored-browser-suffix">↗</span>
-                    </div>
-                    <div className="explored-screen">
-                      <Image
-                        src={project.preview}
-                        alt={project.previewAlt}
-                        fill
-                        loading="lazy"
-                        sizes="(max-width: 900px) 92vw, (max-width: 1400px) 45vw, 610px"
-                      />
-                    </div>
-                  </div>
+          return (
+            <article
+              key={project.name}
+              className="explored-item"
+              aria-labelledby={`${id}-title`}
+              style={{ "--tone": project.tone } as CSSProperties}
+            >
+              {/* Drafted first: the layout's main blocks are ruled in, then
+                  the real screenshot inks over them from the left. */}
+              <div className="explored-media" data-draft="frame">
+                <span className="draft-spec" aria-hidden="true">
+                  <i />
+                  <i />
+                  <i />
+                  <i />
+                  <b />
+                </span>
+
+                <span className="explored-blueprint" aria-hidden="true">
+                  {project.blueprint.map((mark, markIndex) => (
+                    <i
+                      key={markIndex}
+                      data-rule={markKind(mark)}
+                      style={markStyle(mark, markIndex)}
+                    />
+                  ))}
+                </span>
+
+                <div className="explored-shot">
+                  <Image
+                    src={project.preview}
+                    alt={project.previewAlt}
+                    fill
+                    loading="lazy"
+                    sizes="(max-width: 900px) 94vw, (max-width: 1400px) 58vw, 780px"
+                  />
                 </div>
               </div>
 
               <div className="explored-copy">
-                <div className="explored-title">
-                  <h3>{project.name}</h3>
-                  <span>{project.category}</span>
-                </div>
+                <span className="explored-index" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
 
-                <p>{project.description}</p>
+                <p className="explored-kind" data-kind={project.kind}>
+                  {KIND_LABEL[project.kind]}
+                </p>
 
-                <div className="explored-foot">
-                  <ul aria-label={`${project.name} built with`}>
-                    {project.stack.map((tool) => (
-                      <li key={tool}>{tool}</li>
-                    ))}
-                  </ul>
+                <h3 id={`${id}-title`}>{project.name}</h3>
 
-                  <span className="explored-link" aria-hidden="true">
-                    <span>Explore project</span>
-                    <span className="explored-link-icon">
-                      <ArrowUpRight />
-                    </span>
+                <p id={`${id}-description`} className="explored-description">
+                  {project.description}
+                </p>
+
+                <ul className="explored-stack" aria-label="Built with">
+                  {project.stack.map((tool) => (
+                    <li key={tool}>{tool}</li>
+                  ))}
+                </ul>
+
+                {/* The link stretches over the whole project, so the preview
+                    opens the demo too without a second tab stop. */}
+                <a
+                  href={project.url}
+                  className="explored-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-describedby={`${id}-description`}
+                >
+                  <span>Open live demo</span>
+                  <span className="sr-only">
+                    {`: ${project.name}, opens in a new tab`}
                   </span>
-                </div>
+                  <ArrowUpRight aria-hidden="true" />
+                </a>
               </div>
-            </a>
-          </article>
-        ))}
+            </article>
+          );
+        })}
       </div>
     </section>
   );

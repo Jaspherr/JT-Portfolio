@@ -36,8 +36,8 @@ export default function Contact() {
           </h2>
 
           <p className="contact-description">
-            A question about one of the projects, a role you think I&apos;d fit,
-            or something you&apos;re building — my inbox is open.
+            Whether it&apos;s a question about a project, a role you think
+            I&apos;d fit, or something you&apos;re building, my inbox is open.
           </p>
         </div>
 
@@ -78,7 +78,7 @@ export default function Contact() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`${name} — opens in a new tab`}
+                aria-label={`${name}, opens in a new tab`}
                 key={name}
               >
                 <span className="contact-link-number">{number}</span>

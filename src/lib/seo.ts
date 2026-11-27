@@ -14,7 +14,7 @@ export type HeadTag =
   | { tag: "link"; attrs: Record<string, string> };
 
 const AUTHOR = "Jaspher Tania";
-const TITLE_SUFFIX = " — Jaspher Tania";
+const TITLE_SUFFIX = " | Jaspher Tania";
 
 const SITE_KEYWORDS = [
   "Jaspher Tania",

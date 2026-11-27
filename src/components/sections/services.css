@@ -27,8 +27,8 @@
 .services-heading h2 {
   grid-row: 1 / span 2;
   max-width: 900px;
-  font: 700 clamp(46px, 4.1vw, 66px)/.98 var(--font-display);
-  letter-spacing: -.065em;
+  font: 700 var(--section-title)/.98 var(--font-display);
+  letter-spacing: var(--section-title-tracking);
   text-wrap: balance;
 }
 
