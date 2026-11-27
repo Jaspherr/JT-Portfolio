@@ -40,8 +40,9 @@
   --ease-reveal: cubic-bezier(.37, 0, .63, 1);
   --t-reveal: .75s;
 
-  /* Chapter headings (Work, About) share one scale per breakpoint. */
-  --section-title: clamp(40px, 3.6vw, 56px);
+  /* Chapter headings share one scale per breakpoint. On desktop it matches
+     "Selected things", which its narrow column caps at about 52px. */
+  --section-title: clamp(38px, 3.6vw, 52px);
   --section-title-tablet: clamp(42px, 8vw, 58px);
   --section-title-mobile: clamp(38px, 11vw, 50px);
   --section-title-tracking: -.06em;

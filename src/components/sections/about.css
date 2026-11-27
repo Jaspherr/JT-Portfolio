@@ -31,8 +31,8 @@
 .about-story h2 {
   max-width: 580px;
   margin: 0;
-  font: 700 clamp(42px, 4.05vw, 68px)/1.05 var(--font-display);
-  letter-spacing: -.06em;
+  font: 700 var(--section-title)/1.05 var(--font-display);
+  letter-spacing: var(--section-title-tracking);
   color: var(--ink);
   text-wrap: balance;
 }
