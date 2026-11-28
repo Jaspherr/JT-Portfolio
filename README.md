@@ -23,6 +23,10 @@ adjust the result until it feels right.
   drains back as you scroll away.
 - **Selected work:** case studies for Clarify, Sakay, HerbaPlant and USE, each
   on its own page covering the problem, the approach, my role and the outcome.
+- **Explored projects:** four live apps I designed and built on my own: Abong,
+  Fretform, Kelmere and SI-Portal. Each preview is drawn as a blueprint of its
+  layout first, then the real screenshot inks in over it. Kelmere and
+  SI-Portal are demos that run on fictional data.
 - **Capabilities:** four animated scenes that act out how I work: designing a
   layout, writing the component, exploring and coding with AI, and handing a
   design off to a live site. Each scene loops, pauses when it's off screen and
